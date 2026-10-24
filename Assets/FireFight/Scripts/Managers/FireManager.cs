@@ -20,25 +20,44 @@ namespace FireFight.Managers
     public class FireManager : MonoBehaviour
     {
         [Header("Grid")]
-        [Tooltip("Number of cells along each axis (X, Y, Z).")]
-        public Vector3Int gridSize = new Vector3Int(20, 1, 20);
+        [Tooltip("Number of cells along each axis (X, Y, Z). Y > 1 enables smoke to rise.")]
+        public Vector3Int gridSize = new Vector3Int(20, 6, 20);
 
         [Tooltip("Size of each cell in world units (metres).")]
         public float cellSize = 1f;
 
         [Header("Tuning")]
         public FireConfig config = new FireConfig();
+        public SmokeConfig smokeConfig = new SmokeConfig();
+
+        [Header("Fuel")]
+        [Tooltip("If true, every cell starts with fuel so fire can spread freely " +
+                 "(Phase 1 testing). If false, cells start with NO fuel - air does " +
+                 "not burn - and you place fuel yourself via SetFuel. Smoke still " +
+                 "travels through air either way.")]
+        public bool fillWithFuel = true;
 
         /// <summary>The underlying grid (read-only access for visualizers, etc.).</summary>
         public FireGrid Grid { get; private set; }
 
         private FireSim simulation;
+        private SmokeSim smokeSimulation;
         private float tickTimer;
 
         private void Awake()
         {
             Grid = new FireGrid(gridSize, cellSize, transform.position);
             simulation = new FireSim(Grid, config);
+            smokeSimulation = new SmokeSim(Grid, smokeConfig);
+
+            // Air does not burn: unless we explicitly fill the grid with fuel,
+            // every cell starts with zero fuel so fire cannot spread through
+            // empty space. Smoke is unaffected and still travels everywhere.
+            if (!fillWithFuel)
+            {
+                FireCell[] cells = Grid.Cells;
+                for (int i = 0; i < cells.Length; i++) cells[i].fuel = 0f;
+            }
         }
 
         private void Update()
@@ -48,6 +67,7 @@ namespace FireFight.Managers
             {
                 tickTimer -= config.TickInterval;
                 simulation.Tick();
+                smokeSimulation.Tick();
             }
         }
 
@@ -82,6 +102,38 @@ namespace FireFight.Managers
         }
 
         public FireCell GetCell(Vector3Int gridPos) => Grid.GetCell(gridPos);
+
+        /// <summary>
+        /// Set a cell's fuel (0..1). Use this to mark where things can burn when
+        /// fillWithFuel is off, e.g. paint fuel onto a region representing
+        /// furniture or a confined, oxygen-fed space. A future oxygen system
+        /// will hook in here to gate burning by available air.
+        /// </summary>
+        public void SetFuel(Vector3Int gridPos, float fuel)
+        {
+            FireCell cell = Grid.GetCell(gridPos);
+            if (cell != null) cell.fuel = Mathf.Clamp01(fuel);
+        }
+
+        /// <summary>Smoke density (0..1) at a grid position, or 0 if out of bounds.</summary>
+        public float GetSmoke(Vector3Int gridPos)
+        {
+            FireCell cell = Grid.GetCell(gridPos);
+            return cell != null ? cell.smoke : 0f;
+        }
+
+        /// <summary>Smoke density (0..1) at a world-space point.</summary>
+        public float GetSmokeWorld(Vector3 worldPos) => GetSmoke(Grid.WorldToGrid(worldPos));
+
+        /// <summary>Average smoke across the whole grid (0..1). A simple "how smoky is it" metric.</summary>
+        public float AverageSmoke()
+        {
+            FireCell[] cells = Grid.Cells;
+            if (cells.Length == 0) return 0f;
+            float total = 0f;
+            for (int i = 0; i < cells.Length; i++) total += cells[i].smoke;
+            return total / cells.Length;
+        }
 
         /// <summary>How many cells are currently on fire.</summary>
         public int CountBurning()

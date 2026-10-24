@@ -32,6 +32,14 @@ namespace FireFight.Environment
 
         public float heat = 0f;
 
+        /// <summary>
+        /// Smoke density in this cell (0..1). Produced by burning/smouldering
+        /// cells, rises to the cell above, spreads under ceilings, and slowly
+        /// dissipates. Independent of fire: smoke travels through air, fire does
+        /// not. Used for visibility and hazard gameplay.
+        /// </summary>
+        public float smoke = 0f;
+
         public FireCell(Vector3Int gridPosition)
         {
             this.gridPosition = gridPosition;

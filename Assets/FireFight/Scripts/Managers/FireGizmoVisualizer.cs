@@ -18,6 +18,13 @@ namespace FireFight.Managers
         [Tooltip("Draw cubes for cells that are heating up but not yet burning.")]
         public bool showHeat = true;
 
+        [Tooltip("Draw translucent grey cubes for smoke density.")]
+        public bool showSmoke = true;
+
+        [Tooltip("Smoke below this density is not drawn (reduces clutter).")]
+        [Range(0f, 0.5f)]
+        public float smokeDrawThreshold = 0.05f;
+
         [Tooltip("Relative size of each drawn cube (1 = full cell).")]
         [Range(0.1f, 1f)]
         public float cubeScale = 0.9f;
@@ -33,6 +40,21 @@ namespace FireFight.Managers
             float ignition = manager.config.ignitionThreshold;
             FireCell[] cells = grid.Cells;
 
+            // ---- Pass 1: smoke (drawn first so fire/heat draw on top) ----
+            if (showSmoke)
+            {
+                for (int i = 0; i < cells.Length; i++)
+                {
+                    FireCell cell = cells[i];
+                    if (cell.smoke < smokeDrawThreshold) continue;
+                    // Alpha scales with density so thin smoke looks faint.
+                    Gizmos.color = new Color(0.25f, 0.25f, 0.25f, Mathf.Clamp01(cell.smoke) * 0.6f);
+                    Gizmos.DrawCube(grid.GridToWorld(cell.gridPosition),
+                        Vector3.one * grid.CellSize * cubeScale);
+                }
+            }
+
+            // ---- Pass 2: fire state + heat ----
             for (int i = 0; i < cells.Length; i++)
             {
                 FireCell cell = cells[i];

@@ -371,6 +371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireFight.Managers.FireGizmoVisualizer
   showHeat: 1
+  showSmoke: 1
+  smokeDrawThreshold: 0.05
   cubeScale: 0.9
 --- !u!114 &1282594491
 MonoBehaviour:
@@ -401,11 +403,21 @@ MonoBehaviour:
   cellSize: 1
   config:
     ticksPerSecond: 4
+    maxFireLayer: 1
     heatPerTick: 0.35
     ignitionThreshold: 1
     spreadChance: 0.6
     burnRate: 0.05
     coolingRate: 0.1
+  smokeConfig:
+    smokePerBurningTick: 0.25
+    smokePerSmolderingTick: 0.05
+    maxSmokeLayer: 20
+    riseRate: 0.6
+    spreadRate: 0.12
+    dissipation: 0.01
+    minSmoke: 0.001
+  fillWithFuel: 1
 --- !u!4 &1282594493
 Transform:
   m_ObjectHideFlags: 0

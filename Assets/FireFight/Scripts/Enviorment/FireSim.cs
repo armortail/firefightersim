@@ -82,7 +82,12 @@ namespace FireFight.Environment
                     cell.heat = Mathf.Max(0f, cell.heat - config.coolingRate);
                 }
 
-                if (cell.CanIgnite && cell.heat >= config.ignitionThreshold)
+                // Cells above the configured fire ceiling never ignite, so
+                // flames stay in a lower band even though smoke rises higher.
+                bool belowFireCeiling = config.maxFireLayer < 0
+                    || cell.gridPosition.y <= config.maxFireLayer;
+
+                if (cell.CanIgnite && belowFireCeiling && cell.heat >= config.ignitionThreshold)
                 {
                     if (Random.value <= config.spreadChance)
                     {

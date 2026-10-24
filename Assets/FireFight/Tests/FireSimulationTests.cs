@@ -146,6 +146,22 @@ namespace FireFight.Tests
         }
 
         [Test]
+        public void Fire_DoesNotSpread_AboveMaxFireLayer()
+        {
+            // Fire allowed only up to layer 1. A burning cell at y=1 should never
+            // ignite the cell at y=2, even though heat reaches it.
+            var (grid, sim, cfg) = MakeSim(new Vector3Int(3, 4, 3),
+                c => c.maxFireLayer = 1);
+            Ignite(grid, new Vector3Int(1, 1, 1), cfg);
+
+            for (int i = 0; i < 20; i++) sim.Tick();
+
+            var above = grid.GetCell(new Vector3Int(1, 2, 1));
+            Assert.AreNotEqual(FireState.Burning, above.state,
+                "Fire should never ignite a cell above maxFireLayer.");
+        }
+
+        [Test]
         public void WorldToGrid_And_GridToWorld_RoundTrip()
         {
             var grid = new FireGrid(new Vector3Int(10, 1, 10), 2f, new Vector3(5, 0, 5));

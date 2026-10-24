@@ -16,6 +16,11 @@ namespace FireFight.Environment
         public float ticksPerSecond = 4f;
 
         [Header("Spread Tuning")]
+        [Tooltip("Highest Y layer fire is allowed to spread to. Cells above this " +
+                 "never ignite, so flames stay in a lower band while smoke can go " +
+                 "higher. Set to -1 for no cap.")]
+        public int maxFireLayer = -1;
+
         [Tooltip("Heat a burning cell pushes into each neighbour per tick.")]
         public float heatPerTick = 0.35f;
 
