@@ -1,7 +1,9 @@
 {
     "name": "FireFight",
     "rootNamespace": "FireFight",
-    "references": [],
+    "references": [
+        "Unity.Cinemachine"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
