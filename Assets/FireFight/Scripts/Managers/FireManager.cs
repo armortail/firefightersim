@@ -32,10 +32,10 @@ namespace FireFight.Managers
 
         [Header("Fuel")]
         [Tooltip("If true, every cell starts with fuel so fire can spread freely " +
-                 "(Phase 1 testing). If false, cells start with NO fuel - air does " +
-                 "not burn - and you place fuel yourself via SetFuel. Smoke still " +
-                 "travels through air either way.")]
-        public bool fillWithFuel = true;
+                 "(Phase 1 testing). If false (default), cells start with NO fuel - " +
+                 "air does not burn - and Flammable objects paint in their own fuel " +
+                 "via AddFuelInBounds. Smoke still travels through air either way.")]
+        public bool fillWithFuel = false;
 
         /// <summary>The underlying grid (read-only access for visualizers, etc.).</summary>
         public FireGrid Grid { get; private set; }
@@ -43,6 +43,44 @@ namespace FireFight.Managers
         private FireSim simulation;
         private SmokeSim smokeSimulation;
         private float tickTimer;
+
+        // Registry of flammable scene objects, so we can report how much of the
+        // scene is on fire (for later win/loss logic). Flammable adds/removes itself.
+        private readonly System.Collections.Generic.List<Flammable> flammables =
+            new System.Collections.Generic.List<Flammable>();
+
+        /// <summary>Called by Flammable.Start so the manager can track it.</summary>
+        public void RegisterFlammable(Flammable f)
+        {
+            if (f != null && !flammables.Contains(f)) flammables.Add(f);
+        }
+
+        /// <summary>Called by Flammable.OnDestroy to stop tracking it.</summary>
+        public void UnregisterFlammable(Flammable f)
+        {
+            flammables.Remove(f);
+        }
+
+        /// <summary>Total flammable objects registered in the scene.</summary>
+        public int FlammableCount => flammables.Count;
+
+        /// <summary>How many flammable objects are currently on fire.</summary>
+        public int FlammableOnFireCount()
+        {
+            int n = 0;
+            for (int i = 0; i < flammables.Count; i++)
+                if (flammables[i] != null && flammables[i].inflames) n++;
+            return n;
+        }
+
+        /// <summary>
+        /// Fraction (0..1) of flammable objects currently on fire. This is the
+        /// "how much of the scene is under fire" metric for later scoring.
+        /// </summary>
+        public float SceneOnFireFraction()
+        {
+            return flammables.Count == 0 ? 0f : (float)FlammableOnFireCount() / flammables.Count;
+        }
 
         private void Awake()
         {
@@ -113,6 +151,86 @@ namespace FireFight.Managers
         {
             FireCell cell = Grid.GetCell(gridPos);
             if (cell != null) cell.fuel = Mathf.Clamp01(fuel);
+        }
+
+        // ---- Bounds-based helpers: the bridge for physical objects ----
+        //
+        // A Flammable object knows its world-space Bounds (from its collider).
+        // These methods translate that volume into grid cells so the object can
+        // paint fuel into the cells it occupies and later ask if any are burning.
+        // The bounds<->grid math lives here, keeping Flammable free of grid internals.
+
+        /// <summary>
+        /// Give fuel to every cell overlapping a world-space volume. Use when a
+        /// flammable object registers itself so fire can exist where it stands.
+        /// </summary>
+        public void AddFuelInBounds(Bounds worldBounds, float fuel, float flammability)
+        {
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                cell.fuel = Mathf.Clamp01(fuel);
+                cell.flammability = Mathf.Clamp01(flammability);
+            });
+        }
+
+        /// <summary>Ignite every fuelled cell overlapping a world-space volume.</summary>
+        public void IgniteBounds(Bounds worldBounds)
+        {
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                if (cell.fuel > 0f)
+                {
+                    cell.state = FireState.Burning;
+                    cell.heat = config.ignitionThreshold;
+                }
+            });
+        }
+
+        /// <summary>True if ANY cell overlapping the volume is currently burning.</summary>
+        public bool IsAnyBurningInBounds(Bounds worldBounds)
+        {
+            bool burning = false;
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                if (cell.state == FireState.Burning) burning = true;
+            });
+            return burning;
+        }
+
+        /// <summary>
+        /// True if EVERY fuelled cell in the volume has finished burning (Burned).
+        /// Useful to know a flammable object is fully consumed. Returns false if
+        /// the volume has no fuelled cells at all.
+        /// </summary>
+        public bool IsFullyBurnedInBounds(Bounds worldBounds)
+        {
+            bool anyFuelCell = false;
+            bool allBurned = true;
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                // Only consider cells that ever had fuel (part of the object).
+                if (cell.fuel > 0f || cell.state != FireState.Unburned)
+                {
+                    anyFuelCell = true;
+                    if (cell.state != FireState.Burned) allBurned = false;
+                }
+            });
+            return anyFuelCell && allBurned;
+        }
+
+        /// <summary>Run an action over every in-bounds grid cell overlapping a world volume.</summary>
+        private void ForEachCellInBounds(Bounds worldBounds, System.Action<FireCell> action)
+        {
+            Vector3Int min = Grid.WorldToGrid(worldBounds.min);
+            Vector3Int max = Grid.WorldToGrid(worldBounds.max);
+
+            for (int x = min.x; x <= max.x; x++)
+                for (int y = min.y; y <= max.y; y++)
+                    for (int z = min.z; z <= max.z; z++)
+                    {
+                        FireCell cell = Grid.GetCell(new Vector3Int(x, y, z));
+                        if (cell != null) action(cell);
+                    }
         }
 
         /// <summary>Smoke density (0..1) at a grid position, or 0 if out of bounds.</summary>
