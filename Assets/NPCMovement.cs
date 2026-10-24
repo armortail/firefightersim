@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,6 +19,12 @@ public class NPCMovement : MonoBehaviour
 
     }
 
+    //something
+    public void moveTo(Vector3 TargetPosition)
+    {
+        agent.SetDestination(TargetPosition);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -31,7 +38,7 @@ public class NPCMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(aimRay, out hit, 100f))
             {
-                agent.SetDestination(hit.point);
+                moveTo(hit.point);
                 Debug.Log(hit.point);
             }
         }
