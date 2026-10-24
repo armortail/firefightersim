@@ -14,8 +14,16 @@ namespace FireFight.Environment
         public Vector3Int Size { get; }
         public float CellSize { get; }
 
-        /// <summary>World-space position of the grid's (0,0,0) corner.</summary>
+        /// <summary>World-space position of the grid's base centre (centre on X/Z, floor on Y).</summary>
         public Vector3 Origin { get; }
+
+        /// <summary>
+        /// Offset used to centre the grid on Origin. X and Z are centred (so the
+        /// grid spreads equally sideways), but Y is NOT centred: the grid's floor
+        /// sits at Origin and grows upward. This keeps the fire area at ground
+        /// level instead of half-buried.
+        /// </summary>
+        private Vector3 HalfExtent => new Vector3(Size.x, 0f, Size.z) * (CellSize * 0.5f);
 
         /// <summary>Total number of cells.</summary>
         public int Count => cells.Length;
@@ -59,12 +67,17 @@ namespace FireFight.Environment
 
         public Vector3 GridToWorld(Vector3Int gridPos)
         {
-            return Origin + (Vector3)gridPos * CellSize + Vector3.one * (CellSize * 0.5f);
+            // Centre the grid on Origin: shift back by half the grid, then add
+            // half a cell so the returned point is the centre of the cell.
+            return Origin - HalfExtent
+                + (Vector3)gridPos * CellSize
+                + Vector3.one * (CellSize * 0.5f);
         }
 
         public Vector3Int WorldToGrid(Vector3 worldPos)
         {
-            Vector3 local = worldPos - Origin;
+            // Inverse of GridToWorld: undo the centring shift first.
+            Vector3 local = worldPos - Origin + HalfExtent;
             return new Vector3Int(
                 Mathf.FloorToInt(local.x / CellSize),
                 Mathf.FloorToInt(local.y / CellSize),

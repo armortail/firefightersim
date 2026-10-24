@@ -11,7 +11,7 @@ namespace FireFight.Managers
     ///   - expose a small public API (ignite / extinguish / query)
     ///
     /// The actual storage lives in <see cref="FireGrid"/> and the spread rules
-    /// in <see cref="FireSimulation"/>. This class just coordinates them, so it
+    /// in <see cref="FireSim"/>. This class just coordinates them, so it
     /// stays small and the pieces can be tested independently.
     ///
     /// Completely self-contained: it does not read or depend on scene art
