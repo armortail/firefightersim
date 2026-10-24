@@ -45,10 +45,10 @@ public class FirefighterMovement : MonoBehaviour
         }
 
         // Read WASD and prevent faster diagonal movement.
-        float sideways = (keyboard.dKey.isPressed ? 1f : 0f)
-                       - (keyboard.aKey.isPressed ? 1f : 0f);
-        float forward = (keyboard.wKey.isPressed ? 1f : 0f)
-                      - (keyboard.sKey.isPressed ? 1f : 0f);
+        float sideways = (keyboard.dKey.isPressed ? 2f : 0f)
+                       - (keyboard.aKey.isPressed ? 2f : 0f);
+        float forward = (keyboard.wKey.isPressed ? 2f : 0f)
+                      - (keyboard.sKey.isPressed ? 2f : 0f);
 
         Vector3 direction = transform.right * sideways
                           + transform.forward * forward;
