@@ -130,7 +130,10 @@ GameObject:
   - component: {fileID: 161621356}
   - component: {fileID: 161621355}
   - component: {fileID: 161621354}
+<<<<<<< Updated upstream
   - component: {fileID: 161621357}
+=======
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -155,8 +158,13 @@ Camera:
   m_GameObject: {fileID: 161621353}
   m_Enabled: 1
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.4745098, g: 0.19215688, b: 0.24091168, a: 0}
+=======
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+>>>>>>> Stashed changes
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -212,6 +220,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &161621357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +340,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229020688}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &372766633
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +352,10 @@ GameObject:
   m_Component:
   - component: {fileID: 372766635}
   - component: {fileID: 372766634}
+<<<<<<< Updated upstream
   - component: {fileID: 372766636}
+=======
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -429,6 +443,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &372766636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,11 +654,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 161621356}
   - {fileID: 372766635}
+<<<<<<< Updated upstream
   - {fileID: 976738416}
   - {fileID: 738625169}
+=======
+>>>>>>> Stashed changes
