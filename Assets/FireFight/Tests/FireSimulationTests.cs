@@ -23,6 +23,8 @@ namespace FireFight.Tests
                 spreadChance = 1f,   // deterministic: always ignite when hot enough
                 burnRate = 0.1f,
                 coolingRate = 0.1f,
+                upwardHeatMultiplier = 1f,   // neutral by default; bias tests override
+                downwardHeatMultiplier = 1f,
             };
             tune?.Invoke(cfg);
 
@@ -159,6 +161,32 @@ namespace FireFight.Tests
             var above = grid.GetCell(new Vector3Int(1, 2, 1));
             Assert.AreNotEqual(FireState.Burning, above.state,
                 "Fire should never ignite a cell above maxFireLayer.");
+        }
+
+        [Test]
+        public void Fire_ClimbsFasterThanItDescends()
+        {
+            // With strong upward bias and weak downward bias, the cell ABOVE a
+            // flame should ignite while the cell BELOW stays unburned.
+            var (grid, sim, cfg) = MakeSim(new Vector3Int(1, 3, 1), c =>
+            {
+                c.heatPerTick = 0.5f;
+                c.upwardHeatMultiplier = 4f;        // above: 0.5*4 = 2.0 heat in
+                c.downwardHeatMultiplier = 0.05f;   // below: 0.5*0.05 = 0.025 heat in
+            });
+
+            // Full flammability so heat transfers 1:1 (removes the 0.5 default scaling).
+            grid.GetCell(new Vector3Int(0, 0, 0)).flammability = 1f;
+            grid.GetCell(new Vector3Int(0, 2, 0)).flammability = 1f;
+
+            Ignite(grid, new Vector3Int(0, 1, 0), cfg); // light the middle layer
+
+            sim.Tick();
+
+            Assert.AreEqual(FireState.Burning, grid.GetCell(new Vector3Int(0, 2, 0)).state,
+                "The cell above the flame should ignite first (hot air rises).");
+            Assert.AreEqual(FireState.Unburned, grid.GetCell(new Vector3Int(0, 0, 0)).state,
+                "The cell below should lag behind due to weak downward heat.");
         }
 
         [Test]
