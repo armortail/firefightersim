@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -13,9 +14,8 @@ public class NPCMovement : MonoBehaviour
     private Camera commandCamera;
     void Start()
     {
-        Ray aimRay = commandCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
-        
-        
+        agent = GetComponent<NavMeshAgent>();
+
     }
 
     // Update is called once per frame
@@ -25,9 +25,15 @@ public class NPCMovement : MonoBehaviour
 
         if (keyboard == null)
             return;
-        if (keyboard.nKey.isPressed)
+        if (keyboard.nKey.wasPressedThisFrame)
         {
-            agent.SetDestination(Destination.position);
+            Ray aimRay = commandCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hit;
+            if (Physics.Raycast(aimRay, out hit, 100f))
+            {
+                agent.SetDestination(hit.point);
+                Debug.Log(hit.point);
+            }
         }
 
     }
