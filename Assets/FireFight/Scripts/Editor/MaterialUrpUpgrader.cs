@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Rendering;
-using UnityEditor.Rendering.Universal;
+using UnityEditor.Rendering;          // MaterialUpgrader (base class)
+using UnityEditor.Rendering.Universal; // StandardUpgrader, ParticleUpgrader
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -44,6 +44,57 @@ namespace FireFight.EditorTools
                 return;
             }
             Convert(mats, "selection");
+        }
+
+        /// <summary>
+        /// Programmatic, dialog-free conversion used by other editor tools (e.g. the
+        /// Industrial Layout builder). Converts any built-in materials in the list to URP.
+        /// Returns the number of materials actually converted.
+        /// </summary>
+        public static int ConvertForBuilder(List<Material> materials)
+        {
+            if (materials == null) return 0;
+            if (GraphicsSettings.currentRenderPipeline is not UniversalRenderPipelineAsset)
+                return 0;
+
+            var toConvert = new List<Material>();
+            foreach (var m in materials)
+            {
+                if (m == null || m.shader == null) continue;
+                if (IsBuiltInShader(m.shader)) toConvert.Add(m);
+            }
+            if (toConvert.Count == 0) return 0;
+
+            var standard = new StandardUpgrader("Standard");
+            var standardSpec = new StandardUpgrader("Standard (Specular setup)");
+            var particles = new ParticleUpgrader("Legacy Shaders/Particles/Alpha Blended");
+
+            int converted = 0;
+            try
+            {
+                AssetDatabase.StartAssetEditing();
+                foreach (var m in toConvert)
+                {
+                    string shaderName = m.shader != null ? m.shader.name : "";
+                    MaterialUpgrader upgrader = shaderName switch
+                    {
+                        "Standard (Specular setup)" => standardSpec,
+                        var s when s.StartsWith("Legacy Shaders/Particles") || s.StartsWith("Particles/") => particles,
+                        _ => standard,
+                    };
+                    upgrader.Upgrade(m, MaterialUpgrader.UpgradeFlags.None);
+                    EditorUtility.SetDirty(m);
+                    converted++;
+                }
+            }
+            finally
+            {
+                AssetDatabase.StopAssetEditing();
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+            Debug.Log($"[FireFight] URP material upgrade (builder): {converted} material(s) converted.");
+            return converted;
         }
 
         private static void Convert(List<Material> materials, string scopeLabel)
