@@ -1,5 +1,5 @@
 using UnityEngine;
-using FireFight.Managers;
+using UnityEngine.InputSystem;
 
 namespace FireFight.Managers
 {
@@ -39,7 +39,10 @@ namespace FireFight.Managers
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            Keyboard keyboard = Keyboard.current;
+            Mouse mouse = Mouse.current;
+
+            if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame)
             {
                 Vector3Int centre = new Vector3Int(
                     fire.gridSize.x / 2, 0, fire.gridSize.z / 2);
@@ -47,13 +50,17 @@ namespace FireFight.Managers
                 Debug.Log("Ignited centre cell.");
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (mouse != null && mouse.leftButton.wasPressedThisFrame)
             {
-                Ray ray = Camera.main != null ? Camera.main.ScreenPointToRay(Input.mousePosition) : default;
-                if (Camera.main != null && Physics.Raycast(ray, out RaycastHit hit))
+                Camera viewCamera = Camera.main;
+                if (viewCamera != null)
                 {
-                    fire.IgniteWorld(hit.point);
-                    Debug.Log($"Ignited near {hit.point}.");
+                    Ray ray = viewCamera.ScreenPointToRay(mouse.position.ReadValue());
+                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    {
+                        fire.IgniteWorld(hit.point);
+                        Debug.Log($"Ignited near {hit.point}.");
+                    }
                 }
             }
 

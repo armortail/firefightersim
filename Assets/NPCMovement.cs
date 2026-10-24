@@ -1,40 +1,46 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
-
+/// <summary>Moves one NPC. Input and voice commands belong to the command controller.</summary>
+[DisallowMultipleComponent]
+[RequireComponent(typeof(NavMeshAgent))]
 public class NPCMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField]
-    private Transform Destination;
+    [SerializeField, Min(0.01f)] private float destinationSnapDistance = 0.5f;
+
     private NavMeshAgent agent;
-    [SerializeField]
-    private Camera commandCamera;
-    void Start()
+    private NavMeshPath commandPath;
+
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        commandPath = new NavMeshPath();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Accepts a reachable world-space destination. An invalid command leaves
+    /// the current route unchanged. Keyboard and voice can share this API.
+    /// </summary>
+    public bool MoveTo(Vector3 targetPosition)
     {
-        Keyboard keyboard = Keyboard.current;
+        if (!isActiveAndEnabled || agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh)
+            return false;
 
-        if (keyboard == null)
-            return;
-        if (keyboard.nKey.wasPressedThisFrame)
+        var filter = new NavMeshQueryFilter
         {
-            Ray aimRay = commandCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(aimRay, out hit, 100f))
-            {
-                agent.SetDestination(hit.point);
-                Debug.Log(hit.point);
-            }
-        }
+            agentTypeID = agent.agentTypeID,
+            areaMask = agent.areaMask
+        };
 
+        if (!NavMesh.SamplePosition(targetPosition, out NavMeshHit destination,
+                destinationSnapDistance, filter))
+            return false;
+
+        if (!agent.CalculatePath(destination.position, commandPath) ||
+            commandPath.status != NavMeshPathStatus.PathComplete)
+            return false;
+
+        agent.isStopped = false;
+        return agent.SetPath(commandPath);
     }
 }
