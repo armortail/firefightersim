@@ -339,6 +339,88 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653544830}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1282594489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1282594493}
+  - component: {fileID: 1282594492}
+  - component: {fileID: 1282594491}
+  - component: {fileID: 1282594490}
+  m_Layer: 0
+  m_Name: FireSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1282594490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282594489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160ebdd411e491942b5807ce75e5509a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireFight.Managers.FireGizmoVisualizer
+  showHeat: 1
+  cubeScale: 0.9
+--- !u!114 &1282594491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282594489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9233b335692d11c428bdb90a8cee6339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireFight.Managers.FireDemo
+  igniteCentreOnStart: 1
+--- !u!114 &1282594492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282594489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b977bb20f53e39140b1731282136467d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireFight.Managers.FireManager
+  gridSize: {x: 20, y: 1, z: 20}
+  cellSize: 1
+  config:
+    ticksPerSecond: 4
+    heatPerTick: 0.35
+    ignitionThreshold: 1
+    spreadChance: 0.6
+    burnRate: 0.05
+    coolingRate: 0.1
+--- !u!4 &1282594493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282594489}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405046190
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +1049,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1014,3 +1096,4 @@ SceneRoots:
   - {fileID: 1405046192}
   - {fileID: 98910764}
   - {fileID: 1474840708}
+  - {fileID: 1282594493}
