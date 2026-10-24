@@ -106,7 +106,10 @@ namespace FireFight.Environment
             else
             {
                 // Create default material if none assigned
-                renderer.material = new Material(Shader.Find("Standard"));
+                Material defaultMat = new Material(Shader.Find("Standard"));
+                defaultMat.color = Color.white;
+                defaultMat.enableInstancing = true; // For better performance
+                renderer.material = defaultMat;
             }
 
             // Add collider for physics

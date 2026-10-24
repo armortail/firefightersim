@@ -36,6 +36,14 @@ namespace FireFight.Environment
                 meshFilter.mesh = CreateCubeMesh();
             }
 
+            // FIX: Ensure material exists to prevent pink
+            if (meshRenderer.sharedMaterial == null)
+            {
+                Material defaultMat = new Material(Shader.Find("Standard"));
+                defaultMat.color = Color.white;
+                meshRenderer.material = defaultMat;
+            }
+
             UpdateVisual();
         }
 
@@ -46,9 +54,11 @@ namespace FireFight.Environment
         {
             if (meshRenderer == null) return;
 
-            meshRenderer.GetPropertyBlock(propertyBlock);
-            propertyBlock.SetColor("_Color", blockColor);
-            meshRenderer.SetPropertyBlock(propertyBlock);
+            // Directly set material color (more reliable)
+            if (meshRenderer.material != null)
+            {
+                meshRenderer.material.color = blockColor;
+            }
         }
 
         /// <summary>
