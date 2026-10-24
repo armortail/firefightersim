@@ -24,6 +24,15 @@ namespace FireFight.Environment
         [Tooltip("Heat a burning cell pushes into each neighbour per tick.")]
         public float heatPerTick = 0.35f;
 
+        [Header("Convection (hot air rises)")]
+        [Tooltip("Heat multiplier for the neighbour directly ABOVE a flame. " +
+                 ">1 makes fire climb faster (realistic). 1 = no bias.")]
+        public float upwardHeatMultiplier = 2f;
+
+        [Tooltip("Heat multiplier for the neighbour directly BELOW a flame. " +
+                 "<1 makes fire struggle to spread downward (realistic). 1 = no bias.")]
+        public float downwardHeatMultiplier = 0.4f;
+
         [Tooltip("Heat level at which an unburned cell ignites.")]
         public float ignitionThreshold = 1f;
 

@@ -23,14 +23,34 @@ namespace FireFight.Environment
         private readonly FireGrid grid;
         private readonly FireConfig config;
 
+        // Optional confined-space oxygen pools. Empty = no oxygen simulation,
+        // so fire behaves exactly as before when no boxes are supplied.
+        private readonly System.Collections.Generic.List<OxygenBox> oxygenBoxes;
+
         // Reused each tick to avoid per-tick allocations.
         private readonly float[] heatDelta;
 
         public FireSim(FireGrid grid, FireConfig config)
+            : this(grid, config, null)
+        {
+        }
+
+        public FireSim(FireGrid grid, FireConfig config,
+            System.Collections.Generic.List<OxygenBox> oxygenBoxes)
         {
             this.grid = grid;
             this.config = config;
+            this.oxygenBoxes = oxygenBoxes;
             this.heatDelta = new float[grid.Count];
+        }
+
+        /// <summary>Find the oxygen box containing a cell, or null if none (open air).</summary>
+        private OxygenBox BoxAt(Vector3Int pos)
+        {
+            if (oxygenBoxes == null) return null;
+            for (int i = 0; i < oxygenBoxes.Count; i++)
+                if (oxygenBoxes[i].Contains(pos)) return oxygenBoxes[i];
+            return null;
         }
 
         /// <summary>
@@ -52,6 +72,22 @@ namespace FireFight.Environment
                 FireCell cell = cells[i];
                 if (cell.state != FireState.Burning) continue;
 
+                // Confined-space oxygen: a burning cell inside a box consumes
+                // its shared air. If the box has suffocated, the flame dies down
+                // instead of consuming fuel (it can relight when air returns).
+                OxygenBox box = BoxAt(cell.gridPosition);
+                if (box != null)
+                {
+                    if (!box.HasBreathableAir)
+                    {
+                        // Starved of oxygen: stop burning, lose heat.
+                        cell.state = FireState.Unburned;
+                        cell.heat = 0f;
+                        continue;
+                    }
+                    box.ConsumeForOneBurningCell();
+                }
+
                 cell.fuel -= config.burnRate;
                 if (cell.fuel <= 0f)
                 {
@@ -64,7 +100,14 @@ namespace FireFight.Environment
                 {
                     Vector3Int np = cell.gridPosition + offset;
                     if (!grid.InBounds(np)) continue;
-                    heatDelta[grid.Index(np)] += config.heatPerTick;
+
+                    // Convection bias: hot air rises, so the cell above a flame
+                    // gets more heat and the cell below gets less. Sideways = 1x.
+                    float directionMul = 1f;
+                    if (offset.y > 0) directionMul = config.upwardHeatMultiplier;
+                    else if (offset.y < 0) directionMul = config.downwardHeatMultiplier;
+
+                    heatDelta[grid.Index(np)] += config.heatPerTick * directionMul;
                 }
             }
 
@@ -87,13 +130,26 @@ namespace FireFight.Environment
                 bool belowFireCeiling = config.maxFireLayer < 0
                     || cell.gridPosition.y <= config.maxFireLayer;
 
-                if (cell.CanIgnite && belowFireCeiling && cell.heat >= config.ignitionThreshold)
+                // Confined-space oxygen: a cell in a suffocated box cannot ignite.
+                OxygenBox box = BoxAt(cell.gridPosition);
+                bool hasAir = box == null || box.HasBreathableAir;
+
+                if (cell.CanIgnite && belowFireCeiling && hasAir
+                    && cell.heat >= config.ignitionThreshold)
                 {
                     if (Random.value <= config.spreadChance)
                     {
                         cell.state = FireState.Burning;
                     }
                 }
+            }
+
+            // End of tick: open boxes breathe fresh air back in. Do this last so
+            // consumption and ignition this tick saw the pre-replenish oxygen.
+            if (oxygenBoxes != null)
+            {
+                for (int i = 0; i < oxygenBoxes.Count; i++)
+                    oxygenBoxes[i].Replenish();
             }
         }
     }

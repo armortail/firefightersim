@@ -29,6 +29,24 @@ namespace FireFight.Managers
         [Header("Tuning")]
         public FireConfig config = new FireConfig();
         public SmokeConfig smokeConfig = new SmokeConfig();
+        public OxygenConfig oxygenConfig = new OxygenConfig();
+
+        [Header("Confined Spaces (Oxygen Boxes)")]
+        [Tooltip("Enclosed grid regions with a shared oxygen pool. Fire inside " +
+                 "depletes the air and suffocates until the box is opened. Grid " +
+                 "coordinates, inclusive min..max.")]
+        public OxygenBoxDef[] oxygenBoxes = new OxygenBoxDef[0];
+
+        /// <summary>Inspector-friendly definition of an oxygen box (resolved to an OxygenBox at runtime).</summary>
+        [System.Serializable]
+        public class OxygenBoxDef
+        {
+            public string name = "Room";
+            public Vector3Int min;
+            public Vector3Int max = new Vector3Int(5, 3, 5);
+            [Tooltip("If true the box starts vented (fresh air). If false it starts sealed.")]
+            public bool startOpen = false;
+        }
 
         [Header("Fuel")]
         [Tooltip("If true, every cell starts with fuel so fire can spread freely " +
@@ -43,6 +61,10 @@ namespace FireFight.Managers
         private FireSim simulation;
         private SmokeSim smokeSimulation;
         private float tickTimer;
+
+        // Runtime oxygen boxes, built from oxygenBoxes defs on Awake.
+        private readonly System.Collections.Generic.List<OxygenBox> runtimeBoxes =
+            new System.Collections.Generic.List<OxygenBox>();
 
         // Registry of flammable scene objects, so we can report how much of the
         // scene is on fire (for later win/loss logic). Flammable adds/removes itself.
@@ -82,10 +104,58 @@ namespace FireFight.Managers
             return flammables.Count == 0 ? 0f : (float)FlammableOnFireCount() / flammables.Count;
         }
 
+        // ---- Oxygen box API (for door/window scripts to trigger backdraft) ----
+
+        /// <summary>Number of oxygen boxes active at runtime.</summary>
+        public int OxygenBoxCount => runtimeBoxes.Count;
+
+        /// <summary>
+        /// Open or seal an oxygen box by index. Opening a sealed, oxygen-starved
+        /// box lets fresh air back in and the fire inside flares up (backdraft).
+        /// </summary>
+        public void SetOxygenBoxOpen(int index, bool open)
+        {
+            if (index >= 0 && index < runtimeBoxes.Count)
+                runtimeBoxes[index].SetOpen(open);
+        }
+
+        /// <summary>Open/seal the box whose world-space point falls inside it. Returns false if none.</summary>
+        public bool SetOxygenBoxOpenAtWorld(Vector3 worldPos, bool open)
+        {
+            Vector3Int p = Grid.WorldToGrid(worldPos);
+            for (int i = 0; i < runtimeBoxes.Count; i++)
+            {
+                if (runtimeBoxes[i].Contains(p))
+                {
+                    runtimeBoxes[i].SetOpen(open);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>Current oxygen (0..1) of a box by index, or -1 if index invalid.</summary>
+        public float GetOxygen(int index)
+        {
+            return (index >= 0 && index < runtimeBoxes.Count) ? runtimeBoxes[index].Oxygen : -1f;
+        }
+
         private void Awake()
         {
             Grid = new FireGrid(gridSize, cellSize, transform.position);
-            simulation = new FireSim(Grid, config);
+
+            // Build runtime oxygen boxes from the Inspector definitions.
+            runtimeBoxes.Clear();
+            if (oxygenBoxes != null)
+            {
+                foreach (var def in oxygenBoxes)
+                {
+                    if (def == null) continue;
+                    runtimeBoxes.Add(new OxygenBox(def.min, def.max, oxygenConfig, def.startOpen));
+                }
+            }
+
+            simulation = new FireSim(Grid, config, runtimeBoxes);
             smokeSimulation = new SmokeSim(Grid, smokeConfig);
 
             // Air does not burn: unless we explicitly fill the grid with fuel,
