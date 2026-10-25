@@ -8,9 +8,10 @@ namespace FireFight.Managers
     /// FireManager. Lets you start a fire and watch it spread in Play mode.
     ///
     /// Controls:
-    ///   Space - ignite the centre cell
     ///   Left mouse - ignite the cell under the mouse (needs a collider to hit)
-    ///   R - reset the scene's fire by reloading is not done here; just re-enter Play
+    ///
+    /// Note: the Space key is intentionally NOT used here - it is reserved for the
+    /// voice-command push-to-talk (see VoiceInputController).
     /// </summary>
     [RequireComponent(typeof(FireManager))]
     public class FireDemo : MonoBehaviour
@@ -39,16 +40,7 @@ namespace FireFight.Managers
 
         private void Update()
         {
-            Keyboard keyboard = Keyboard.current;
             Mouse mouse = Mouse.current;
-
-            if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame)
-            {
-                Vector3Int centre = new Vector3Int(
-                    fire.gridSize.x / 2, 0, fire.gridSize.z / 2);
-                fire.IgniteCell(centre);
-                Debug.Log("Ignited centre cell.");
-            }
 
             if (mouse != null && mouse.leftButton.wasPressedThisFrame)
             {

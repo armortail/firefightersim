@@ -358,25 +358,10 @@ namespace FireFight.Managers
         /// </summary>
         public void ExtinguishSphere(Vector3 worldCenter, float radius, float cooling, float wetness)
         {
-            if (radius <= 0f) return;
-            var min = new Vector3(worldCenter.x - radius, worldCenter.y - radius, worldCenter.z - radius);
-            var max = new Vector3(worldCenter.x + radius, worldCenter.y + radius, worldCenter.z + radius);
-            Vector3Int gMin = Grid.WorldToGrid(min);
-            Vector3Int gMax = Grid.WorldToGrid(max);
-
-            for (int x = gMin.x; x <= gMax.x; x++)
-                for (int y = gMin.y; y <= gMax.y; y++)
-                    for (int z = gMin.z; z <= gMax.z; z++)
-                    {
-                        var gp = new Vector3Int(x, y, z);
-                        if (Grid.GetCell(gp) == null) continue;
-
-                        float dist = Vector3.Distance(Grid.GridToWorld(gp), worldCenter);
-                        if (dist > radius) continue;
-
-                        float falloff = 1f - (dist / radius); // 1 at centre, 0 at edge
-                        WetCell(gp, cooling * falloff, wetness * falloff);
-                    }
+            // Falloff-weighted water over a sphere, sharing the one sphere-iteration helper
+            // (see ForEachCellInSphere) so every area tool scans cells the same way.
+            ForEachCellInSphere(worldCenter, radius,
+                (gp, falloff) => WetCell(gp, cooling * falloff, wetness * falloff));
         }
 
         /// <summary>
