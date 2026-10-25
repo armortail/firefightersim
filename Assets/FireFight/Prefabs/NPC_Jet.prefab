@@ -78,7 +78,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -106,6 +106,8 @@ MonoBehaviour:
   hose: {fileID: 0}
   extinguishStandoff: 8
   fireManager: {fileID: 0}
+  fireWorkRadius: 2.5
+  postExtinguishSoakSeconds: 0.6
 --- !u!114 &3148935549149946123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,9 +127,14 @@ MonoBehaviour:
   coneAngle: 0
   coolingPerSecond: 3
   wetnessPerSecond: 0.5
+  waterOutputMultiplier: 3
   impactLayers:
     serializedVersion: 2
     m_Bits: 51
+  jetSplashRadius: 0.65
+  streamVfxPrefab: {fileID: 0}
+  impactVfxPrefab: {fileID: 0}
+  streamForwardAxis: {x: 0, y: 0, z: 1}
 --- !u!1 &7337667942090673800
 GameObject:
   m_ObjectHideFlags: 0
