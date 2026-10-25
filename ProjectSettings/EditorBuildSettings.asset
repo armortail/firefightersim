@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/FireFight/Scenes/UIScenes/MainMenu.unity
+    guid: e5cc70ba8c41d7748b88a49451d43834
+  - enabled: 1
     path: Assets/FireFight/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
