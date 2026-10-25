@@ -56,6 +56,9 @@ namespace FireFight.EditorTools
             "/roads/", "/fences/", "/buildings/",
         };
 
+        /// <summary>Name prefix of the runtime highlight overlay child; never tagged.</summary>
+        private const string HighlightOverlayPrefix = "_FlammableHighlight";
+
         [MenuItem(MenuRoot + "Mark Flammables In Scene")]
         public static void MarkInScene()
         {
@@ -63,7 +66,16 @@ namespace FireFight.EditorTools
                 FindObjectsInactive.Include, FindObjectsSortMode.None);
             var roots = new List<GameObject>(all.Length);
             foreach (var t in all) roots.Add(t.gameObject);
-            Run(roots, "Mark Flammables In Scene");
+
+            Undo.SetCurrentGroupName("Mark Flammables In Scene");
+            int group = Undo.GetCurrentGroup();
+            var list = TagFlammables(roots, useUndo: true);
+            Undo.CollapseUndoOperations(group);
+
+            if (list.Count > 0)
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+
+            ReportTagging(list.Count);
         }
 
         [MenuItem(MenuRoot + "Mark Flammables On Selection")]
@@ -82,61 +94,72 @@ namespace FireFight.EditorTools
                 foreach (var t in go.GetComponentsInChildren<Transform>(true))
                     list.Add(t.gameObject);
 
-            Run(list, "Mark Flammables On Selection");
+            Undo.SetCurrentGroupName("Mark Flammables On Selection");
+            int group = Undo.GetCurrentGroup();
+            var tagged = TagFlammables(list, useUndo: true);
+            Undo.CollapseUndoOperations(group);
+
+            if (tagged.Count > 0)
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+
+            ReportTagging(tagged.Count);
         }
 
-        private static void Run(List<GameObject> candidates, string undoLabel)
+        private static void ReportTagging(int added)
         {
-            Undo.SetCurrentGroupName(undoLabel);
-            int group = Undo.GetCurrentGroup();
+            string summary = $"Flammable tagging done.\n\nAdded: {added}";
+            Debug.Log("[FireFight] " + summary.Replace("\n\n", " ").Replace("\n", " | "));
+            EditorUtility.DisplayDialog("Mark Flammables", summary, "OK");
+        }
 
-            int added = 0, skippedExisting = 0, skippedNoMatch = 0;
+        /// <summary>
+        /// Classify the given candidate GameObjects by their source-prefab folder and add a
+        /// <see cref="Flammable"/> (with the category's fuel/flammability preset) to each burnable
+        /// prefab-instance root that doesn't already have one. Dialog-free and reusable: the menu
+        /// items call this with <paramref name="useUndo"/> true; the procedural builder calls it with
+        /// false (no undo stack needed mid-build). Returns every object that received a Flammable.
+        /// </summary>
+        public static List<Flammable> TagFlammables(IEnumerable<GameObject> candidates, bool useUndo)
+        {
+            var result = new List<Flammable>();
             var seen = new HashSet<GameObject>();
 
             foreach (var go in candidates)
             {
                 if (go == null || !seen.Add(go)) continue;
 
+                // Never tag the runtime highlight overlay child (created at Play time).
+                if (go.name.StartsWith(HighlightOverlayPrefix)) continue;
+
                 // One Flammable per logical object: only tag the prefab-instance root
                 // so a barrel made of several child meshes gets a single component.
                 if (!IsPrefabInstanceRoot(go)) continue;
 
-                if (go.GetComponent<Flammable>() != null) { skippedExisting++; continue; }
+                if (go.GetComponent<Flammable>() != null) continue;
 
                 string path = GetSourcePrefabPath(go);
-                if (string.IsNullOrEmpty(path)) { skippedNoMatch++; continue; }
+                if (string.IsNullOrEmpty(path)) continue;
                 string lower = path.ToLowerInvariant();
 
-                if (MatchesAny(lower, NeverBurn)) { skippedNoMatch++; continue; }
+                if (MatchesAny(lower, NeverBurn)) continue;
 
-                if (!TryClassify(lower, out FuelPreset preset)) { skippedNoMatch++; continue; }
+                if (!TryClassify(lower, out FuelPreset preset)) continue;
 
                 // Must have something to size the fuel volume from.
                 if (go.GetComponentInChildren<Collider>() == null &&
                     go.GetComponentInChildren<Renderer>() == null)
-                {
-                    skippedNoMatch++;
                     continue;
-                }
 
-                var flammable = Undo.AddComponent<Flammable>(go);
+                Flammable flammable = useUndo
+                    ? Undo.AddComponent<Flammable>(go)
+                    : go.AddComponent<Flammable>();
                 flammable.fuel = preset.fuel;
                 flammable.flammability = preset.flammability;
-                EditorUtility.SetDirty(go);
-                added++;
+                if (!useUndo) EditorUtility.SetDirty(go);
+                result.Add(flammable);
             }
 
-            Undo.CollapseUndoOperations(group);
-
-            if (added > 0)
-                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-
-            string summary = $"Flammable tagging done.\n\n" +
-                             $"Added: {added}\n" +
-                             $"Skipped (already had Flammable): {skippedExisting}\n" +
-                             $"Skipped (not a burnable category): {skippedNoMatch}";
-            Debug.Log("[FireFight] " + summary.Replace("\n\n", " ").Replace("\n", " | "));
-            EditorUtility.DisplayDialog("Mark Flammables", summary, "OK");
+            return result;
         }
 
         [MenuItem(MenuRoot + "Remove All Flammables In Scene")]
