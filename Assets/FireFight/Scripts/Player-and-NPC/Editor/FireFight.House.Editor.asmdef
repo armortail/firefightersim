@@ -1,0 +1,14 @@
+{
+    "name": "FireFight.House.Editor",
+    "rootNamespace": "FireFight.Editor",
+    "references": ["FireFight"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -4,6 +4,7 @@
     "references": [
         "Unity.Cinemachine",
         "Unity.InputSystem",
+        "Unity.AI.Navigation",
         "com.whisper.unity"
     ],
     "includePlatforms": [],

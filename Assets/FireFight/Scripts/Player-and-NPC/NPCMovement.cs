@@ -25,6 +25,9 @@ public class NPCMovement : MonoBehaviour
     private float nextRepathTime;
     private Vector3 fireZoneCenter;
     private float soakUntil;
+    private HouseDoor waitingForDoor;
+    private bool pausedForDoor;
+    private float nextDoorCheckTime;
     private readonly RaycastHit[] sightHits = new RaycastHit[32];
 
     public bool IsExtinguishing => extinguishing;
@@ -150,6 +153,31 @@ public class NPCMovement : MonoBehaviour
 
     private void Update()
     {
+        if (AgentReady && (pausedForDoor || waitingForDoor != null || !agent.isStopped))
+        {
+            if (waitingForDoor == null && Time.time >= nextDoorCheckTime)
+            {
+                nextDoorCheckTime = Time.time + 0.1f;
+                waitingForDoor = HouseDoor.OpenForApproachingAgent(agent);
+            }
+            if (waitingForDoor != null)
+            {
+                waitingForDoor.SetOpen(true);
+                if (!waitingForDoor.IsPassable && waitingForDoor.isActiveAndEnabled)
+                {
+                    pausedForDoor = true;
+                    agent.isStopped = true;
+                    if (hose != null) hose.StopSpray();
+                    return;
+                }
+                waitingForDoor = null;
+            }
+            if (pausedForDoor)
+            {
+                pausedForDoor = false;
+                agent.isStopped = false;
+            }
+        }
         if (!extinguishing) return;
         if (!AgentReady || hose == null || !hose.isActiveAndEnabled)
         {

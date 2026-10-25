@@ -29,8 +29,15 @@ public class HoseController : MonoBehaviour
 
     private Vector3? aimDirectionOverride;
     private readonly RaycastHit[] rayHits = new RaycastHit[64];
-    private Flammable[] receivers;
+    private struct WaterReceiver
+    {
+        public Flammable target;
+        public Collider body;
+    }
+    private readonly List<WaterReceiver> receivers = new List<WaterReceiver>();
     private float refreshReceiversAt;
+    private float pendingSprayTime;
+    private const float ApplicationInterval = 0.05f;
     private readonly HashSet<int> wettedCells = new HashSet<int>();
     public bool IsSpraying { get; private set; }
     public float SprayRange => sprayRange;
@@ -57,8 +64,16 @@ public class HoseController : MonoBehaviour
     }
 
     public void StartSpray() => IsSpraying = true;
-    public void StopSpray() => IsSpraying = false;
-    public void SetSpraying(bool spraying) => IsSpraying = spraying;
+    public void StopSpray()
+    {
+        if (IsSpraying && pendingSprayTime > 0f)
+        {
+            ApplyWater(pendingSprayTime);
+            pendingSprayTime = 0f;
+        }
+        IsSpraying = false;
+    }
+    public void SetSpraying(bool spraying) { if (spraying) StartSpray(); else StopSpray(); }
 
     public void AimAt(Vector3? worldTarget)
     {
@@ -68,11 +83,22 @@ public class HoseController : MonoBehaviour
 
     private void Update()
     {
-        if (IsSpraying) TickSpray(Time.deltaTime);
+        if (!IsSpraying) return;
+        UpdateImpact(); // Keep aiming and the jet responsive at the render frame rate.
+        pendingSprayTime += Time.deltaTime;
+        if (pendingSprayTime < ApplicationInterval) return;
+        ApplyWater(pendingSprayTime);
+        pendingSprayTime = 0f;
     }
 
     /// <summary>Applies one spray step. Appearance and water delivery use the same range/angle.</summary>
     public void TickSpray(float deltaTime)
+    {
+        UpdateImpact();
+        ApplyWater(deltaTime);
+    }
+
+    private void UpdateImpact()
     {
         Vector3 origin = Origin;
         Vector3 direction = Direction;
@@ -80,7 +106,13 @@ public class HoseController : MonoBehaviour
         ImpactPoint = HasImpact ? hit.point : origin + direction * sprayRange;
         ImpactNormal = HasImpact ? hit.normal : -direction;
         VisibleLength = HasImpact ? hit.distance : sprayRange;
+    }
+
+    private void ApplyWater(float deltaTime)
+    {
         if (!IsSpraying || deltaTime <= 0f || fireManager == null || fireManager.Grid == null) return;
+        Vector3 origin = Origin;
+        Vector3 direction = Direction;
 
         float cooling = coolingPerSecond * waterOutputMultiplier * deltaTime;
         float wetness = wetnessPerSecond * waterOutputMultiplier * deltaTime;
@@ -89,7 +121,7 @@ public class HoseController : MonoBehaviour
         {
             if (!HasImpact) return;
             // Deliver full jet strength to the struck cell; splash has a smaller footprint.
-            Vector3Int struck = fireManager.Grid.WorldToGrid(hit.point + direction * 0.03f);
+            Vector3Int struck = fireManager.Grid.WorldToGrid(ImpactPoint + direction * 0.03f);
             fireManager.WetCell(struck, cooling, wetness);
             ApplyVolume(origin, direction, cooling, wetness, struck);
         }
@@ -101,20 +133,31 @@ public class HoseController : MonoBehaviour
         FireGrid grid = fireManager.Grid;
         float radius = sprayPattern == SprayPattern.Cone ? sprayRange : jetSplashRadius;
         Vector3 center = sprayPattern == SprayPattern.Cone ? origin : ImpactPoint;
-        if (receivers == null || Time.time >= refreshReceiversAt)
+        Vector3 padding = Vector3.one * (radius + grid.CellSize);
+        float coneCosine = Mathf.Cos(coneAngle * Mathf.Deg2Rad);
+        if (Time.time >= refreshReceiversAt)
         {
-            receivers = FindObjectsByType<Flammable>(FindObjectsSortMode.None);
+            receivers.Clear();
+            foreach (var target in FindObjectsByType<Flammable>(FindObjectsSortMode.None))
+            {
+                if (target.fireManager != fireManager) continue;
+                var body = target.GetComponentInChildren<Collider>();
+                if (body != null) receivers.Add(new WaterReceiver { target = target, body = body });
+            }
             refreshReceiversAt = Time.time + 0.5f;
         }
         wettedCells.Clear();
-        foreach (var receiver in receivers)
+        foreach (var entry in receivers)
         {
-            if (receiver == null || receiver.fireManager != fireManager ||
-                !FireFight.NPCFireTarget.TryGetBounds(receiver, out Bounds bounds) ||
-                bounds.SqrDistance(center) > radius * radius) continue;
-            Collider body = receiver.GetComponentInChildren<Collider>();
-            Vector3Int min = grid.WorldToGrid(bounds.min);
-            Vector3Int max = grid.WorldToGrid(bounds.max);
+            var receiver = entry.target;
+            Collider body = entry.body;
+            if (receiver == null || !receiver.isActiveAndEnabled || receiver.fireManager != fireManager ||
+                body == null || !body.enabled || body.isTrigger) continue;
+            Bounds bounds = body.bounds;
+            if (bounds.SqrDistance(center) > radius * radius) continue;
+            // Large props can span thousands of cells. Only visit the part within water reach.
+            Vector3Int min = grid.WorldToGrid(Vector3.Max(bounds.min, center - padding));
+            Vector3Int max = grid.WorldToGrid(Vector3.Min(bounds.max, center + padding));
             for (int x = Mathf.Max(0, min.x); x <= Mathf.Min(grid.Size.x - 1, max.x); x++)
             for (int y = Mathf.Max(0, min.y); y <= Mathf.Min(grid.Size.y - 1, max.y); y++)
             for (int z = Mathf.Max(0, min.z); z <= Mathf.Min(grid.Size.z - 1, max.z); z++)
@@ -126,7 +169,7 @@ public class HoseController : MonoBehaviour
                 // Boundary voxels can have their centres outside the mesh. Test the actual object surface.
                 Vector3 point = body.ClosestPoint(grid.GridToWorld(gp));
                 float distance = (point - center).magnitude;
-                if (distance > radius || !InsideCone(origin, direction, point)) continue;
+                if (distance > radius || !InsideCone(origin, direction, point, coneCosine)) continue;
                 Vector3 offset = point - origin;
                 if (!RaycastEnvironment(origin, offset.normalized, offset.magnitude + 0.05f, out RaycastHit contact) ||
                     contact.collider.GetComponentInParent<Flammable>() != receiver) continue;
@@ -139,12 +182,12 @@ public class HoseController : MonoBehaviour
         }
     }
 
-    private bool InsideCone(Vector3 origin, Vector3 direction, Vector3 point)
+    private bool InsideCone(Vector3 origin, Vector3 direction, Vector3 point, float coneCosine)
     {
         if (sprayPattern != SprayPattern.Cone) return true;
         Vector3 offset = point - origin;
         return offset.sqrMagnitude > 0.0001f &&
-            Vector3.Dot(offset.normalized, direction) >= Mathf.Cos(coneAngle * Mathf.Deg2Rad);
+            Vector3.Dot(offset.normalized, direction) >= coneCosine;
     }
 
     private bool RaycastEnvironment(Vector3 origin, Vector3 direction, float distance, out RaycastHit closest)

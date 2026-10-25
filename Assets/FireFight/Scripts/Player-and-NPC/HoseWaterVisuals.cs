@@ -22,6 +22,8 @@ public class HoseWaterVisuals : MonoBehaviour
     private Vector3[] coneVertices;
     private Vector2[] coneUvs;
     private Color[] coneColors;
+    private float nextConeUpdate;
+    private bool wasSpraying;
     private readonly Vector3[] coneEdges = new Vector3[33];
     private const int ConeSegments = 32;
     private const int ConeRings = 10;
@@ -40,7 +42,10 @@ public class HoseWaterVisuals : MonoBehaviour
         visualRoot.transform.SetParent(transform, false);
         droplets = CreateParticles("Water Droplets", visualRoot.transform);
         splash = CreateParticles("Contact Splash", visualRoot.transform);
+        var splashCollision = splash.collision;
+        splashCollision.enabled = false;
         var splashMain = splash.main;
+        splashMain.maxParticles = 128;
         splashMain.loop = false;
         splashMain.startLifetime = new ParticleSystem.MinMaxCurve(0.12f, 0.3f);
         splashMain.startSpeed = new ParticleSystem.MinMaxCurve(0.6f, 1.5f);
@@ -63,7 +68,7 @@ public class HoseWaterVisuals : MonoBehaviour
         jet.shadowCastingMode = ShadowCastingMode.Off;
         jet.receiveShadows = false;
         jet.enabled = false;
-        BuildPressureCone();
+        if (hose.Pattern == SprayPattern.Cone) BuildPressureCone();
     }
 
     private ParticleSystem CreateParticles(string label, Transform parent)
@@ -77,7 +82,7 @@ public class HoseWaterVisuals : MonoBehaviour
         main.playOnAwake = false;
         main.loop = true;
         main.simulationSpace = ParticleSystemSimulationSpace.World;
-        main.maxParticles = 5000;
+        main.maxParticles = 1024;
         main.startColor = new Color(0.8f, 0.93f, 1f, 0.5f);
         var renderer = system.GetComponent<ParticleSystemRenderer>();
         renderer.sharedMaterial = dropMaterial;
@@ -100,7 +105,7 @@ public class HoseWaterVisuals : MonoBehaviour
         collision.bounce = 0f;
         collision.dampen = 1f;
         collision.lifetimeLoss = 1f;
-        collision.quality = ParticleSystemCollisionQuality.High;
+        collision.quality = ParticleSystemCollisionQuality.Medium;
         collision.radiusScale = 0.2f;
         return system;
     }
@@ -109,13 +114,17 @@ public class HoseWaterVisuals : MonoBehaviour
     {
         if (hose == null || droplets == null) return;
         bool cone = hose.Pattern == SprayPattern.Cone;
+        if (cone && coneRenderer == null) BuildPressureCone();
         jet.enabled = hose.IsSpraying && !cone;
-        coneRenderer.enabled = hose.IsSpraying && cone;
+        if (coneRenderer != null) coneRenderer.enabled = hose.IsSpraying && cone;
         if (!hose.IsSpraying)
         {
             if (droplets.isEmitting) droplets.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+            wasSpraying = false;
             return;
         }
+        if (!wasSpraying) nextConeUpdate = 0f;
+        wasSpraying = true;
         Vector3 direction = hose.Direction;
         droplets.transform.SetPositionAndRotation(hose.Origin + direction * 0.06f, Quaternion.LookRotation(direction));
         var main = droplets.main;
@@ -124,7 +133,7 @@ public class HoseWaterVisuals : MonoBehaviour
         main.startLifetime = Mathf.Max(0.02f, (cone ? hose.SprayRange : hose.VisibleLength) / speed);
         main.startSize = cone ? new ParticleSystem.MinMaxCurve(0.05f, 0.1f) : new ParticleSystem.MinMaxCurve(0.025f, 0.045f);
         var emission = droplets.emission;
-        emission.rateOverTime = cone ? 3600f : 260f;
+        emission.rateOverTime = cone ? 900f : 260f;
         var shape = droplets.shape;
         shape.shapeType = ParticleSystemShapeType.Cone;
         shape.angle = cone ? hose.ConeHalfAngle : 0.6f;
@@ -206,12 +215,37 @@ public class HoseWaterVisuals : MonoBehaviour
         }
         coneMesh.vertices = coneVertices;
         coneMesh.triangles = triangles;
+        // UVs and opacity do not depend on clipping. Upload once; scroll the material instead.
+        for (int ring = 0; ring < ConeRings; ring++)
+        {
+            float t = (float)ring / (ConeRings - 1);
+            float fade = Mathf.SmoothStep(0f, 1f, t * 12f) * Mathf.SmoothStep(0f, 1f, (1f - t) * 5f);
+            for (int segment = 0; segment <= ConeSegments; segment++)
+            {
+                int vertex = ring * (ConeSegments + 1) + segment;
+                coneUvs[vertex] = new Vector2((float)segment / ConeSegments * 2f, t * 3f);
+                coneColors[vertex] = new Color(0.85f, 0.95f, 1f, fade * 0.24f);
+            }
+            for (int sheet = 0; sheet < ConeSheets; sheet++)
+            for (int side = 0; side < 3; side++)
+            {
+                int vertex = shellCount + sheet * ConeRings * 3 + ring * 3 + side;
+                coneUvs[vertex] = new Vector2(side * 0.5f + sheet * 0.23f, t * 3f);
+                coneColors[vertex] = new Color(0.85f, 0.95f, 1f, side == 1 ? fade * 0.24f : 0f);
+            }
+        }
+        coneMesh.uv = coneUvs;
+        coneMesh.colors = coneColors;
     }
 
     private void UpdatePressureCone(Vector3 direction)
     {
         Quaternion rotation = Quaternion.LookRotation(direction);
         coneRenderer.transform.SetPositionAndRotation(hose.Origin, rotation);
+        var scroll = new Vector2(0f, -Time.time * 9f);
+        coneMaterial.SetTextureOffset(coneMaterial.HasProperty("_BaseMap") ? "_BaseMap" : "_MainTex", scroll);
+        if (Time.time < nextConeUpdate) return;
+        nextConeUpdate = Time.time + 0.05f;
         float angle = hose.ConeHalfAngle * Mathf.Deg2Rad;
         for (int segment = 0; segment <= ConeSegments; segment++)
         {
@@ -220,17 +254,13 @@ public class HoseWaterVisuals : MonoBehaviour
                 Mathf.Sin(theta) * Mathf.Sin(angle), Mathf.Cos(angle));
             coneEdges[segment] = ray * hose.GetVisualReach(rotation * ray);
         }
-        float scroll = Time.time * 9f;
         for (int ring = 0; ring < ConeRings; ring++)
         {
             float t = (float)ring / (ConeRings - 1);
-            float fade = Mathf.SmoothStep(0f, 1f, t * 12f) * Mathf.SmoothStep(0f, 1f, (1f - t) * 5f);
             for (int segment = 0; segment <= ConeSegments; segment++)
             {
                 int index = ring * (ConeSegments + 1) + segment;
                 coneVertices[index] = coneEdges[segment] * t;
-                coneUvs[index] = new Vector2((float)segment / ConeSegments * 2f, t * 3f - scroll);
-                coneColors[index] = new Color(0.85f, 0.95f, 1f, fade * 0.24f);
             }
             int shellCount = ConeRings * (ConeSegments + 1);
             for (int sheet = 0; sheet < ConeSheets; sheet++)
@@ -243,17 +273,10 @@ public class HoseWaterVisuals : MonoBehaviour
                 coneVertices[index] = left;
                 coneVertices[index + 1] = center;
                 coneVertices[index + 2] = right;
-                for (int side = 0; side < 3; side++)
-                {
-                    coneUvs[index + side] = new Vector2(side * 0.5f + sheet * 0.23f, t * 3f - scroll);
-                    coneColors[index + side] = new Color(0.85f, 0.95f, 1f, side == 1 ? fade * 0.24f : 0f);
-                }
             }
         }
         coneMesh.vertices = coneVertices;
-        coneMesh.uv = coneUvs;
-        coneMesh.colors = coneColors;
-        coneMesh.RecalculateBounds();
+        coneMesh.bounds = new Bounds(Vector3.zero, Vector3.one * Mathf.Max(0.1f, hose.SprayRange * 2f));
     }
 
     private static Texture2D MakeTexture(bool strip)
