@@ -33,14 +33,38 @@ namespace FireFight.EditorTools
     public static class IndustrialLayoutBuilder
     {
         private const string MenuRoot = "Tools/FireFight/";
-        private const string AssetRoot = "Assets/RPG_FPS_game_assets_industrial";
+
+        // The industrial asset pack may live at the project root or under Assets/Imported/.
+        // Resolve it at build time so a rebuild doesn't fail if the pack was relocated.
+        private static readonly string[] AssetRootCandidates =
+        {
+            "Assets/RPG_FPS_game_assets_industrial",
+            "Assets/Imported/RPG_FPS_game_assets_industrial",
+        };
+
+        private static string ResolveAssetRoot()
+        {
+            foreach (var c in AssetRootCandidates)
+                if (AssetDatabase.IsValidFolder(c)) return c;
+
+            // Fall back to a search for the pack's Roads folder anywhere under Assets.
+            foreach (var guid in AssetDatabase.FindAssets("Road_set_v1_b_floor t:Prefab"))
+            {
+                string p = AssetDatabase.GUIDToAssetPath(guid);
+                int idx = p.IndexOf("/Roads/", StringComparison.OrdinalIgnoreCase);
+                if (idx > 0) return p.Substring(0, idx);
+            }
+            return null;
+        }
+
+        private static string AssetRoot => ResolveAssetRoot();
         private const string SceneFolder = "Assets/FireFight/Scenes";
         private const string SceneName = "IndustrialLayout";
         private const string BaseManPrefabPath = "Assets/Base_Man/Prefab/Rrefab.prefab";
 
         // Layout tuning ---------------------------------------------------------------
-        private const int GroundTilesX = 12;   // ground tiles along X
-        private const int GroundTilesZ = 12;   // ground tiles along Z
+        private const int GroundTilesX = 6;    // ground tiles along X (tighter yard, not a void)
+        private const int GroundTilesZ = 6;    // ground tiles along Z
         private const int RandomSeed = 1234;   // deterministic result
 
         // Fire grid / clearance tuning ------------------------------------------------
@@ -72,10 +96,11 @@ namespace FireFight.EditorTools
                 return;
             }
 
-            if (!AssetDatabase.IsValidFolder(AssetRoot))
+            if (string.IsNullOrEmpty(AssetRoot))
             {
                 EditorUtility.DisplayDialog("Build Industrial Layout",
-                    $"Could not find imported assets at '{AssetRoot}'.", "OK");
+                    "Could not find the RPG_FPS_game_assets_industrial pack under Assets/ " +
+                    "(looked at the project root and Assets/Imported/). Import it first.", "OK");
                 return;
             }
 
@@ -114,8 +139,14 @@ namespace FireFight.EditorTools
 
         private static void Build()
         {
+            string assetRoot = AssetRoot;
+            if (string.IsNullOrEmpty(assetRoot))
+                throw new Exception(
+                    "RPG_FPS_game_assets_industrial pack not found under Assets/ " +
+                    "(checked project root and Assets/Imported/). Import it before building.");
+
             EditorUtility.DisplayProgressBar("Industrial Layout", "Upgrading imported materials to URP...", 0.05f);
-            UpgradeImportedMaterialsToUrp();
+            UpgradeImportedMaterialsToUrp(assetRoot);
 
             EditorUtility.DisplayProgressBar("Industrial Layout", "Creating scene...", 0.1f);
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -124,7 +155,7 @@ namespace FireFight.EditorTools
             var root = new GameObject("IndustrialLayout");
 
             // --- Catalog the imported prefabs by category --------------------------------
-            var catalog = new PrefabCatalog(AssetRoot);
+            var catalog = new PrefabCatalog(assetRoot);
             if (catalog.GroundFloors.Count == 0)
                 throw new Exception("No road floor prefabs found to build walkable ground from.");
 
@@ -145,6 +176,15 @@ namespace FireFight.EditorTools
             float originZ = -(GroundTilesZ * tileSize.z) * 0.5f;
             var occupied = new List<Bounds>();
 
+            // The floor tile's mesh UVs only span ~2 across a 20 m tile, so a seamless asphalt
+            // texture stretches to ~10 m per repeat and reads as a flat brown smear. Make a
+            // higher-tiling instance (without touching the imported source material) so the
+            // asphalt shows real detail underfoot.
+            // Prefer the detailed road/pavement material (oil stains, contrast) over the dull
+            // seamless-asphalt floor texture for the whole ground surface.
+            GameObject groundMatSource = catalog.RoadTiles.Count > 0 ? catalog.RoadTiles[0] : catalog.GroundFloors[0];
+            Material tiledGround = MakeTiledGroundMaterial(groundMatSource, tileSize, catalog.GroundFloors[0]);
+
             for (int gx = 0; gx < GroundTilesX; gx++)
             {
                 for (int gz = 0; gz < GroundTilesZ; gz++)
@@ -155,6 +195,9 @@ namespace FireFight.EditorTools
                         0f,
                         originZ + (gz + 0.5f) * tileSize.z);
                     var tile = InstantiatePrefab(floorPrefab, groundRoot.transform, pos, Quaternion.identity);
+                    if (tiledGround != null)
+                        foreach (var r in tile.GetComponentsInChildren<Renderer>())
+                            r.sharedMaterial = tiledGround;
                     MarkStatic(tile);
                 }
             }
@@ -182,11 +225,11 @@ namespace FireFight.EditorTools
 
             // --- Large structures: oil tanks & containers --------------------------------
             EditorUtility.DisplayProgressBar("Industrial Layout", "Placing large structures...", 0.6f);
-            PlaceLargeStructures(catalog, root.transform, random, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied);
+            PlaceLargeStructures(catalog, root.transform, random, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied, structureBounds);
 
             // --- Scatter props -----------------------------------------------------------
             EditorUtility.DisplayProgressBar("Industrial Layout", "Scattering props...", 0.68f);
-            ScatterProps(catalog, root.transform, random, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied);
+            ScatterProps(catalog, root.transform, random, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied, structureBounds);
 
             // --- Tag flammables in the SAVED scene + play-mode highlight + pick seed ------
             EditorUtility.DisplayProgressBar("Industrial Layout", "Tagging flammables...", 0.74f);
@@ -466,7 +509,7 @@ namespace FireFight.EditorTools
 
         // ================================================================= Large structures
         private static void PlaceLargeStructures(PrefabCatalog cat, Transform parent, System.Random rng,
-            float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied)
+            float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied, Bounds structureBounds)
         {
             var sRoot = new GameObject("Structures");
             sRoot.transform.SetParent(parent);
@@ -476,21 +519,30 @@ namespace FireFight.EditorTools
             big.AddRange(cat.Containers);
             if (big.Count == 0) return;
 
-            int placed = 0, attempts = 0, target = 14;
-            while (placed < target && attempts++ < 400)
+            // Ring the big structures around the hangar so the 360 walkaround is surrounded by
+            // hazards to read, instead of scattering them to the far edges of the lot.
+            float ringMin = structureBounds.extents.magnitude + CLEARANCE + 2f;
+            float ringMax = ringMin + 26f;
+            int placed = 0, attempts = 0, target = 12;
+            while (placed < target && attempts++ < 600)
             {
                 GameObject prefab = big[rng.Next(big.Count)];
                 Vector3 size = GetPrefabSize(prefab);
                 if (size.x < 0.1f) continue;
 
-                float x = Mathf.Lerp(minX + size.x, maxX - size.x, (float)rng.NextDouble());
-                float z = Mathf.Lerp(minZ + size.z, maxZ - 14f, (float)rng.NextDouble());
+                float ang = (float)(rng.NextDouble() * System.Math.PI * 2.0);
+                float dist = Mathf.Lerp(ringMin, ringMax, (float)rng.NextDouble());
+                float x = structureBounds.center.x + Mathf.Cos(ang) * dist;
+                float z = structureBounds.center.z + Mathf.Sin(ang) * dist;
+                if (x < minX + size.x || x > maxX - size.x || z < minZ + size.z || z > maxZ - size.z) continue;
+
                 Vector3 pos = new Vector3(x, 0f, z);
                 var footprint = new Bounds(pos, new Vector3(size.x, 4, size.z));
                 if (Overlaps(footprint, occupied, 2.0f)) continue;
 
                 float yaw = 90f * rng.Next(4);
                 var go = InstantiatePrefab(prefab, sRoot.transform, pos, Quaternion.Euler(0, yaw, 0));
+                SeatOnGround(go);
                 MarkStatic(go);
                 occupied.Add(footprint);
                 placed++;
@@ -499,28 +551,38 @@ namespace FireFight.EditorTools
 
         // ================================================================= Props
         private static void ScatterProps(PrefabCatalog cat, Transform parent, System.Random rng,
-            float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied)
+            float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied, Bounds structureBounds)
         {
             if (cat.Props.Count == 0 && cat.Particles.Count == 0) return;
 
             var pRoot = new GameObject("Props");
             pRoot.transform.SetParent(parent);
 
-            int placed = 0, attempts = 0, target = 90;
-            while (cat.Props.Count > 0 && placed < target && attempts++ < 2000)
+            // Cluster props in a band hugging the clearance ring so the walkaround is lined with
+            // detail (barrels, crates, debris) right where the firefighter looks, rather than
+            // sprinkled thinly across the whole lot.
+            float bandMin = Mathf.Max(structureBounds.extents.x, structureBounds.extents.z) + CLEARANCE + 0.5f;
+            float bandMax = bandMin + 22f;
+            int placed = 0, attempts = 0, target = 70;
+            while (cat.Props.Count > 0 && placed < target && attempts++ < 3000)
             {
                 GameObject prefab = cat.Props[rng.Next(cat.Props.Count)];
                 Vector3 size = GetPrefabSize(prefab);
                 if (size.x < 0.05f) continue;
 
-                float x = Mathf.Lerp(minX + 2f, maxX - 2f, (float)rng.NextDouble());
-                float z = Mathf.Lerp(minZ + 2f, maxZ - 2f, (float)rng.NextDouble());
+                float ang = (float)(rng.NextDouble() * System.Math.PI * 2.0);
+                float dist = Mathf.Lerp(bandMin, bandMax, (float)rng.NextDouble());
+                float x = structureBounds.center.x + Mathf.Cos(ang) * dist;
+                float z = structureBounds.center.z + Mathf.Sin(ang) * dist;
+                if (x < minX + 2f || x > maxX - 2f || z < minZ + 2f || z > maxZ - 2f) continue;
+
                 Vector3 pos = new Vector3(x, 0f, z);
                 var footprint = new Bounds(pos, new Vector3(Mathf.Max(size.x, 0.3f), 2, Mathf.Max(size.z, 0.3f)));
                 if (Overlaps(footprint, occupied, 0.3f)) continue;
 
                 float yaw = (float)(rng.NextDouble() * 360.0);
                 var go = InstantiatePrefab(prefab, pRoot.transform, pos, Quaternion.Euler(0, yaw, 0));
+                SeatOnGround(go);
                 MarkStatic(go);
                 occupied.Add(footprint);
                 placed++;
@@ -563,10 +625,14 @@ namespace FireFight.EditorTools
 
             // Size-up vantage: just outside the clearance ring on the -Z (front) side, but
             // clamped a couple of metres inside the perimeter so a big hangar can't push the
-            // spawn onto the fence.
+            // spawn onto the fence. Offset in X off the central road cross (which runs along
+            // x=0) so the firefighter starts on open walkable ground, not on the road seam.
             float spawnZ = Mathf.Max(areaMinZ + 2f, -(structureBounds.extents.z + CLEARANCE + 2f));
-            player.transform.position = new Vector3(structureBounds.center.x, 1.2f, spawnZ);
-            player.transform.forward = Vector3.forward; // face the structure (+Z)
+            float spawnX = structureBounds.center.x + structureBounds.extents.x + CLEARANCE * 0.5f;
+            player.transform.position = new Vector3(spawnX, 1.2f, spawnZ);
+            // Face the structure centre from the offset vantage.
+            player.transform.forward =
+                (structureBounds.center - new Vector3(spawnX, structureBounds.center.y, spawnZ)).normalized;
             player.tag = "Player";
 
             var cc = player.AddComponent<CharacterController>();
@@ -717,16 +783,63 @@ namespace FireFight.EditorTools
         }
 
         // ================================================================= Material upgrade
-        private static void UpgradeImportedMaterialsToUrp()
+        private static void UpgradeImportedMaterialsToUrp(string assetRoot)
         {
             var mats = new List<Material>();
-            foreach (var guid in AssetDatabase.FindAssets("t:Material", new[] { AssetRoot }))
+            foreach (var guid in AssetDatabase.FindAssets("t:Material", new[] { assetRoot }))
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
                 var m = AssetDatabase.LoadAssetAtPath<Material>(path);
                 if (m != null) mats.Add(m);
             }
             MaterialUrpUpgrader.ConvertForBuilder(mats);
+        }
+
+        /// <summary>
+        /// Clone the floor tile's material and raise its texture tiling so the asphalt repeats at
+        /// a realistic ~3 m scale instead of being stretched ~10 m per repeat (which looks like a
+        /// flat brown smear). The imported source material is left untouched; the clone is saved
+        /// as a project asset so it survives scene save/reload.
+        /// </summary>
+        private static Material MakeTiledGroundMaterial(GameObject floorPrefab, Vector3 tileSize, GameObject targetTilePrefab)
+        {
+            var srcRenderer = floorPrefab != null ? floorPrefab.GetComponentInChildren<Renderer>() : null;
+            var src = srcRenderer != null ? srcRenderer.sharedMaterial : null;
+            if (src == null) return null;
+
+            var clone = new Material(src) { name = src.name + "_GroundTiled" };
+
+            // The floor tile mesh already repeats its UVs (uvMax ~2 across a 20 m tile). Account
+            // for that built-in UV span so we don't over-tile: aim for ~1 texture repeat per 8 m
+            // of world space on the ACTUAL ground tile, matching the crisp look of the road tiles.
+            float uvSpan = GetMeshUvMax(targetTilePrefab);        // e.g. 2 for the floor tile
+            if (uvSpan < 0.01f) uvSpan = 1f;
+            float worldRepeats = Mathf.Max(1f, tileSize.x / 8f);  // ~2.5 repeats across a 20 m tile
+            float scaleFactor = worldRepeats / uvSpan;            // divide out the mesh's own UV span
+            var scale = new Vector2(scaleFactor, scaleFactor);
+
+            if (clone.HasProperty("_BaseMap")) clone.SetTextureScale("_BaseMap", scale);
+            if (clone.HasProperty("_MainTex")) clone.SetTextureScale("_MainTex", scale);
+            if (clone.HasProperty("_BumpMap")) clone.SetTextureScale("_BumpMap", scale);
+
+            const string dir = "Assets/FireFight/Scenes/Generated";
+            if (!AssetDatabase.IsValidFolder(dir))
+                Directory.CreateDirectory(dir);
+            string path = AssetDatabase.GenerateUniqueAssetPath($"{dir}/{clone.name}.mat");
+            AssetDatabase.CreateAsset(clone, path);
+            return clone;
+        }
+
+        /// <summary>Largest UV coordinate on a prefab's first mesh (how many times its UVs already repeat).</summary>
+        private static float GetMeshUvMax(GameObject prefab)
+        {
+            if (prefab == null) return 1f;
+            var mf = prefab.GetComponentInChildren<MeshFilter>();
+            if (mf == null || mf.sharedMesh == null) return 1f;
+            float max = 0f;
+            foreach (var uv in mf.sharedMesh.uv)
+                max = Mathf.Max(max, Mathf.Max(uv.x, uv.y));
+            return max <= 0.01f ? 1f : max;
         }
 
         // ================================================================= Helpers
@@ -736,6 +849,21 @@ namespace FireFight.EditorTools
             go.transform.SetParent(parent);
             go.transform.SetPositionAndRotation(pos, rot);
             return go;
+        }
+
+        /// <summary>
+        /// Drop a placed object so its renderer-bounds base sits on the ground (y=0). Prefabs in
+        /// this pack have inconsistent pivots (some at the base, some at mesh centre or on a
+        /// mount), which otherwise leaves props floating above or sunk into the floor.
+        /// </summary>
+        private static void SeatOnGround(GameObject go)
+        {
+            var renderers = go.GetComponentsInChildren<Renderer>();
+            if (renderers.Length == 0) return;
+            Bounds b = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++) b.Encapsulate(renderers[i].bounds);
+            float drop = b.min.y; // >0 means floating, <0 means sunk
+            go.transform.position -= new Vector3(0f, drop, 0f);
         }
 
         private static bool Overlaps(Bounds b, List<Bounds> others, float padding)
@@ -823,12 +951,24 @@ namespace FireFight.EditorTools
                     string lower = path.ToLowerInvariant();
                     string name = Path.GetFileNameWithoutExtension(path).ToLowerInvariant();
 
-                    if (lower.Contains("/roads/") && name.Contains("floor"))
+                    // Only FLAT, walkable road pieces count as ground. The "Roads" folder also
+                    // ships vertical trim ("floor elevation" sets: UNIConcrete_wall_* tiles) whose
+                    // names contain "tile"/"floor" but are 3 m-tall WALLS. Including them built the
+                    // road cross out of walls and trapped the player spawn. Exclude anything that is
+                    // a wall or lives in the elevation set.
+                    bool isFlatRoadPiece =
+                        lower.Contains("/roads/")
+                        && !name.Contains("wall")
+                        && !lower.Contains("floor_elevation")
+                        && !lower.Contains("elevation_set")
+                        && !name.Contains("road_up"); // ramps are not flat ground either
+
+                    if (isFlatRoadPiece && name.Contains("floor"))
                     {
                         GroundFloors.Add(prefab);
                         continue;
                     }
-                    if (lower.Contains("/roads/") && name.Contains("tile"))
+                    if (isFlatRoadPiece && name.Contains("tile"))
                     {
                         RoadTiles.Add(prefab);
                         continue;

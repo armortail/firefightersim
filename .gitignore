@@ -66,3 +66,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Git worktrees used for feature work (never commit the worktree dir)
+/.worktrees/
+
+# Kiro local settings and cache
+/.kiro/settings/
+/.kiro/cloud-cache/
