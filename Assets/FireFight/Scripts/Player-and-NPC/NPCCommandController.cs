@@ -29,10 +29,7 @@ public class NPCCommandController : MonoBehaviour
             return;
 
         
-        if(Mouse.current!= null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            TrySelectNpcAtAim();
-        }
+        
     }
 
     public void TrySelectNpcAtAim()

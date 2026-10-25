@@ -75,8 +75,6 @@ namespace FireFight
             if (isTranscribing || audio.Data == null || audio.Data.Length == 0)
                 return;
 
-            commandRouter.CaptureAim();
-
             int thisRecording = recordingVersion;
             isTranscribing = true;
 

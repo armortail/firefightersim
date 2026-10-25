@@ -31,7 +31,7 @@ public class NPCMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         commandPath = new NavMeshPath();
         if (hose == null) hose = GetComponentInChildren<HoseController>();
-        if (fireManager == null) fireManager = FindObjectOfType<FireManager>();
+        if (fireManager == null) fireManager = FindFirstObjectByType<FireManager>(); ;
     }
 
     /// <summary>
