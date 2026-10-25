@@ -5889,7 +5889,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607801393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ba66ffecbd8f14498310c6b3cd641ae, type: 3}
   m_Name: 
@@ -7503,8 +7503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba66ffecbd8f14498310c6b3cd641ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FireFight::FireFight.Managers.RandomFireSpawner
-  fireManager: {fileID: 0}
-  spawnPoints: []
+  fireManager: {fileID: 1282594492}
+  spawnPoints:
+  - {fileID: 859119713}
+  - {fileID: 607801394}
   igniteRadius: 1.5
   useFixedSeed: 0
   randomSeed: 0
@@ -19797,6 +19799,5477 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
   m_Name: ''
   m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1 &710000000000000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000001}
+  m_Layer: 0
+  m_Name: House Demo Furniture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000101}
+  - {fileID: 710000000000000201}
+  - {fileID: 710000000000000301}
+  - {fileID: 710000000000000401}
+  - {fileID: 710000000000000501}
+  - {fileID: 710000000000000601}
+  - {fileID: 710000000000000701}
+  - {fileID: 710000000000001001}
+  - {fileID: 710000000000001101}
+  - {fileID: 710000000000001201}
+  - {fileID: 710000000000001301}
+  - {fileID: 710000000000001401}
+  - {fileID: 710000000000001501}
+  - {fileID: 710000000000001601}
+  - {fileID: 710000000000001701}
+  - {fileID: 710000000000001801}
+  - {fileID: 710000000000001901}
+  - {fileID: 710000000000002001}
+  - {fileID: 710000000000002101}
+  - {fileID: 710000000000002201}
+  - {fileID: 710000000000002301}
+  - {fileID: 710000000000002401}
+  - {fileID: 710000000000002501}
+  - {fileID: 710000000000002601}
+  - {fileID: 710000000000002701}
+  - {fileID: 710000000000002801}
+  - {fileID: 710000000000002901}
+  - {fileID: 710000000000003001}
+  - {fileID: 710000000000003101}
+  - {fileID: 710000000000003201}
+  - {fileID: 710000000000003301}
+  - {fileID: 710000000000003401}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &710000000000000100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000101}
+  - component: {fileID: 710000000000000102}
+  - component: {fileID: 710000000000000105}
+  - component: {fileID: 710000000000000103}
+  - component: {fileID: 710000000000000104}
+  m_Layer: 0
+  m_Name: Main Room Sofa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1.0, z: 0, w: 6.123233995736766e-17}
+  m_LocalPosition: {x: 41.04, y: 0.02, z: 12.93196}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000111}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &710000000000000102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000100}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.211918, y: 0.862138, z: 0.93}
+  m_Center: {x: 0, y: 0.431069, z: 0}
+--- !u!208 &710000000000000105
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000100}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.105959, y: 0.431069, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.431069, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000101}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_Name
+      value: Couch_08 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+--- !u!4 &710000000000000111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000000200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000201}
+  - component: {fileID: 710000000000000202}
+  - component: {fileID: 710000000000000205}
+  - component: {fileID: 710000000000000203}
+  - component: {fileID: 710000000000000204}
+  m_Layer: 0
+  m_Name: Main Room Armchair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 39.2, y: 0.02, z: 11.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000211}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000000202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.001918, y: 0.7, z: 0.93}
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!208 &710000000000000205
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.500959, y: 0.35, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000201}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_Name
+      value: Armchair_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+--- !u!4 &710000000000000211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000000300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000301}
+  - component: {fileID: 710000000000000302}
+  - component: {fileID: 710000000000000305}
+  - component: {fileID: 710000000000000303}
+  - component: {fileID: 710000000000000304}
+  m_Layer: 0
+  m_Name: Main Room Coffee Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 41.0, y: 0.02, z: 11.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000311}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000000302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000300}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.80415, y: 0.423367, z: 0.80415}
+  m_Center: {x: 0, y: 0.2116835, z: 0}
+--- !u!208 &710000000000000305
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000300}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.402075, y: 0.2116835, z: 0.402075}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.2116835, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000310
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000301}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_Name
+      value: Coffee_Table_03 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.353367'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+--- !u!4 &710000000000000311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000000400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000401}
+  - component: {fileID: 710000000000000402}
+  - component: {fileID: 710000000000000405}
+  - component: {fileID: 710000000000000403}
+  - component: {fileID: 710000000000000404}
+  m_Layer: 0
+  m_Name: Main Room Side Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 42.65, y: 0.02, z: 13.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000411}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000000402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.574988, z: 0.8}
+  m_Center: {x: 0, y: 0.287494, z: 0}
+--- !u!208 &710000000000000405
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.287494, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.287494, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000401}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_Name
+      value: Nightstand_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.00296'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+--- !u!4 &710000000000000411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000000500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000501}
+  - component: {fileID: 710000000000000502}
+  - component: {fileID: 710000000000000505}
+  - component: {fileID: 710000000000000503}
+  - component: {fileID: 710000000000000504}
+  m_Layer: 0
+  m_Name: Rear Room Bed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 25.1, y: 0.02, z: 34.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000511}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000000502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000500}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.399124, y: 1.159125, z: 2.540888}
+  m_Center: {x: 0, y: 0.5795625, z: 0}
+--- !u!208 &710000000000000505
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000500}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.699562, y: 0.5795625, z: 1.270444}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5795625, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000501}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_Name
+      value: Bed_07 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+--- !u!4 &710000000000000511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 027e35f7697bc234e8a1ece1eb95268e, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000000600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000601}
+  - component: {fileID: 710000000000000602}
+  - component: {fileID: 710000000000000605}
+  - component: {fileID: 710000000000000603}
+  - component: {fileID: 710000000000000604}
+  m_Layer: 0
+  m_Name: Rear Room Bedside Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 23.4, y: 0.02, z: 35.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000611}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000000602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000600}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.574988, z: 0.8}
+  m_Center: {x: 0, y: 0.287494, z: 0}
+--- !u!208 &710000000000000605
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000600}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.287494, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.287494, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000601}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_Name
+      value: Nightstand_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.00296'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+--- !u!4 &710000000000000611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000000700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000000701}
+  - component: {fileID: 710000000000000702}
+  - component: {fileID: 710000000000000705}
+  - component: {fileID: 710000000000000703}
+  - component: {fileID: 710000000000000704}
+  m_Layer: 0
+  m_Name: Rear Room Wooden Chair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000000701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1.0, z: 0, w: 6.123233995736766e-17}
+  m_LocalPosition: {x: 26.8, y: 0.02, z: 33.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000000711}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &710000000000000702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!208 &710000000000000705
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!114 &710000000000000703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000000704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000000700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!1001 &710000000000000710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000000701}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000000711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000000710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001001}
+  - component: {fileID: 710000000000001002}
+  - component: {fileID: 710000000000001005}
+  - component: {fileID: 710000000000001003}
+  - component: {fileID: 710000000000001004}
+  m_Layer: 0
+  m_Name: Main Room Lounge Armchair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 41, y: 0.02, z: 9.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001011}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000001002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.001918, y: 0.7, z: 0.93}
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &710000000000001003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001005
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.500959, y: 0.35, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001001}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_Name
+      value: Armchair_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+--- !u!4 &710000000000001011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001101}
+  - component: {fileID: 710000000000001102}
+  - component: {fileID: 710000000000001105}
+  - component: {fileID: 710000000000001103}
+  - component: {fileID: 710000000000001104}
+  m_Layer: 0
+  m_Name: Main Room Second Sofa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 36, y: 0.02, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001111}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000001102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001100}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.211918, y: 0.862138, z: 0.93}
+  m_Center: {x: 0, y: 0.431069, z: 0}
+--- !u!114 &710000000000001103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001105
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001100}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.105959, y: 0.431069, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.431069, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001101}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_Name
+      value: Couch_08 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+--- !u!4 &710000000000001111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001201}
+  - component: {fileID: 710000000000001202}
+  - component: {fileID: 710000000000001205}
+  - component: {fileID: 710000000000001203}
+  - component: {fileID: 710000000000001204}
+  m_Layer: 0
+  m_Name: Main Room Second Sofa Armchair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 37.7, y: 0.02, z: 15.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001211}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &710000000000001202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.001918, y: 0.7, z: 0.93}
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &710000000000001203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001205
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.500959, y: 0.35, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001201}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_Name
+      value: Armchair_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+--- !u!4 &710000000000001211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001301}
+  - component: {fileID: 710000000000001302}
+  - component: {fileID: 710000000000001305}
+  - component: {fileID: 710000000000001303}
+  - component: {fileID: 710000000000001304}
+  m_Layer: 0
+  m_Name: Main Room Sitting Area Sofa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 28, y: 0.02, z: 19.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001311}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000001302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001300}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.211918, y: 0.862138, z: 0.93}
+  m_Center: {x: 0, y: 0.431069, z: 0}
+--- !u!114 &710000000000001303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001305
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001300}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.105959, y: 0.431069, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.431069, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001310
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001301}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_Name
+      value: Couch_08 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+--- !u!4 &710000000000001311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac078548db88e18438f7e35d1558957f, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001401}
+  - component: {fileID: 710000000000001402}
+  - component: {fileID: 710000000000001405}
+  - component: {fileID: 710000000000001403}
+  - component: {fileID: 710000000000001404}
+  m_Layer: 0
+  m_Name: Main Room Sitting Area Coffee Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 28, y: 0.02, z: 20.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001411}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000001402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.80415, y: 0.423367, z: 0.80415}
+  m_Center: {x: 0, y: 0.2116835, z: 0}
+--- !u!114 &710000000000001403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001405
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.402075, y: 0.2116835, z: 0.402075}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.2116835, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001401}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_Name
+      value: Coffee_Table_03 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.353367'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+--- !u!4 &710000000000001411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 46e441ec2b955364cbfc9234515bbcab, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001501}
+  - component: {fileID: 710000000000001502}
+  - component: {fileID: 710000000000001505}
+  - component: {fileID: 710000000000001503}
+  - component: {fileID: 710000000000001504}
+  m_Layer: 0
+  m_Name: Main Room Sitting Area Left Armchair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 26.2, y: 0.02, z: 20.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001511}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000001502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001500}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.001918, y: 0.7, z: 0.93}
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &710000000000001503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001505
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001500}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.500959, y: 0.35, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001501}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_Name
+      value: Armchair_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+--- !u!4 &710000000000001511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001601}
+  - component: {fileID: 710000000000001602}
+  - component: {fileID: 710000000000001605}
+  - component: {fileID: 710000000000001603}
+  - component: {fileID: 710000000000001604}
+  m_Layer: 0
+  m_Name: Main Room Sitting Area Right Armchair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 29.8, y: 0.02, z: 20.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001611}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &710000000000001602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001600}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.001918, y: 0.7, z: 0.93}
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &710000000000001603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001605
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001600}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.500959, y: 0.35, z: 0.465}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001601}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_Name
+      value: Armchair_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+--- !u!4 &710000000000001611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a7c992a87a949c49add3a9e8daaecd6, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001701}
+  - component: {fileID: 710000000000001702}
+  - component: {fileID: 710000000000001705}
+  - component: {fileID: 710000000000001703}
+  - component: {fileID: 710000000000001704}
+  m_Layer: 0
+  m_Name: Main Room Sitting Area Side Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 29.6, y: 0.02, z: 19.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001711}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000001702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.574988, z: 0.8}
+  m_Center: {x: 0, y: 0.287494, z: 0}
+--- !u!114 &710000000000001703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001705
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.287494, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.287494, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001701}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_Name
+      value: Nightstand_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.00296'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+--- !u!4 &710000000000001711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001801}
+  - component: {fileID: 710000000000001802}
+  - component: {fileID: 710000000000001805}
+  - component: {fileID: 710000000000001803}
+  - component: {fileID: 710000000000001804}
+  m_Layer: 0
+  m_Name: Main Room Dining Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 29.3, y: 0.02, z: 7.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001811}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000001802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001800}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6, y: 0.7527, z: 0.75}
+  m_Center: {x: 0, y: 0.37635, z: 0}
+--- !u!114 &710000000000001803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001805
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001800}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.8, y: 0.37635, z: 0.375}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.37635, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001810
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001801}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_Name
+      value: Kitchen_Table_09 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.0027'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+--- !u!4 &710000000000001811 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e6ea1a5d3b49cb948b46712f42294df7, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000001900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000001901}
+  - component: {fileID: 710000000000001902}
+  - component: {fileID: 710000000000001905}
+  - component: {fileID: 710000000000001903}
+  - component: {fileID: 710000000000001904}
+  m_Layer: 0
+  m_Name: Main Room Dining Chair 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000001901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 28.85, y: 0.02, z: 6.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000001911}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000001902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000001903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000001904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000001905
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000001900}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000001910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000001901}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000001911 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000001910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002001}
+  - component: {fileID: 710000000000002002}
+  - component: {fileID: 710000000000002005}
+  - component: {fileID: 710000000000002003}
+  - component: {fileID: 710000000000002004}
+  m_Layer: 0
+  m_Name: Main Room Dining Chair 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 29.75, y: 0.02, z: 6.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002011}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000002002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000002003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002005
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002001}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000002011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002101}
+  - component: {fileID: 710000000000002102}
+  - component: {fileID: 710000000000002105}
+  - component: {fileID: 710000000000002103}
+  - component: {fileID: 710000000000002104}
+  m_Layer: 0
+  m_Name: Main Room Dining Chair 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1.0, z: 0, w: 6.123233995736766e-17}
+  m_LocalPosition: {x: 28.85, y: 0.02, z: 8.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002111}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &710000000000002102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002100}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000002103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002105
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002100}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002101}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000002111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002201}
+  - component: {fileID: 710000000000002202}
+  - component: {fileID: 710000000000002205}
+  - component: {fileID: 710000000000002203}
+  - component: {fileID: 710000000000002204}
+  m_Layer: 0
+  m_Name: Main Room Dining Chair 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1.0, z: 0, w: 6.123233995736766e-17}
+  m_LocalPosition: {x: 29.75, y: 0.02, z: 8.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002211}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &710000000000002202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000002203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002205
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002201}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000002211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002301}
+  - component: {fileID: 710000000000002302}
+  - component: {fileID: 710000000000002305}
+  - component: {fileID: 710000000000002303}
+  - component: {fileID: 710000000000002304}
+  m_Layer: 0
+  m_Name: Main Room Dining Chair 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 27.95, y: 0.02, z: 7.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002311}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000002302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002300}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000002303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002305
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002300}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002310
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002301}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000002311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002401}
+  - component: {fileID: 710000000000002402}
+  - component: {fileID: 710000000000002405}
+  - component: {fileID: 710000000000002403}
+  - component: {fileID: 710000000000002404}
+  m_Layer: 0
+  m_Name: Main Room Dining Chair 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 30.65, y: 0.02, z: 7.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002411}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &710000000000002402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000002403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002405
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002401}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000002411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002501}
+  - component: {fileID: 710000000000002502}
+  - component: {fileID: 710000000000002505}
+  - component: {fileID: 710000000000002503}
+  - component: {fileID: 710000000000002504}
+  m_Layer: 0
+  m_Name: Main Room Study Desk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 39.8, y: 0.02, z: 24.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002511}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000002502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002500}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.318178, y: 0.76, z: 0.740668}
+  m_Center: {x: 0, y: 0.38, z: 0}
+--- !u!114 &710000000000002503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002505
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002500}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.659089, y: 0.38, z: 0.370334}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002501}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_Name
+      value: Work_Table_06 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+--- !u!4 &710000000000002511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002601}
+  - component: {fileID: 710000000000002602}
+  - component: {fileID: 710000000000002605}
+  - component: {fileID: 710000000000002603}
+  - component: {fileID: 710000000000002604}
+  m_Layer: 0
+  m_Name: Main Room Study Chair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 39.8, y: 0.02, z: 23.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002611}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000002602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002600}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000002603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002605
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002600}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002601}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000002611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002701}
+  - component: {fileID: 710000000000002702}
+  - component: {fileID: 710000000000002705}
+  - component: {fileID: 710000000000002703}
+  - component: {fileID: 710000000000002704}
+  m_Layer: 0
+  m_Name: Main Room Study Cabinet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 42, y: 0.02, z: 24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002711}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000002702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.88, y: 1.579749, z: 0.88}
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+--- !u!114 &710000000000002703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002705
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.44, y: 0.7898745, z: 0.44}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002701}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_Name
+      value: Closet_01 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.002486'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+--- !u!4 &710000000000002711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002801}
+  - component: {fileID: 710000000000002802}
+  - component: {fileID: 710000000000002805}
+  - component: {fileID: 710000000000002803}
+  - component: {fileID: 710000000000002804}
+  m_Layer: 0
+  m_Name: Main Room Study Side Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 41.1, y: 0.02, z: 24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002811}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000002802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002800}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.574988, z: 0.8}
+  m_Center: {x: 0, y: 0.287494, z: 0}
+--- !u!114 &710000000000002803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002805
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002800}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.287494, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.287494, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002810
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002801}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_Name
+      value: Nightstand_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.00296'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+--- !u!4 &710000000000002811 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000002900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000002901}
+  - component: {fileID: 710000000000002902}
+  - component: {fileID: 710000000000002905}
+  - component: {fileID: 710000000000002903}
+  - component: {fileID: 710000000000002904}
+  m_Layer: 0
+  m_Name: Main Room Entrance Cabinet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000002901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 41.3, y: 0.02, z: -1.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000002911}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000002902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.88, y: 1.579749, z: 0.88}
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+--- !u!114 &710000000000002903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000002904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000002905
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000002900}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.44, y: 0.7898745, z: 0.44}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000002910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000002901}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_Name
+      value: Closet_01 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.002486'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+--- !u!4 &710000000000002911 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+  m_PrefabInstance: {fileID: 710000000000002910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000003000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000003001}
+  - component: {fileID: 710000000000003002}
+  - component: {fileID: 710000000000003005}
+  - component: {fileID: 710000000000003003}
+  - component: {fileID: 710000000000003004}
+  m_Layer: 0
+  m_Name: Main Room Storage Cabinet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000003001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 42, y: 0.02, z: 19.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000003011}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000003002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.88, y: 1.579749, z: 0.88}
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+--- !u!114 &710000000000003003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000003004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000003005
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.44, y: 0.7898745, z: 0.44}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000003010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000003001}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_Name
+      value: Closet_01 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.002486'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+--- !u!4 &710000000000003011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+  m_PrefabInstance: {fileID: 710000000000003010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000003100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000003101}
+  - component: {fileID: 710000000000003102}
+  - component: {fileID: 710000000000003105}
+  - component: {fileID: 710000000000003103}
+  - component: {fileID: 710000000000003104}
+  m_Layer: 0
+  m_Name: Main Room Storage Side Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000003101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 40.8, y: 0.02, z: 19.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000003111}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000003102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003100}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.574988, z: 0.8}
+  m_Center: {x: 0, y: 0.287494, z: 0}
+--- !u!114 &710000000000003103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000003104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000003105
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003100}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.287494, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.287494, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000003110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000003101}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_Name
+      value: Nightstand_02 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.00296'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+--- !u!4 &710000000000003111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8e9d8be7ded17d4c828545092707e25, type: 3}
+  m_PrefabInstance: {fileID: 710000000000003110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000003200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000003201}
+  - component: {fileID: 710000000000003202}
+  - component: {fileID: 710000000000003205}
+  - component: {fileID: 710000000000003203}
+  - component: {fileID: 710000000000003204}
+  m_Layer: 0
+  m_Name: Main Room Window Desk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000003201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 25.3, y: 0.02, z: 25.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000003211}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &710000000000003202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.318178, y: 0.76, z: 0.740668}
+  m_Center: {x: 0, y: 0.38, z: 0}
+--- !u!114 &710000000000003203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000003204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000003205
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.659089, y: 0.38, z: 0.370334}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000003210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000003201}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_Name
+      value: Work_Table_06 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+--- !u!4 &710000000000003211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38b7e49d1cdcf341b5a1b193e9061e1, type: 3}
+  m_PrefabInstance: {fileID: 710000000000003210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000003300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000003301}
+  - component: {fileID: 710000000000003302}
+  - component: {fileID: 710000000000003305}
+  - component: {fileID: 710000000000003303}
+  - component: {fileID: 710000000000003304}
+  m_Layer: 0
+  m_Name: Main Room Window Desk Chair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000003301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071067811865476, z: 0, w: 0.7071067811865476}
+  m_LocalPosition: {x: 26.4, y: 0.02, z: 25.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000003311}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &710000000000003302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003300}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45494, y: 0.6, z: 0.45494}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &710000000000003303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000003304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000003305
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003300}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.22747, y: 0.3, z: 0.22747}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000003310
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000003301}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_Name
+      value: Chair_17 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+--- !u!4 &710000000000003311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f023e87be9ed66849b43bd089b6e7200, type: 3}
+  m_PrefabInstance: {fileID: 710000000000003310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &710000000000003400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710000000000003401}
+  - component: {fileID: 710000000000003402}
+  - component: {fileID: 710000000000003405}
+  - component: {fileID: 710000000000003403}
+  - component: {fileID: 710000000000003404}
+  m_Layer: 0
+  m_Name: Main Room Window Desk Cabinet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710000000000003401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.0, z: 0, w: 1.0}
+  m_LocalPosition: {x: 24, y: 0.02, z: 25.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 710000000000003411}
+  m_Father: {fileID: 710000000000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &710000000000003402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.88, y: 1.579749, z: 0.88}
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+--- !u!114 &710000000000003403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeb24b71491854e911cb7bc67e3c2c, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.Flammable
+  fireManager: {fileID: 1282594492}
+  fuel: 1
+  flammability: 0.8
+  inflames: 0
+  burnedOut: 0
+  onIgnite:
+    m_PersistentCalls:
+      m_Calls: []
+  onBurnedOut:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &710000000000003404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a235b08e9715aca48aa1662049dc17e1, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.CharOnBurnout
+  charAmount: 0.92
+  charTint: {r: 0.1, g: 0.055, b: 0.03, a: 1}
+  charIfAlreadyBurned: 1
+--- !u!208 &710000000000003405
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710000000000003400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.44, y: 0.7898745, z: 0.44}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7898745, z: 0}
+  m_TimeToStationary: 0.1
+--- !u!1001 &710000000000003410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710000000000003401}
+    m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_Name
+      value: Closet_01 Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '0.002486'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.x
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.y
+      value: '1'
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+      propertyPath: m_LocalScale.z
+      value: '1'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+--- !u!4 &710000000000003411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c0bcb4b5ca7d547b74ad3f37927c91, type: 3}
+  m_PrefabInstance: {fileID: 710000000000003410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -19818,3 +25291,4 @@ SceneRoots:
   - {fileID: 21090484}
   - {fileID: 859119713}
   - {fileID: 607801394}
+  - {fileID: 710000000000000001}
