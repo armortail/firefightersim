@@ -46,6 +46,15 @@ namespace FireFight.Environment
         [Tooltip("Heat lost per tick when a cell is NOT next to fire (natural cooling).")]
         public float coolingRate = 0.1f;
 
+        [Header("Water / Wetness")]
+        [Tooltip("Wetness lost per tick as water evaporates. Lower = stays wet (and fire-resistant) longer.")]
+        [Range(0f, 0.2f)]
+        public float evaporationRate = 0.02f;
+
+        [Tooltip("A burning cell wetter than this is forced out (water smothered it).")]
+        [Range(0f, 1f)]
+        public float wetExtinguishThreshold = 0.5f;
+
         /// <summary>Seconds between ticks, derived from ticksPerSecond.</summary>
         public float TickInterval => 1f / Mathf.Max(0.01f, ticksPerSecond);
     }

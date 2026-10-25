@@ -3,7 +3,6 @@
     "rootNamespace": "FireFight.Tests",
     "references": [
         "FireFight",
-        "FireFight.Editor",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],
