@@ -9,12 +9,9 @@ namespace FireFight
     {
         [SerializeField] private NPCMovement danny;
         [SerializeField] private NPCMovement simon;
-        [SerializeField] private Camera commandCamera;
-        [SerializeField] private float commandDistance = 100f;
-        [SerializeField] private LayerMask commandLayers = Physics.DefaultRaycastLayers;
+        [SerializeField] private NPCDestinationMarkers destinationMarkers;
 
-        private RaycastHit capturedHit;
-        private bool hasCapturedHit;
+        
 
         public void ExecuteCommand(string transcript)
         {
@@ -65,39 +62,33 @@ namespace FireFight
                 return;
             }
 
-            if (recipient == null || !hasCapturedHit)
+            if (recipient == null)
             {
-                Debug.Log("Missing NPC or destination.");
+                Debug.Log("The requested NPC is not assigned.");
                 return;
             }
 
-            if (Vector3.Dot(capturedHit.normal, Vector3.up) < 0.5f)
+            if (destinationMarkers == null)
             {
-                Debug.Log("Aim at walkable ground.");
+                Debug.Log("Assign the destination marker controller.");
                 return;
             }
 
-            if (!recipient.MoveTo(capturedHit.point))
+            if (!destinationMarkers.TryGetDestination(
+                    recipient, out Vector3 destination))
             {
-                Debug.Log("That destination is not reachable.");
+                Debug.Log("Place " + recipient.name + "'s marker first.");
+                return;
+            }
+
+            if (!recipient.MoveTo(destination))
+            {
+                Debug.Log("That destination is no longer reachable.");
             }
         }
 
 
-        public void CaptureAim()
-        {
-            hasCapturedHit = false;
-
-            if (commandCamera == null)
-                return;
-
-            Ray aimRay = commandCamera.ViewportPointToRay(
-                new Vector3(0.5f, 0.5f, 0f));
-
-            hasCapturedHit = Physics.Raycast(
-                aimRay, out capturedHit, commandDistance,
-                commandLayers, QueryTriggerInteraction.Ignore);
-        }
+        
 
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
