@@ -32,11 +32,33 @@ public class NPCCommandController : MonoBehaviour
             CommandSelectedNpcAtAim();
         else if (keyboard.fKey.wasPressedThisFrame)
             CommandSelectedNpcExtinguishAtAim();
+        if(Mouse.current!= null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            TrySelectNpcAtAim();
+        }
     }
 
+    public void TrySelectNpcAtAim()
+    {
+        Ray aimRay = commandCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
+
+        if (Physics.Raycast(aimRay, out RaycastHit hit, commandDistance,
+    commandLayers, QueryTriggerInteraction.Ignore))
+        {
+            NPCMovement clickedNpc = hit.collider.GetComponentInParent<NPCMovement>();
+            SelectNpc(clickedNpc);
+        }
+        else
+        {
+            SelectNpc(null);
+        }
+
+
+    }
     /// <summary>Selects the sole recipient; other NPCs do not listen for input.</summary>
     public void SelectNpc(NPCMovement npc)
     {
+        
         selectedNpc = npc;
     }
 
