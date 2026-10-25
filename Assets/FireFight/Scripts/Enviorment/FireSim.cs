@@ -72,7 +72,15 @@ namespace FireFight.Environment
                 FireCell cell = cells[i];
                 if (cell.state != FireState.Burning) continue;
 
-<<<<<<< Updated upstream
+                // Water smother: a burning cell that got wet enough is put out.
+                // It keeps its fuel and can relight once it dries.
+                if (cell.wetness >= config.wetExtinguishThreshold)
+                {
+                    cell.state = FireState.Unburned;
+                    cell.heat = 0f;
+                    continue;
+                }
+
                 // Confined-space oxygen: a burning cell inside a box consumes
                 // its shared air. If the box has suffocated, the flame dies down
                 // instead of consuming fuel (it can relight when air returns).
@@ -87,15 +95,6 @@ namespace FireFight.Environment
                         continue;
                     }
                     box.ConsumeForOneBurningCell();
-=======
-                // Water smother: a burning cell that got wet enough is put out.
-                // It keeps its fuel and can relight once it dries.
-                if (cell.wetness >= config.wetExtinguishThreshold)
-                {
-                    cell.state = FireState.Unburned;
-                    cell.heat = 0f;
-                    continue;
->>>>>>> Stashed changes
                 }
 
                 cell.fuel -= config.burnRate;
