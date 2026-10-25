@@ -209,6 +209,110 @@ namespace FireFight.Managers
             }
         }
 
+        // ---- Extinguishing: ways to kill fire ----
+        //
+        // All methods apply two effects to each affected cell:
+        //   - cooling: removes heat (can drop a flame below ignition)
+        //   - wetness: left behind so the cell resists re-igniting for a while
+        // Tools (hose, extinguisher, sprinkler) call the shape that fits them.
+
+        /// <summary>Cool AND wet a single cell. The building block for every area method.</summary>
+        public void WetCell(Vector3Int gridPos, float cooling, float wetness)
+        {
+            FireCell cell = Grid.GetCell(gridPos);
+            if (cell == null) return;
+
+            cell.heat = Mathf.Max(0f, cell.heat - cooling);
+            cell.wetness = Mathf.Clamp01(cell.wetness + wetness);
+
+            if (cell.state == FireState.Burning && cell.heat < config.ignitionThreshold)
+                cell.state = FireState.Unburned; // can relight once it dries
+        }
+
+        /// <summary>
+        /// Extinguish a sphere of cells around a world point (splash / burst /
+        /// extinguisher cloud). Cooling and wetness fall off toward the edge.
+        /// </summary>
+        public void ExtinguishSphere(Vector3 worldCenter, float radius, float cooling, float wetness)
+        {
+            if (radius <= 0f) return;
+            var min = new Vector3(worldCenter.x - radius, worldCenter.y - radius, worldCenter.z - radius);
+            var max = new Vector3(worldCenter.x + radius, worldCenter.y + radius, worldCenter.z + radius);
+            Vector3Int gMin = Grid.WorldToGrid(min);
+            Vector3Int gMax = Grid.WorldToGrid(max);
+
+            for (int x = gMin.x; x <= gMax.x; x++)
+                for (int y = gMin.y; y <= gMax.y; y++)
+                    for (int z = gMin.z; z <= gMax.z; z++)
+                    {
+                        var gp = new Vector3Int(x, y, z);
+                        if (Grid.GetCell(gp) == null) continue;
+
+                        float dist = Vector3.Distance(Grid.GridToWorld(gp), worldCenter);
+                        if (dist > radius) continue;
+
+                        float falloff = 1f - (dist / radius); // 1 at centre, 0 at edge
+                        WetCell(gp, cooling * falloff, wetness * falloff);
+                    }
+        }
+
+        /// <summary>
+        /// Extinguish a cone of cells from an origin along a direction (a hose
+        /// spray in Cone mode). A cell is affected if it is within range and the
+        /// angle between the spray direction and the cell is under halfAngle.
+        /// </summary>
+        public void ExtinguishCone(Vector3 origin, Vector3 direction, float range,
+            float halfAngleDegrees, float cooling, float wetness)
+        {
+            if (range <= 0f) return;
+            direction = direction.normalized;
+            float cosHalf = Mathf.Cos(halfAngleDegrees * Mathf.Deg2Rad);
+
+            var min = new Vector3(origin.x - range, origin.y - range, origin.z - range);
+            var max = new Vector3(origin.x + range, origin.y + range, origin.z + range);
+            Vector3Int gMin = Grid.WorldToGrid(min);
+            Vector3Int gMax = Grid.WorldToGrid(max);
+
+            for (int x = gMin.x; x <= gMax.x; x++)
+                for (int y = gMin.y; y <= gMax.y; y++)
+                    for (int z = gMin.z; z <= gMax.z; z++)
+                    {
+                        var gp = new Vector3Int(x, y, z);
+                        if (Grid.GetCell(gp) == null) continue;
+
+                        Vector3 toCell = Grid.GridToWorld(gp) - origin;
+                        float dist = toCell.magnitude;
+                        if (dist > range || dist < 1e-4f) continue;
+
+                        // Inside the cone if the angle is within the half-angle.
+                        if (Vector3.Dot(toCell / dist, direction) < cosHalf) continue;
+
+                        float falloff = 1f - (dist / range);
+                        WetCell(gp, cooling * falloff, wetness * falloff);
+                    }
+        }
+
+        /// <summary>
+        /// Extinguish a jet: a focused stream. Cools/wets the single cell at the
+        /// impact point plus its immediate neighbours (a small splash).
+        /// </summary>
+        public void ExtinguishJet(Vector3 impactPoint, float cooling, float wetness)
+        {
+            ExtinguishSphere(impactPoint, cellSize, cooling, wetness);
+        }
+
+        /// <summary>Extinguish every cell in a world-space box (sprinkler zone / retardant drop).</summary>
+        public void ExtinguishBounds(Bounds worldBounds, float cooling, float wetness)
+        {
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                cell.heat = Mathf.Max(0f, cell.heat - cooling);
+                cell.wetness = Mathf.Clamp01(cell.wetness + wetness);
+                if (cell.state == FireState.Burning && cell.heat < config.ignitionThreshold)
+                    cell.state = FireState.Unburned;
+            });
+        }
+
         public FireCell GetCell(Vector3Int gridPos) => Grid.GetCell(gridPos);
 
         /// <summary>
