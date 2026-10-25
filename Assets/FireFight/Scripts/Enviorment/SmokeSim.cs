@@ -55,10 +55,16 @@ namespace FireFight.Environment
                 }
                 else if (cell.state == FireState.Burned)
                 {
-                    // Burned cells smoulder only for a limited time, then go cold so
-                    // the scene can clear. -1 means smoulder forever (legacy behaviour).
-                    bool stillSmouldering = config.smoulderDurationTicks < 0
-                        || cell.smoulderedTicks < config.smoulderDurationTicks;
+                    // Water douses the embers: a wet-enough burned cell stops smouldering
+                    // immediately, so hosing a burned-out area clears its smoke source fast.
+                    bool doused = config.wetStopsSmoulder
+                        && cell.wetness >= config.smoulderDouseThreshold;
+
+                    // Otherwise burned cells smoulder only for a limited time, then go cold.
+                    // -1 means smoulder forever (legacy behaviour).
+                    bool stillSmouldering = !doused
+                        && (config.smoulderDurationTicks < 0
+                            || cell.smoulderedTicks < config.smoulderDurationTicks);
                     if (stillSmouldering)
                     {
                         cell.smoke = Mathf.Min(1f, cell.smoke + config.smokePerSmolderingTick);
@@ -110,7 +116,12 @@ namespace FireFight.Environment
             // ---- 4. Commit buffer + dissipation + clamp ----
             for (int i = 0; i < cells.Length; i++)
             {
-                float s = next[i] - config.dissipation;
+                // Base dissipation, plus extra where the cell is wet: water spray
+                // knocks smoke down, so a just-extinguished cell clears much faster.
+                float clear = config.dissipation
+                    + config.extraDissipationWhenWet * Mathf.Clamp01(cells[i].wetness);
+
+                float s = next[i] - clear;
                 if (s < config.minSmoke) s = 0f;
                 else if (s > 1f) s = 1f;
                 cells[i].smoke = s;

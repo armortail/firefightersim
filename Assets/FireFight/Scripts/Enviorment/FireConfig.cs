@@ -55,6 +55,12 @@ namespace FireFight.Environment
         [Range(0f, 1f)]
         public float wetExtinguishThreshold = 0.5f;
 
+        [Tooltip("EXTRA heat drained per tick from a wet cell, scaled by its wetness. Makes a " +
+                 "just-extinguished area cool down fast instead of lingering warm (and so it " +
+                 "won't re-ignite the moment a neighbour flares).")]
+        [Range(0f, 2f)]
+        public float extraCoolingWhenWet = 0.5f;
+
         [Header("Smother Coating (foam / CO2 / blanket)")]
         [Tooltip("Coating lost per tick as foam collapses / CO2 disperses. Lower = the " +
                  "smother blanket lasts longer before the cell can burn again.")]

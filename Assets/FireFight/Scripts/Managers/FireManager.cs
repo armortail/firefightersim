@@ -34,8 +34,25 @@ namespace FireFight.Managers
         [Header("Confined Spaces (Oxygen Boxes)")]
         [Tooltip("Enclosed grid regions with a shared oxygen pool. Fire inside " +
                  "depletes the air and suffocates until the box is opened. Grid " +
-                 "coordinates, inclusive min..max.")]
+                 "coordinates, inclusive min..max. Used only when auto-detect is OFF.")]
         public OxygenBoxDef[] oxygenBoxes = new OxygenBoxDef[0];
+
+        [Tooltip("Auto-detect rooms by flood-filling connected air cells. Solid obstacles " +
+                 "(walls, closed doors, large props on the obstacle layers) separate rooms. " +
+                 "When on, the manual oxygenBoxes list above is ignored.")]
+        public bool autoDetectOxygenBoxes = false;
+
+        [Tooltip("Physics layers whose colliders count as SOLID (block air / separate rooms): " +
+                 "walls, doors, fuel tankers, containers, etc.")]
+        public LayerMask obstacleLayers = ~0;
+
+        [Tooltip("Smallest room (in cells) that becomes a confined oxygen box. Larger pockets " +
+                 "like the open outdoors are ignored so only real enclosed rooms suffocate fire.")]
+        public int minRoomCells = 2;
+
+        [Tooltip("Biggest room (in cells) treated as confined. A pocket larger than this is " +
+                 "considered 'open air' and not modelled as a suffocating room. 0 = no cap.")]
+        public int maxRoomCells = 0;
 
         /// <summary>Inspector-friendly definition of an oxygen box (resolved to an OxygenBox at runtime).</summary>
         [System.Serializable]
@@ -144,17 +161,6 @@ namespace FireFight.Managers
         {
             Grid = new FireGrid(gridSize, cellSize, transform.position);
 
-            // Build runtime oxygen boxes from the Inspector definitions.
-            runtimeBoxes.Clear();
-            if (oxygenBoxes != null)
-            {
-                foreach (var def in oxygenBoxes)
-                {
-                    if (def == null) continue;
-                    runtimeBoxes.Add(new OxygenBox(def.min, def.max, oxygenConfig, def.startOpen));
-                }
-            }
-
             simulation = new FireSim(Grid, config, runtimeBoxes);
             smokeSimulation = new SmokeSim(Grid, smokeConfig);
 
@@ -166,6 +172,76 @@ namespace FireFight.Managers
                 FireCell[] cells = Grid.Cells;
                 for (int i = 0; i < cells.Length; i++) cells[i].fuel = 0f;
             }
+
+            BuildOxygenBoxes();
+        }
+
+        /// <summary>
+        /// (Re)build the runtime oxygen boxes. In AUTO mode it marks solid cells from
+        /// physics and flood-fills connected air into one box per room; otherwise it uses
+        /// the hand-authored <see cref="oxygenBoxes"/> definitions.
+        /// </summary>
+        private void BuildOxygenBoxes()
+        {
+            runtimeBoxes.Clear();
+
+            if (autoDetectOxygenBoxes)
+            {
+                MarkSolidCellsFromPhysics();
+
+                var rooms = OxygenAutoDetector.DetectRooms(Grid);
+                foreach (var room in rooms)
+                {
+                    int n = room.Count;
+                    if (n < minRoomCells) continue;                 // too small to matter
+                    if (maxRoomCells > 0 && n > maxRoomCells) continue; // open-air pocket, not a room
+                    // Auto rooms start SEALED so an enclosed fire suffocates until a door opens.
+                    runtimeBoxes.Add(new OxygenBox(room, oxygenConfig, startOpen: false));
+                }
+            }
+            else if (oxygenBoxes != null)
+            {
+                foreach (var def in oxygenBoxes)
+                {
+                    if (def == null) continue;
+                    runtimeBoxes.Add(new OxygenBox(def.min, def.max, oxygenConfig, def.startOpen));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Flag every grid cell that overlaps an obstacle collider as solid, using a box
+        /// overlap test at the cell centre. Solids block air so flood-fill detection treats
+        /// them as room barriers. Cheap enough to run on build / re-detect, not per frame.
+        /// </summary>
+        private void MarkSolidCellsFromPhysics()
+        {
+            FireCell[] cells = Grid.Cells;
+            Vector3 half = Vector3.one * (Grid.CellSize * 0.5f);
+            for (int i = 0; i < cells.Length; i++)
+            {
+                Vector3 centre = Grid.GridToWorld(cells[i].gridPosition);
+                cells[i].isSolid = Physics.CheckBox(centre, half, Quaternion.identity,
+                    obstacleLayers, QueryTriggerInteraction.Ignore);
+            }
+        }
+
+        /// <summary>
+        /// Re-run room auto-detection (e.g. after a door/window opens or closes so rooms
+        /// merge or split). No-op when auto-detect is off. Preserves nothing of the old
+        /// oxygen levels - a freshly opened room reads as fresh air, which is the intent.
+        /// </summary>
+        public void RedetectOxygenBoxes()
+        {
+            if (Grid == null) return;
+            BuildOxygenBoxes();
+        }
+
+        /// <summary>Mark/clear a world-space volume as solid (e.g. a door closing/opening), no re-detect.</summary>
+        public void SetSolidInBounds(Bounds worldBounds, bool solid)
+        {
+            if (Grid == null) return;
+            ForEachCellInBounds(worldBounds, cell => cell.isSolid = solid);
         }
 
         private void Update()
