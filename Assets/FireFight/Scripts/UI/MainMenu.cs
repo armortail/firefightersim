@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         SceneManager.UnloadSceneAsync(0);//doing this to make sure it comes back
+        
     }
     public void Keybinds()
     {
