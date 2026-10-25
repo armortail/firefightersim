@@ -77,8 +77,8 @@ namespace FireFight.Managers
             // MonoBehaviour's UnityEvent fields are still valid listener targets.
             if (flammable != null)
             {
-                flammable.onIgnite.AddListener(OnIgnite);
-                flammable.onBurnedOut.AddListener(OnBurned);
+                flammable.onIgnite?.AddListener(OnIgnite);
+                flammable.onBurnedOut?.AddListener(OnBurned);
             }
         }
 
@@ -110,8 +110,8 @@ namespace FireFight.Managers
         {
             if (flammable != null)
             {
-                flammable.onIgnite.RemoveListener(OnIgnite);
-                flammable.onBurnedOut.RemoveListener(OnBurned);
+                flammable.onIgnite?.RemoveListener(OnIgnite);
+                flammable.onBurnedOut?.RemoveListener(OnBurned);
             }
             if (ownedMaterial != null)
                 Destroy(ownedMaterial);

@@ -41,10 +41,10 @@ namespace FireFight.Managers
 
         [Header("Events")]
         [Tooltip("Fired the moment this object catches fire. Hook flame particles / audio here.")]
-        public UnityEvent onIgnite;
+        public UnityEvent onIgnite = new UnityEvent();
 
         [Tooltip("Fired once this object has fully burned out. Hook charred material / collapse here.")]
-        public UnityEvent onBurnedOut;
+        public UnityEvent onBurnedOut = new UnityEvent();
 
         // Cached world-space bounds of this object's cells. Recomputed on start.
         private Bounds worldBounds;

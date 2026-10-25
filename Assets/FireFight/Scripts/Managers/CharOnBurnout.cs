@@ -51,17 +51,26 @@ namespace FireFight.Managers
 
         private void Start()
         {
-            if (flammable != null)
-                flammable.onBurnedOut.AddListener(ApplyChar);
+            if (flammable == null) flammable = GetComponent<Flammable>();
+            if (flammable == null)
+            {
+                // No sibling Flammable: nothing can tell us when to char.
+                enabled = false;
+                return;
+            }
 
-            if (charIfAlreadyBurned && flammable != null && flammable.burnedOut)
+            // onBurnedOut is initialised on Flammable, but guard anyway so a null
+            // event (e.g. from an unusual add order) can never throw here.
+            flammable.onBurnedOut?.AddListener(ApplyChar);
+
+            if (charIfAlreadyBurned && flammable.burnedOut)
                 ApplyChar();
         }
 
         private void OnDestroy()
         {
             if (flammable != null)
-                flammable.onBurnedOut.RemoveListener(ApplyChar);
+                flammable.onBurnedOut?.RemoveListener(ApplyChar);
             RestoreAndCleanup();
         }
 
@@ -94,20 +103,16 @@ namespace FireFight.Managers
         /// <summary>Clone a material and darken it to soot; kills shine and emission.</summary>
         private Material MakeCharred(Material source)
         {
-            // If a source slot is empty, still return a basic dark material so nothing renders bright.
-            Material clone = source != null
-                ? new Material(source)
-                : new Material(Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard"));
-            clone.name = (source != null ? source.name : "Char") + "_Charred";
+            // Empty material slot: nothing to darken, and fabricating one needs a shader
+            // that may not exist in a build. Return null so the slot stays as-is.
+            if (source == null) return null;
+            if (source.shader == null) return source; // can't safely clone; leave original
+
+            var clone = new Material(source) { name = source.name + "_Charred" };
 
             // Darken whatever colour property the shader uses.
             DarkenColor(clone, BaseColorId);
             DarkenColor(clone, ColorId);
-            if (source == null)
-            {
-                if (clone.HasProperty(BaseColorId)) clone.SetColor(BaseColorId, charTint);
-                if (clone.HasProperty(ColorId)) clone.SetColor(ColorId, charTint);
-            }
 
             // Soot is matte: no metal, no gloss.
             if (clone.HasProperty(MetallicId)) clone.SetFloat(MetallicId, 0f);
@@ -139,13 +144,21 @@ namespace FireFight.Managers
         {
             for (int i = 0; i < affected.Count; i++)
             {
-                if (affected[i] != null && originalShared[i] != null)
-                    affected[i].sharedMaterials = originalShared[i];
+                Material[] original = originalShared[i];
+                if (affected[i] != null && original != null)
+                    affected[i].sharedMaterials = original;
 
-                // Destroy the owned charred instances so they don't leak.
-                if (ownedCharred[i] != null)
-                    foreach (var m in ownedCharred[i])
-                        if (m != null) Destroy(m);
+                // Destroy only the clones WE created - never a null slot or a
+                // pass-through of an original shared material (that would delete art).
+                Material[] charredSet = ownedCharred[i];
+                if (charredSet == null) continue;
+                for (int j = 0; j < charredSet.Length; j++)
+                {
+                    Material m = charredSet[j];
+                    if (m == null) continue;
+                    bool isOriginal = original != null && j < original.Length && original[j] == m;
+                    if (!isOriginal) Destroy(m);
+                }
             }
             affected.Clear();
             originalShared.Clear();
