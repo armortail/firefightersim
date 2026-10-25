@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FireFight.Managers
 {
     /// <summary>
-    /// Makes an object look charred once it has fully burned out.
+    /// Makes an object look charred after sustained burning ends or it fully burns out.
     ///
     /// Subscribes to the sibling <see cref="Flammable.onBurnedOut"/> event and, when it fires,
     /// swaps every renderer's materials for darkened, matte "charred" instances (near-black
@@ -20,10 +20,10 @@ namespace FireFight.Managers
     public class CharOnBurnout : MonoBehaviour
     {
         [Tooltip("How dark the surface becomes (0 = untouched, 1 = near black soot).")]
-        [Range(0f, 1f)] public float charAmount = 0.85f;
+        [Range(0f, 1f)] public float charAmount = 0.92f;
 
         [Tooltip("Tint multiplied into the darkened albedo (slightly warm soot reads better than pure grey).")]
-        public Color charTint = new Color(0.12f, 0.1f, 0.09f);
+        public Color charTint = new Color(0.10f, 0.055f, 0.03f);
 
         [Tooltip("If true, char immediately if the object is already burned out when this starts " +
                  "(e.g. component added after the fact).")]
@@ -31,6 +31,8 @@ namespace FireFight.Managers
 
         private Flammable flammable;
         private bool charred;
+        private float burningSeconds;
+        private const float BurnSecondsToChar = 5f;
 
         // Per-renderer swap bookkeeping so we can restore + clean up our owned instances.
         private readonly List<Renderer> affected = new List<Renderer>();
@@ -74,6 +76,19 @@ namespace FireFight.Managers
             RestoreAndCleanup();
         }
 
+        private void LateUpdate()
+        {
+            if (charred || flammable == null || !flammable.isActiveAndEnabled) return;
+            // Reuse Flammable's state; do not scan the fire grid again.
+            if (flammable.inflames)
+                burningSeconds += Time.deltaTime;
+            else
+            {
+                if (burningSeconds >= BurnSecondsToChar) ApplyChar();
+                burningSeconds = 0f;
+            }
+        }
+
         /// <summary>Swap every renderer on this object to a charred material instance.</summary>
         public void ApplyChar()
         {
@@ -84,6 +99,8 @@ namespace FireFight.Managers
             foreach (var r in renderers)
             {
                 if (r == null) continue;
+                // Leave flame particles, hose effects, and highlight lines alone.
+                if (!(r is MeshRenderer) && !(r is SkinnedMeshRenderer)) continue;
                 // Skip overlay renderers created by other visual components (e.g. the highlight cage).
                 if (r.gameObject.name.StartsWith("_")) continue;
 
