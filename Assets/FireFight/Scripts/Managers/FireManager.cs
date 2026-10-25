@@ -60,12 +60,18 @@ namespace FireFight.Managers
                  "via AddFuelInBounds. Smoke still travels through air either way.")]
         public bool fillWithFuel = false;
 
+        [Header("Debug")]
+        [Tooltip("Log burning-cell count and burned fraction to the Console once per second. " +
+                 "Off by default so it doesn't spam; turn on while tuning spread.")]
+        public bool logSpreadStats = false;
+
         /// <summary>The underlying grid (read-only access for visualizers, etc.).</summary>
         public FireGrid Grid { get; private set; }
 
         private FireSim simulation;
         private SmokeSim smokeSimulation;
         private float tickTimer;
+        private float statsLogTimer;
 
         // Runtime oxygen boxes, built from oxygenBoxes defs on Awake.
         private readonly System.Collections.Generic.List<OxygenBox> runtimeBoxes =
@@ -184,6 +190,18 @@ namespace FireFight.Managers
                 tickTimer -= config.TickInterval;
                 simulation.Tick();
                 smokeSimulation.Tick();
+            }
+
+            // Optional debug readout (moved here from the old FireDemo component).
+            if (logSpreadStats)
+            {
+                statsLogTimer += Time.deltaTime;
+                if (statsLogTimer >= 1f)
+                {
+                    statsLogTimer = 0f;
+                    Debug.Log($"[FireFight] Burning cells: {CountBurning()} | " +
+                              $"Burned fraction: {BurnedFraction():P0}");
+                }
             }
         }
 
