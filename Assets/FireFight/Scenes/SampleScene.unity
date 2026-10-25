@@ -552,12 +552,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b977bb20f53e39140b1731282136467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireFight.Managers.FireManager
-  gridSize: {x: 30, y: 30, z: 30}
+  gridSize: {x: 100, y: 30, z: 100}
   cellSize: 1
   config:
     ticksPerSecond: 4
     maxFireLayer: 1
     heatPerTick: 0.35
+    upwardHeatMultiplier: 2
+    downwardHeatMultiplier: 0.4
     ignitionThreshold: 1
     spreadChance: 0.6
     burnRate: 0.05
@@ -570,6 +572,11 @@ MonoBehaviour:
     spreadRate: 0.12
     dissipation: 0.01
     minSmoke: 0.001
+  oxygenConfig:
+    consumptionPerBurningCell: 0.02
+    replenishRate: 0.05
+    sustainThreshold: 0.15
+  oxygenBoxes: []
   fillWithFuel: 1
 --- !u!4 &1282594493
 Transform:
