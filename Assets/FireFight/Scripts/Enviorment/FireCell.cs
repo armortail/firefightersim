@@ -70,6 +70,15 @@ namespace FireFight.Environment
         /// </summary>
         public int smoulderedTicks = 0;
 
+        /// <summary>
+        /// True if this cell is blocked by a solid obstacle (a wall, a closed door,
+        /// or a large prop like a fuel tanker / container). Solid cells are NOT air:
+        /// the oxygen room auto-detector treats them as barriers that separate rooms,
+        /// and fire cannot exist in them. Set by the FireManager from physics overlap
+        /// against an obstacle LayerMask, and toggled by doors/windows at runtime.
+        /// </summary>
+        public bool isSolid = false;
+
         public FireCell(Vector3Int gridPosition)
         {
             this.gridPosition = gridPosition;

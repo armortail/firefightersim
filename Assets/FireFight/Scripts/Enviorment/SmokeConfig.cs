@@ -44,6 +44,21 @@ namespace FireFight.Environment
         [Range(0f, 0.2f)]
         public float dissipation = 0.01f;
 
+        [Tooltip("EXTRA smoke removed per tick from a cell that is wet (water knocks smoke down). " +
+                 "Scaled by the cell's wetness, so a freshly-sprayed cell clears much faster " +
+                 "than it does from natural dissipation alone.")]
+        [Range(0f, 0.5f)]
+        public float extraDissipationWhenWet = 0.08f;
+
+        [Tooltip("If true, wetting a burned-out (smouldering) cell above the threshold below " +
+                 "stops it smouldering immediately - water puts the embers out so they stop " +
+                 "producing smoke.")]
+        public bool wetStopsSmoulder = true;
+
+        [Tooltip("Wetness a smouldering cell needs to be doused enough to stop smoking.")]
+        [Range(0f, 1f)]
+        public float smoulderDouseThreshold = 0.1f;
+
         [Tooltip("Smoke below this is snapped to 0 to avoid endless tiny values.")]
         public float minSmoke = 0.001f;
     }

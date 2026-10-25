@@ -155,6 +155,13 @@ namespace FireFight.Environment
                     cell.heat = Mathf.Max(0f, cell.heat - config.coolingRate);
                 }
 
+                // Water carries heat away: a wet cell sheds extra residual heat
+                // (scaled by wetness) so a just-extinguished spot cools quickly and
+                // resists flashing back from a hot neighbour.
+                if (cell.wetness > 0f && cell.heat > 0f)
+                    cell.heat = Mathf.Max(0f,
+                        cell.heat - config.extraCoolingWhenWet * cell.wetness);
+
                 // Cells above the configured fire ceiling never ignite, so
                 // flames stay in a lower band even though smoke rises higher.
                 bool belowFireCeiling = config.maxFireLayer < 0
@@ -168,7 +175,7 @@ namespace FireFight.Environment
                 // cannot ignite, regardless of how hot it gets.
                 bool airBlockedByCoating = cell.coating >= config.coatingExtinguishThreshold;
 
-                if (cell.CanIgnite && belowFireCeiling && hasAir && !airBlockedByCoating
+                if (cell.CanIgnite && !cell.isSolid && belowFireCeiling && hasAir && !airBlockedByCoating
                     && cell.heat >= config.ignitionThreshold)
                 {
                     if (Random.value <= config.spreadChance)
