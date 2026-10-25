@@ -145,7 +145,12 @@ namespace FireFight.Managers
 
                 if (requireCollider && col == null) continue;
 
-                if (target.GetComponent<Flammable>() != null) continue; // already tagged
+                if (target.GetComponent<Flammable>() != null)
+                {
+                    if (addCharOnBurnout && target.GetComponent<CharOnBurnout>() == null)
+                        target.AddComponent<CharOnBurnout>();
+                    continue;
+                }
 
                 var flammable = target.AddComponent<Flammable>();
                 flammable.fireManager = fireManager;
