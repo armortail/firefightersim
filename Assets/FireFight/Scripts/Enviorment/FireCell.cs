@@ -40,6 +40,15 @@ namespace FireFight.Environment
         /// </summary>
         public float smoke = 0f;
 
+        /// <summary>
+        /// Wetness (0..1) left behind by water/extinguishing. While wet, the cell
+        /// resists igniting (its effective flammability is reduced) and it cannot
+        /// stay burning. Evaporates slowly each tick so the cell can eventually
+        /// dry out and burn again. This stops fire snapping back the instant you
+        /// stop spraying.
+        /// </summary>
+        public float wetness = 0f;
+
         public FireCell(Vector3Int gridPosition)
         {
             this.gridPosition = gridPosition;
@@ -47,5 +56,11 @@ namespace FireFight.Environment
 
         /// <summary>True if this cell can still catch fire.</summary>
         public bool CanIgnite => state == FireState.Unburned && fuel > 0f;
+
+        /// <summary>
+        /// Effective flammability after wetness suppression. A fully wet cell
+        /// (wetness = 1) has ~zero flammability; a dry cell uses its base value.
+        /// </summary>
+        public float EffectiveFlammability => flammability * (1f - Mathf.Clamp01(wetness));
     }
 }
