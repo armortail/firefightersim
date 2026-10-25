@@ -25,9 +25,13 @@ namespace FireFight.Managers
         public bool showFire = true;
         public bool showHeat = true;
         public bool showSmoke = true;
+        public bool showWater = true;
 
         [Tooltip("Smoke below this density is not drawn (reduces clutter / overdraw).")]
         [Range(0f, 0.5f)] public float smokeDrawThreshold = 0.05f;
+
+        [Tooltip("Wetness below this is not drawn.")]
+        [Range(0f, 0.5f)] public float waterDrawThreshold = 0.05f;
 
         [Header("Look")]
         [Tooltip("Quad size relative to a grid cell (1 = full cell).")]
@@ -45,12 +49,15 @@ namespace FireFight.Managers
         [Tooltip("Colour smoke renders as.")]
         public Color smokeColor = new Color(0.2f, 0.2f, 0.2f);
 
+        [Tooltip("Colour water / wetness renders as.")]
+        public Color waterColor = new Color(0.25f, 0.55f, 1f);
+
         private FireManager manager;
-        private Camera targetCamera;
 
         private Mesh quad;
         private Material fireMaterial;   // additive, emissive - for flames + heat
         private Material smokeMaterial;  // alpha-blended grey - for smoke
+        private Material waterMaterial;  // alpha-blended blue - for wetness
 
         // Reused each frame; instancing is capped at 1023 matrices per draw call.
         private const int BatchMax = 1023;
@@ -58,6 +65,8 @@ namespace FireFight.Managers
         private readonly List<Vector4> fireColors = new List<Vector4>(BatchMax);
         private readonly List<Matrix4x4> smokeBatch = new List<Matrix4x4>(BatchMax);
         private readonly List<Vector4> smokeColors = new List<Vector4>(BatchMax);
+        private readonly List<Matrix4x4> waterBatch = new List<Matrix4x4>(BatchMax);
+        private readonly List<Vector4> waterColors = new List<Vector4>(BatchMax);
         private MaterialPropertyBlock mpb;
 
         private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
@@ -70,6 +79,7 @@ namespace FireFight.Managers
             quad = BuildQuad();
             fireMaterial = BuildFireMaterial();
             smokeMaterial = BuildSmokeMaterial();
+            waterMaterial = BuildWaterMaterial();
             mpb = new MaterialPropertyBlock();
         }
 
@@ -78,6 +88,7 @@ namespace FireFight.Managers
             if (quad != null) Destroy(quad);
             if (fireMaterial != null) Destroy(fireMaterial);
             if (smokeMaterial != null) Destroy(smokeMaterial);
+            if (waterMaterial != null) Destroy(waterMaterial);
         }
 
         private void LateUpdate()
@@ -85,7 +96,7 @@ namespace FireFight.Managers
             FireGrid grid = manager != null ? manager.Grid : null;
             if (grid == null) return; // grid only exists in Play mode
 
-            targetCamera = Camera.main != null ? Camera.main : Camera.current;
+            Camera targetCamera = Camera.main != null ? Camera.main : Camera.current;
             // Billboard toward the camera if we have one; otherwise face up.
             Quaternion facing = targetCamera != null
                 ? Quaternion.LookRotation(-targetCamera.transform.forward, Vector3.up)
@@ -100,12 +111,22 @@ namespace FireFight.Managers
 
             fireBatch.Clear(); fireColors.Clear();
             smokeBatch.Clear(); smokeColors.Clear();
+            waterBatch.Clear(); waterColors.Clear();
 
             FireCell[] cells = grid.Cells;
             for (int i = 0; i < cells.Length; i++)
             {
                 FireCell c = cells[i];
                 Vector3 world = grid.GridToWorld(c.gridPosition);
+
+                // ---- Water / wetness (drawn first, low, as a wet sheen) ----
+                if (showWater && c.wetness >= waterDrawThreshold)
+                {
+                    float a = Mathf.Clamp01(c.wetness) * 0.6f;
+                    AddInstance(waterBatch, waterColors,
+                        world, facing, baseSize * 0.9f,
+                        new Vector4(waterColor.r, waterColor.g, waterColor.b, a));
+                }
 
                 // ---- Smoke (drawn by its own material) ----
                 if (showSmoke && c.smoke >= smokeDrawThreshold)
@@ -170,6 +191,15 @@ namespace FireFight.Managers
                 Graphics.DrawMeshInstanced(quad, 0, smokeMaterial, smokeBatch, mpb);
                 smokeBatch.Clear(); smokeColors.Clear();
             }
+
+            if (waterBatch.Count > 0)
+            {
+                mpb.Clear();
+                mpb.SetColor(BaseColorId, waterColor);
+                mpb.SetColor(ColorId, waterColor);
+                Graphics.DrawMeshInstanced(quad, 0, waterMaterial, waterBatch, mpb);
+                waterBatch.Clear(); waterColors.Clear();
+            }
         }
 
         // ---- Resource construction (self-owned, destroyed in OnDestroy) ----
@@ -214,6 +244,19 @@ namespace FireFight.Managers
             ConfigureTransparent(mat, additive: false);
             if (mat.HasProperty(BaseColorId)) mat.SetColor(BaseColorId, smokeColor);
             if (mat.HasProperty(ColorId)) mat.SetColor(ColorId, smokeColor);
+            return mat;
+        }
+
+        /// <summary>Alpha-blended unlit material for the water / wetness sheen.</summary>
+        private Material BuildWaterMaterial()
+        {
+            Shader shader = Shader.Find("Universal Render Pipeline/Particles/Unlit")
+                            ?? Shader.Find("Universal Render Pipeline/Unlit")
+                            ?? Shader.Find("Sprites/Default");
+            var mat = new Material(shader) { name = "FireRuntimeWaterMat", enableInstancing = true };
+            ConfigureTransparent(mat, additive: false);
+            if (mat.HasProperty(BaseColorId)) mat.SetColor(BaseColorId, waterColor);
+            if (mat.HasProperty(ColorId)) mat.SetColor(ColorId, waterColor);
             return mat;
         }
 

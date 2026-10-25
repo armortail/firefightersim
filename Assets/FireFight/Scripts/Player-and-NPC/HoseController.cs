@@ -54,13 +54,13 @@ public class HoseController : MonoBehaviour
     private void Reset()
     {
         if (nozzlePoint == null) nozzlePoint = transform;
-        if (fireManager == null) fireManager = FindObjectOfType<FireManager>();
+        if (fireManager == null) fireManager = FindFirstObjectByType<FireManager>();
     }
 
     private void Awake()
     {
         if (nozzlePoint == null) nozzlePoint = transform;
-        if (fireManager == null) fireManager = FindObjectOfType<FireManager>();
+        if (fireManager == null) fireManager = FindFirstObjectByType<FireManager>();
     }
 
     /// <summary>Begin spraying. Safe to call every frame.</summary>

@@ -65,6 +65,10 @@ namespace FireFight.Managers
         [Tooltip("Flammability used for the 'high' set above (0..1).")]
         [Range(0f, 1f)] public float highFlammability = 0.9f;
 
+        [Tooltip("Also add a CharOnBurnout component so each object turns charred-black once it " +
+                 "has fully burned out.")]
+        public bool addCharOnBurnout = true;
+
         [Header("Debug")]
         [Tooltip("Log how many objects were tagged.")]
         public bool logResult = true;
@@ -148,6 +152,10 @@ namespace FireFight.Managers
                 flammable.fuel = defaultFuel;
                 flammable.flammability = IsHighFlammability(target.name) ? highFlammability : defaultFlammability;
                 count++;
+
+                // Charred look once this object fully burns out.
+                if (addCharOnBurnout && target.GetComponent<CharOnBurnout>() == null)
+                    target.AddComponent<CharOnBurnout>();
 
                 // Remember the first high-flammability object (else the first tagged) as the
                 // demo ignition source, so auto-ignite lights something that catches readily.
