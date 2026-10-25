@@ -18,6 +18,8 @@ public class HoseController : MonoBehaviour
     [SerializeField, Range(0f, 80f)] private float coneAngle = 25f;
     [SerializeField, Min(0f)] private float coolingPerSecond = 3f;
     [SerializeField, Min(0f)] private float wetnessPerSecond = 0.5f;
+    [Tooltip("Overall water delivery. Raise this to cool and soak fires faster without changing fire physics.")]
+    [SerializeField, Min(0.1f)] private float waterOutputMultiplier = 3f;
     [SerializeField] private LayerMask impactLayers = Physics.DefaultRaycastLayers;
     [SerializeField, Min(0.05f)] private float jetSplashRadius = 0.65f;
     // Retain the former prefab slots so existing assets do not lose serialized data.
@@ -80,8 +82,8 @@ public class HoseController : MonoBehaviour
         VisibleLength = HasImpact ? hit.distance : sprayRange;
         if (!IsSpraying || deltaTime <= 0f || fireManager == null || fireManager.Grid == null) return;
 
-        float cooling = coolingPerSecond * deltaTime;
-        float wetness = wetnessPerSecond * deltaTime;
+        float cooling = coolingPerSecond * waterOutputMultiplier * deltaTime;
+        float wetness = wetnessPerSecond * waterOutputMultiplier * deltaTime;
         if (cooling <= 0f && wetness <= 0f) return;
         if (sprayPattern == SprayPattern.Jet)
         {
@@ -129,6 +131,8 @@ public class HoseController : MonoBehaviour
                 if (!RaycastEnvironment(origin, offset.normalized, offset.magnitude + 0.05f, out RaycastHit contact) ||
                     contact.collider.GetComponentInParent<Flammable>() != receiver) continue;
                 float strength = 1f - distance / Mathf.Max(radius, 0.001f);
+                // A pressure-fed cone should still deliver substantial water at working range.
+                if (sprayPattern == SprayPattern.Cone) strength = Mathf.Lerp(0.65f, 1f, strength);
                 fireManager.WetCell(gp, cooling * strength, wetness * strength);
                 wettedCells.Add(grid.Index(gp));
             }
@@ -156,6 +160,13 @@ public class HoseController : MonoBehaviour
             nearest = closest.distance;
         }
         return !float.IsPositiveInfinity(nearest);
+    }
+
+    /// <summary>Lets the water cone end at the same solid surfaces that block water delivery.</summary>
+    public float GetVisualReach(Vector3 direction)
+    {
+        return RaycastEnvironment(Origin, direction.normalized, sprayRange, out RaycastHit hit)
+            ? hit.distance : sprayRange;
     }
 
     private void OnDisable() => StopSpray();

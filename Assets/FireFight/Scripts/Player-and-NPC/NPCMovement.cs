@@ -14,7 +14,7 @@ public class NPCMovement : MonoBehaviour
     [SerializeField, Min(0.5f)] private float extinguishStandoff = 4f;
     [SerializeField] private FireManager fireManager;
     [SerializeField, Min(0.5f)] private float fireWorkRadius = 2.5f;
-    [SerializeField, Min(0f)] private float postExtinguishSoakSeconds = 1.5f;
+    [SerializeField, Min(0f)] private float postExtinguishSoakSeconds = 0.6f;
 
     private NavMeshAgent agent;
     private NavMeshPath commandPath;

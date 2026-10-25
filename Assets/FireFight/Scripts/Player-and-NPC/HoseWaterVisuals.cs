@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-/// <summary>Continuous water droplets: a narrow jet or a genuinely widening fog cone.</summary>
+/// <summary>A narrow jet or a dense pressure-fed cone, with moving water and feathered edges.</summary>
 [DisallowMultipleComponent]
 public class HoseWaterVisuals : MonoBehaviour
 {
@@ -15,6 +15,17 @@ public class HoseWaterVisuals : MonoBehaviour
     private Texture2D jetTexture;
     private GameObject visualRoot;
     private float splashTimer;
+    private Mesh coneMesh;
+    private MeshRenderer coneRenderer;
+    private Material coneMaterial;
+    private Texture2D coneTexture;
+    private Vector3[] coneVertices;
+    private Vector2[] coneUvs;
+    private Color[] coneColors;
+    private readonly Vector3[] coneEdges = new Vector3[33];
+    private const int ConeSegments = 32;
+    private const int ConeRings = 10;
+    private const int ConeSheets = 4;
 
     private void Awake()
     {
@@ -52,6 +63,7 @@ public class HoseWaterVisuals : MonoBehaviour
         jet.shadowCastingMode = ShadowCastingMode.Off;
         jet.receiveShadows = false;
         jet.enabled = false;
+        BuildPressureCone();
     }
 
     private ParticleSystem CreateParticles(string label, Transform parent)
@@ -65,7 +77,7 @@ public class HoseWaterVisuals : MonoBehaviour
         main.playOnAwake = false;
         main.loop = true;
         main.simulationSpace = ParticleSystemSimulationSpace.World;
-        main.maxParticles = 2500;
+        main.maxParticles = 5000;
         main.startColor = new Color(0.8f, 0.93f, 1f, 0.5f);
         var renderer = system.GetComponent<ParticleSystemRenderer>();
         renderer.sharedMaterial = dropMaterial;
@@ -98,6 +110,7 @@ public class HoseWaterVisuals : MonoBehaviour
         if (hose == null || droplets == null) return;
         bool cone = hose.Pattern == SprayPattern.Cone;
         jet.enabled = hose.IsSpraying && !cone;
+        coneRenderer.enabled = hose.IsSpraying && cone;
         if (!hose.IsSpraying)
         {
             if (droplets.isEmitting) droplets.Stop(false, ParticleSystemStopBehavior.StopEmitting);
@@ -106,17 +119,19 @@ public class HoseWaterVisuals : MonoBehaviour
         Vector3 direction = hose.Direction;
         droplets.transform.SetPositionAndRotation(hose.Origin + direction * 0.06f, Quaternion.LookRotation(direction));
         var main = droplets.main;
-        float speed = cone ? 12f : 20f;
+        float speed = cone ? 24f : 26f;
         main.startSpeed = speed;
         main.startLifetime = Mathf.Max(0.02f, (cone ? hose.SprayRange : hose.VisibleLength) / speed);
-        main.startSize = cone ? new ParticleSystem.MinMaxCurve(0.025f, 0.055f) : new ParticleSystem.MinMaxCurve(0.025f, 0.045f);
+        main.startSize = cone ? new ParticleSystem.MinMaxCurve(0.05f, 0.1f) : new ParticleSystem.MinMaxCurve(0.025f, 0.045f);
         var emission = droplets.emission;
-        emission.rateOverTime = cone ? 850f : 180f;
+        emission.rateOverTime = cone ? 3600f : 260f;
         var shape = droplets.shape;
         shape.shapeType = ParticleSystemShapeType.Cone;
         shape.angle = cone ? hose.ConeHalfAngle : 0.6f;
         shape.radius = cone ? 0.025f : 0.012f;
         if (!droplets.isPlaying) droplets.Play();
+
+        if (cone) UpdatePressureCone(direction);
 
         if (!cone)
         {
@@ -136,6 +151,109 @@ public class HoseWaterVisuals : MonoBehaviour
                 Quaternion.FromToRotation(Vector3.up, hose.ImpactNormal));
             splash.Emit(cone ? 5 : 3);
         }
+    }
+
+    private void BuildPressureCone()
+    {
+        // The continuous core provides the water volume; particles add motion and soft edges.
+        var obj = new GameObject("Pressurized Cone");
+        obj.layer = 2;
+        obj.transform.SetParent(visualRoot.transform, false);
+        coneMesh = new Mesh { name = "Pressure Water Cone" };
+        coneMesh.MarkDynamic();
+        obj.AddComponent<MeshFilter>().sharedMesh = coneMesh;
+        coneRenderer = obj.AddComponent<MeshRenderer>();
+        coneTexture = new Texture2D(64, 128, TextureFormat.RGBA32, false);
+        coneTexture.name = "Moving Water Streaks";
+        coneTexture.wrapMode = TextureWrapMode.Repeat;
+        var pixels = new Color[64 * 128];
+        for (int y = 0; y < 128; y++)
+        for (int x = 0; x < 64; x++)
+        {
+            float streak = Mathf.PerlinNoise(x * 0.35f, y * 0.04f);
+            pixels[x + y * 64] = new Color(0.83f, 0.94f, 1f, Mathf.Lerp(0.25f, 0.85f, streak));
+        }
+        coneTexture.SetPixels(pixels);
+        coneTexture.Apply();
+        coneMaterial = MakeMaterial(coneTexture);
+        coneRenderer.sharedMaterial = coneMaterial;
+        coneRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        coneRenderer.receiveShadows = false;
+        coneRenderer.enabled = false;
+
+        int shellCount = ConeRings * (ConeSegments + 1);
+        int count = shellCount + ConeSheets * ConeRings * 3;
+        coneVertices = new Vector3[count];
+        coneUvs = new Vector2[count];
+        coneColors = new Color[count];
+        int[] triangles = new int[(ConeRings - 1) * ConeSegments * 6 + ConeSheets * (ConeRings - 1) * 12];
+        int index = 0;
+        for (int ring = 0; ring < ConeRings - 1; ring++)
+        for (int segment = 0; segment < ConeSegments; segment++)
+        {
+            int a = ring * (ConeSegments + 1) + segment;
+            int b = a + ConeSegments + 1;
+            triangles[index++] = a; triangles[index++] = b; triangles[index++] = a + 1;
+            triangles[index++] = a + 1; triangles[index++] = b; triangles[index++] = b + 1;
+        }
+        for (int sheet = 0; sheet < ConeSheets; sheet++)
+        for (int ring = 0; ring < ConeRings - 1; ring++)
+        for (int side = 0; side < 2; side++)
+        {
+            int a = shellCount + sheet * ConeRings * 3 + ring * 3 + side;
+            triangles[index++] = a; triangles[index++] = a + 3; triangles[index++] = a + 1;
+            triangles[index++] = a + 1; triangles[index++] = a + 3; triangles[index++] = a + 4;
+        }
+        coneMesh.vertices = coneVertices;
+        coneMesh.triangles = triangles;
+    }
+
+    private void UpdatePressureCone(Vector3 direction)
+    {
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        coneRenderer.transform.SetPositionAndRotation(hose.Origin, rotation);
+        float angle = hose.ConeHalfAngle * Mathf.Deg2Rad;
+        for (int segment = 0; segment <= ConeSegments; segment++)
+        {
+            float theta = segment * Mathf.PI * 2f / ConeSegments;
+            Vector3 ray = new Vector3(Mathf.Cos(theta) * Mathf.Sin(angle),
+                Mathf.Sin(theta) * Mathf.Sin(angle), Mathf.Cos(angle));
+            coneEdges[segment] = ray * hose.GetVisualReach(rotation * ray);
+        }
+        float scroll = Time.time * 9f;
+        for (int ring = 0; ring < ConeRings; ring++)
+        {
+            float t = (float)ring / (ConeRings - 1);
+            float fade = Mathf.SmoothStep(0f, 1f, t * 12f) * Mathf.SmoothStep(0f, 1f, (1f - t) * 5f);
+            for (int segment = 0; segment <= ConeSegments; segment++)
+            {
+                int index = ring * (ConeSegments + 1) + segment;
+                coneVertices[index] = coneEdges[segment] * t;
+                coneUvs[index] = new Vector2((float)segment / ConeSegments * 2f, t * 3f - scroll);
+                coneColors[index] = new Color(0.85f, 0.95f, 1f, fade * 0.24f);
+            }
+            int shellCount = ConeRings * (ConeSegments + 1);
+            for (int sheet = 0; sheet < ConeSheets; sheet++)
+            {
+                int segment = sheet * ConeSegments / (ConeSheets * 2);
+                Vector3 left = coneEdges[segment] * t;
+                Vector3 right = coneEdges[segment + ConeSegments / 2] * t;
+                Vector3 center = Vector3.forward * Mathf.Min(hose.SprayRange, hose.VisibleLength) * t;
+                int index = shellCount + sheet * ConeRings * 3 + ring * 3;
+                coneVertices[index] = left;
+                coneVertices[index + 1] = center;
+                coneVertices[index + 2] = right;
+                for (int side = 0; side < 3; side++)
+                {
+                    coneUvs[index + side] = new Vector2(side * 0.5f + sheet * 0.23f, t * 3f - scroll);
+                    coneColors[index + side] = new Color(0.85f, 0.95f, 1f, side == 1 ? fade * 0.24f : 0f);
+                }
+            }
+        }
+        coneMesh.vertices = coneVertices;
+        coneMesh.uv = coneUvs;
+        coneMesh.colors = coneColors;
+        coneMesh.RecalculateBounds();
     }
 
     private static Texture2D MakeTexture(bool strip)
@@ -182,5 +300,8 @@ public class HoseWaterVisuals : MonoBehaviour
         if (jetMaterial != null) Destroy(jetMaterial);
         if (dropTexture != null) Destroy(dropTexture);
         if (jetTexture != null) Destroy(jetTexture);
+        if (coneMesh != null) Destroy(coneMesh);
+        if (coneMaterial != null) Destroy(coneMaterial);
+        if (coneTexture != null) Destroy(coneTexture);
     }
 }
