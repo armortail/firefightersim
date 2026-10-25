@@ -60,6 +60,7 @@ MonoBehaviour:
   closedCenter: {x: 0.5, y: 0.5, z: 0}
   closedSize: {x: 1, y: 1, z: 0.12}
   isWindow: 1
+  startOpen: 0
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0

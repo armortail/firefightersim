@@ -19057,6 +19057,10 @@ PrefabInstance:
       propertyPath: roomA
       value: '3'
       objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: startOpen
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19134,6 +19138,10 @@ PrefabInstance:
     - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
       propertyPath: roomA
       value: '2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: startOpen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19290,6 +19298,10 @@ PrefabInstance:
     - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
       propertyPath: roomA
       value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: startOpen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

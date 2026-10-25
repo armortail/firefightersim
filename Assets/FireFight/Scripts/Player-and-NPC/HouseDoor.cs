@@ -29,6 +29,7 @@ namespace FireFight
                  "through a window) and doesn't block closing on someone standing in it. Set a " +
                  "smaller closedSize / hinge angle in the Inspector for a window.")]
         [SerializeField] private bool isWindow = false;
+        [SerializeField] private bool startOpen = false;
 
         private Quaternion[] closedRotations;
         private Quaternion[] openRotations;
@@ -135,12 +136,14 @@ namespace FireFight
 
         private void Awake()
         {
+            IsOpen = startOpen;
             closedRotations = new Quaternion[hinges.Length];
             openRotations = new Quaternion[hinges.Length];
             for (int i = 0; i < hinges.Length; i++)
             {
                 closedRotations[i] = hinges[i].localRotation;
                 openRotations[i] = closedRotations[i] * Quaternion.Euler(0f, openAngles[i], 0f);
+                if (startOpen) hinges[i].localRotation = openRotations[i];
             }
             obstacles = GetComponentsInChildren<NavMeshObstacle>();
             foreach (var obstacle in obstacles) obstacle.carveOnlyStationary = true;
