@@ -55,6 +55,18 @@ namespace FireFight.Environment
         [Range(0f, 1f)]
         public float wetExtinguishThreshold = 0.5f;
 
+        [Header("Smother Coating (foam / CO2 / blanket)")]
+        [Tooltip("Coating lost per tick as foam collapses / CO2 disperses. Lower = the " +
+                 "smother blanket lasts longer before the cell can burn again.")]
+        [Range(0f, 0.2f)]
+        public float coatingDecayRate = 0.01f;
+
+        [Tooltip("A burning cell coated above this is smothered (sealed from oxygen). " +
+                 "Also the level at which an unburned cell is considered air-blocked and " +
+                 "cannot ignite.")]
+        [Range(0f, 1f)]
+        public float coatingExtinguishThreshold = 0.4f;
+
         /// <summary>Seconds between ticks, derived from ticksPerSecond.</summary>
         public float TickInterval => 1f / Mathf.Max(0.01f, ticksPerSecond);
     }

@@ -49,6 +49,18 @@ namespace FireFight.Environment
         /// </summary>
         public float wetness = 0f;
 
+        /// <summary>
+        /// Smother coating (0..1) left behind by foam, CO2, a fire blanket, sand,
+        /// or dry powder. Models attacking the OXYGEN side of the fire tetrahedron:
+        /// the coating seals the fuel off from air. While coated above the config
+        /// threshold, the cell cannot stay burning and cannot ignite, regardless of
+        /// heat. Unlike wetness it does not cool; it blocks air. It decays slowly
+        /// (foam collapses, CO2 disperses) so protection is temporary unless
+        /// reapplied. Kept separate from wetness so a cell can be both wet AND
+        /// foamed, and so tools can model each agent independently.
+        /// </summary>
+        public float coating = 0f;
+
         public FireCell(Vector3Int gridPosition)
         {
             this.gridPosition = gridPosition;
@@ -58,9 +70,14 @@ namespace FireFight.Environment
         public bool CanIgnite => state == FireState.Unburned && fuel > 0f;
 
         /// <summary>
-        /// Effective flammability after wetness suppression. A fully wet cell
-        /// (wetness = 1) has ~zero flammability; a dry cell uses its base value.
+        /// Effective flammability after wetness AND coating suppression. A fully
+        /// wet OR fully coated cell has ~zero flammability; a dry, uncoated cell
+        /// uses its base value. The two suppressors stack multiplicatively so
+        /// applying both (e.g. water then foam) is at least as effective as either.
         /// </summary>
-        public float EffectiveFlammability => flammability * (1f - Mathf.Clamp01(wetness));
+        public float EffectiveFlammability =>
+            flammability
+            * (1f - Mathf.Clamp01(wetness))
+            * (1f - Mathf.Clamp01(coating));
     }
 }

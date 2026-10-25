@@ -81,6 +81,16 @@ namespace FireFight.Environment
                     continue;
                 }
 
+                // Oxygen-blocking coating (foam / CO2 / blanket / powder): a burning
+                // cell sealed from air is smothered. Keeps its fuel; can relight once
+                // the coating decays away.
+                if (cell.coating >= config.coatingExtinguishThreshold)
+                {
+                    cell.state = FireState.Unburned;
+                    cell.heat = 0f;
+                    continue;
+                }
+
                 // Confined-space oxygen: a burning cell inside a box consumes
                 // its shared air. If the box has suffocated, the flame dies down
                 // instead of consuming fuel (it can relight when air returns).
@@ -129,6 +139,12 @@ namespace FireFight.Environment
                 if (cell.wetness > 0f)
                     cell.wetness = Mathf.Max(0f, cell.wetness - config.evaporationRate);
 
+                // Smother coating decays over time (foam collapses, CO2 disperses)
+                // so a sealed cell can eventually burn again unless the agent is
+                // reapplied.
+                if (cell.coating > 0f)
+                    cell.coating = Mathf.Max(0f, cell.coating - config.coatingDecayRate);
+
                 if (heatDelta[i] > 0f)
                 {
                     // Wetness suppresses how readily a cell heats up / catches.
@@ -148,7 +164,11 @@ namespace FireFight.Environment
                 OxygenBox box = BoxAt(cell.gridPosition);
                 bool hasAir = box == null || box.HasBreathableAir;
 
-                if (cell.CanIgnite && belowFireCeiling && hasAir
+                // A cell sealed by a smother coating is blocked from air and
+                // cannot ignite, regardless of how hot it gets.
+                bool airBlockedByCoating = cell.coating >= config.coatingExtinguishThreshold;
+
+                if (cell.CanIgnite && belowFireCeiling && hasAir && !airBlockedByCoating
                     && cell.heat >= config.ignitionThreshold)
                 {
                     if (Random.value <= config.spreadChance)

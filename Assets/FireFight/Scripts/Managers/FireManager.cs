@@ -229,6 +229,129 @@ namespace FireFight.Managers
                 cell.state = FireState.Unburned; // can relight once it dries
         }
 
+        // ---- Oxygen side: smother with foam / CO2 / blanket / sand ----
+        //
+        // Applies a persistent oxygen-blocking COATING instead of cooling. A cell
+        // coated above FireConfig.coatingExtinguishThreshold is put out and cannot
+        // reignite until the coating decays. Use for foam, CO2, dry powder, a fire
+        // blanket, or shovelled sand/dirt.
+
+        /// <summary>Lay smother coating on one cell (building block for the area shapes).</summary>
+        public void SmotherCell(Vector3Int gridPos, float coating)
+        {
+            FireCell cell = Grid.GetCell(gridPos);
+            if (cell == null) return;
+
+            cell.coating = Mathf.Clamp01(cell.coating + coating);
+
+            // Immediate knockdown if we sealed it past the threshold.
+            if (cell.state == FireState.Burning && cell.coating >= config.coatingExtinguishThreshold)
+            {
+                cell.heat = 0f;
+                cell.state = FireState.Unburned; // can relight once the coating decays
+            }
+        }
+
+        /// <summary>Smother a sphere of cells (foam burst / CO2 cloud / extinguisher). Falls off to the edge.</summary>
+        public void SmotherSphere(Vector3 worldCenter, float radius, float coating)
+        {
+            ForEachCellInSphere(worldCenter, radius,
+                (gp, falloff) => SmotherCell(gp, coating * falloff));
+        }
+
+        /// <summary>Smother every cell in a world-space box (foam blanket / total-flood CO2 zone).</summary>
+        public void SmotherBounds(Bounds worldBounds, float coating)
+        {
+            ForEachCellInBounds(worldBounds, cell =>
+                cell.coating = Mathf.Clamp01(cell.coating + coating));
+            // Knock down any flames the blanket now seals.
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                if (cell.state == FireState.Burning && cell.coating >= config.coatingExtinguishThreshold)
+                {
+                    cell.heat = 0f;
+                    cell.state = FireState.Unburned;
+                }
+            });
+        }
+
+        // ---- Fuel side: starve the fire (firebreak / clear the fuel) ----
+        //
+        // Removes fuel from cells so there is nothing left to burn. A burning cell
+        // whose fuel hits zero finishes as Burned (consumed); an unburned cell with
+        // no fuel can never catch. Use for cutting a firebreak, hauling away stock,
+        // or scraping a surface down to non-combustible material.
+
+        /// <summary>Remove up to <paramref name="amount"/> fuel (0..1) from one cell.</summary>
+        public void RemoveFuel(Vector3Int gridPos, float amount)
+        {
+            FireCell cell = Grid.GetCell(gridPos);
+            if (cell == null) return;
+
+            cell.fuel = Mathf.Clamp01(cell.fuel - Mathf.Max(0f, amount));
+            if (cell.fuel <= 0f)
+            {
+                cell.fuel = 0f;
+                // Nothing left to burn: a flame here is starved out, an unburned
+                // cell becomes inert. Mark Burned so it cannot relight.
+                cell.heat = 0f;
+                cell.state = FireState.Burned;
+            }
+        }
+
+        /// <summary>Fully clear fuel from one cell (hard firebreak).</summary>
+        public void StarveCell(Vector3Int gridPos) => RemoveFuel(gridPos, 1f);
+
+        /// <summary>Cut a firebreak through a world-space box: clears all fuel inside it.</summary>
+        public void StarveBounds(Bounds worldBounds)
+        {
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                cell.fuel = 0f;
+                cell.heat = 0f;
+                cell.state = FireState.Burned;
+            });
+        }
+
+        // ---- Chain-reaction side: chemical knockdown (dry chem / clean agent) ----
+        //
+        // Interrupts the combustion chain reaction directly (like a dry-chemical or
+        // Halon/clean-agent discharge): any burning cell is immediately knocked
+        // down. This does NOT cool, coat, or remove fuel, so without follow-up the
+        // cell can reignite from a hot neighbour - realistic for flammable-liquid
+        // fires where the dry chem stops the flame but the hot fuel can flash back.
+
+        /// <summary>Instantly knock a flame out of one cell (chain-reaction interruption).</summary>
+        public void ChemicalSuppressCell(Vector3Int gridPos)
+        {
+            FireCell cell = Grid.GetCell(gridPos);
+            if (cell == null) return;
+            if (cell.state == FireState.Burning)
+            {
+                cell.heat = 0f;
+                cell.state = FireState.Unburned; // knocked down; may flash back if reheated
+            }
+        }
+
+        /// <summary>Knock down every flame in a sphere (handheld extinguisher sweep).</summary>
+        public void ChemicalSuppressSphere(Vector3 worldCenter, float radius)
+        {
+            ForEachCellInSphere(worldCenter, radius, (gp, _) => ChemicalSuppressCell(gp));
+        }
+
+        /// <summary>Knock down every flame in a world-space box (total-flood clean-agent dump).</summary>
+        public void ChemicalSuppressBounds(Bounds worldBounds)
+        {
+            ForEachCellInBounds(worldBounds, cell =>
+            {
+                if (cell.state == FireState.Burning)
+                {
+                    cell.heat = 0f;
+                    cell.state = FireState.Unburned;
+                }
+            });
+        }
+
         /// <summary>
         /// Extinguish a sphere of cells around a world point (splash / burst /
         /// extinguisher cloud). Cooling and wetness fall off toward the edge.
@@ -404,6 +527,34 @@ namespace FireFight.Managers
                     {
                         FireCell cell = Grid.GetCell(new Vector3Int(x, y, z));
                         if (cell != null) action(cell);
+                    }
+        }
+
+        /// <summary>
+        /// Run an action over every in-bounds grid cell within a world-space sphere.
+        /// The action receives the cell's grid position and a 0..1 falloff (1 at the
+        /// centre, 0 at the edge) so callers can taper strength like the water shapes.
+        /// </summary>
+        private void ForEachCellInSphere(Vector3 worldCenter, float radius,
+            System.Action<Vector3Int, float> action)
+        {
+            if (radius <= 0f) return;
+            var min = new Vector3(worldCenter.x - radius, worldCenter.y - radius, worldCenter.z - radius);
+            var max = new Vector3(worldCenter.x + radius, worldCenter.y + radius, worldCenter.z + radius);
+            Vector3Int gMin = Grid.WorldToGrid(min);
+            Vector3Int gMax = Grid.WorldToGrid(max);
+
+            for (int x = gMin.x; x <= gMax.x; x++)
+                for (int y = gMin.y; y <= gMax.y; y++)
+                    for (int z = gMin.z; z <= gMax.z; z++)
+                    {
+                        var gp = new Vector3Int(x, y, z);
+                        if (Grid.GetCell(gp) == null) continue;
+
+                        float dist = Vector3.Distance(Grid.GridToWorld(gp), worldCenter);
+                        if (dist > radius) continue;
+
+                        action(gp, 1f - (dist / radius));
                     }
         }
 
