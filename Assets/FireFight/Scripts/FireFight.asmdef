@@ -3,7 +3,8 @@
     "rootNamespace": "FireFight",
     "references": [
         "Unity.Cinemachine",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "com.whisper.unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

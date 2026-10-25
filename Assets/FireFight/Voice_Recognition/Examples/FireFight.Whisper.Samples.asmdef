@@ -1,0 +1,11 @@
+{
+    "name": "FireFight.Whisper.Samples",
+    "references": [
+        "com.whisper.unity",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true
+}

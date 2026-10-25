@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 /// <summary>Chooses the recipient and aimed destination for player-issued NPC commands.</summary>
 [DisallowMultipleComponent]
 public class NPCCommandController : MonoBehaviour
@@ -27,11 +28,7 @@ public class NPCCommandController : MonoBehaviour
         if (keyboard == null)
             return;
 
-        // N = move here. F = go fight the fire at the aim point.
-        if (keyboard.nKey.wasPressedThisFrame)
-            CommandSelectedNpcAtAim();
-        else if (keyboard.fKey.wasPressedThisFrame)
-            CommandSelectedNpcExtinguishAtAim();
+        
         if(Mouse.current!= null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             TrySelectNpcAtAim();
