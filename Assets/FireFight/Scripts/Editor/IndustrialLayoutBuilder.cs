@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FireFight.Managers;
 using Unity.AI.Navigation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -14,16 +15,18 @@ using UnityEngine.SceneManagement;
 namespace FireFight.EditorTools
 {
     /// <summary>
-    /// Procedurally assembles a fully walkable industrial layout using ONLY the prefabs
-    /// imported under Assets/RPG_FPS_game_assets_industrial (roads, buildings, fences,
-    /// oil tanks, containers, props, particles, shaders, textures).
+    /// Procedurally assembles a functional firefighter SIZE-UP training scene using ONLY the
+    /// prefabs imported under Assets/RPG_FPS_game_assets_industrial and Assets/Base_Man.
     ///
-    /// The builder reads each prefab's real world-space bounds at generation time, so tile
-    /// placement, prop spacing and perimeter walls adapt to the actual geometry instead of
-    /// hard-coded sizes. A walkable ground is laid from the road floor tiles (which ship with
-    /// mesh colliders), props are scattered without overlapping, a first-person player
-    /// (reusing the project's FirefighterMovement) is dropped in, and a NavMesh is baked for
-    /// the whole walkable area. Everything is saved into a fresh scene.
+    /// The scene is designed for a 360° walkaround: a single free-standing central structure
+    /// (a hangar) sits at world origin with a guaranteed clearance ring on all four sides, so
+    /// a first-person firefighter can circle it and read the hazards. Burnable objects are
+    /// tagged with Flammable in the SAVED scene and carry a play-mode FlammableHighlight cue,
+    /// a FireManager + SeedIgniter start and spread a demo fire on Play, and NPCs on a baked
+    /// NavMesh demonstrate the command/movement system.
+    ///
+    /// The SAVED scene is the deliverable: nothing here depends on a human clicking a menu
+    /// after generation. The scene is written to a FIXED path and overwritten each run.
     ///
     /// Menu: Tools > FireFight > Build Industrial Layout
     /// </summary>
@@ -33,11 +36,16 @@ namespace FireFight.EditorTools
         private const string AssetRoot = "Assets/RPG_FPS_game_assets_industrial";
         private const string SceneFolder = "Assets/FireFight/Scenes";
         private const string SceneName = "IndustrialLayout";
+        private const string BaseManPrefabPath = "Assets/Base_Man/Prefab/Rrefab.prefab";
 
         // Layout tuning ---------------------------------------------------------------
         private const int GroundTilesX = 12;   // ground tiles along X
         private const int GroundTilesZ = 12;   // ground tiles along Z
         private const int RandomSeed = 1234;   // deterministic result
+
+        // Fire grid / clearance tuning ------------------------------------------------
+        internal const float CLEARANCE = 6f;    // walkable ring around the central structure (m)
+        internal const int MAX_CELLS = 48;      // per-axis fire-grid cell budget
 
         /// <summary>Headless entry point for CI / -executeMethod. No dialogs.</summary>
         public static void BuildBatch()
@@ -72,9 +80,11 @@ namespace FireFight.EditorTools
             }
 
             if (!EditorUtility.DisplayDialog("Build Industrial Layout",
-                    "This will create a NEW scene and assemble a walkable industrial layout " +
-                    "from your imported RPG_FPS_game_assets_industrial prefabs only.\n\n" +
-                    "Built-in (pink) materials in that pack will be auto-converted to URP first.\n\n" +
+                    "This builds a firefighter size-up scene from your imported " +
+                    "RPG_FPS_game_assets_industrial + Base_Man prefabs only.\n\n" +
+                    "This OVERWRITES Assets/FireFight/Scenes/IndustrialLayout.unity. On a shared " +
+                    "repo, commit or stash that scene first so a teammate's in-flight edits are safe.\n\n" +
+                    "Built-in (pink) materials in the pack will be auto-converted to URP first.\n\n" +
                     "Continue?", "Build", "Cancel"))
             {
                 return;
@@ -117,7 +127,7 @@ namespace FireFight.EditorTools
             CreateLighting(root);
 
             // --- Ground ------------------------------------------------------------------
-            EditorUtility.DisplayProgressBar("Industrial Layout", "Laying walkable ground...", 0.25f);
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Laying walkable ground...", 0.2f);
             var groundRoot = new GameObject("Ground");
             groundRoot.transform.SetParent(root.transform);
 
@@ -146,54 +156,201 @@ namespace FireFight.EditorTools
             float areaMinX = originX, areaMaxX = originX + GroundTilesX * tileSize.x;
             float areaMinZ = originZ, areaMaxZ = originZ + GroundTilesZ * tileSize.z;
 
-            // --- Roads: a cross running through the middle -------------------------------
+            // --- Central free-standing structure (before roads, pushes its clearance ring
+            //     into 'occupied' so nothing else can intrude the walkaround) --------------
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Placing central structure...", 0.3f);
+            PlaceCentralStructure(catalog, root.transform, occupied, out Bounds structureBounds);
+            Bounds clearanceRing = MakeClearanceRing(structureBounds);
+
+            // --- Roads: a cross framing the structure (skips the clearance ring) ---------
             EditorUtility.DisplayProgressBar("Industrial Layout", "Placing roads...", 0.4f);
-            PlaceRoads(catalog, root.transform, tileSize, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied);
+            PlaceRoads(catalog, root.transform, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied, clearanceRing);
 
             // --- Perimeter fence ---------------------------------------------------------
             EditorUtility.DisplayProgressBar("Industrial Layout", "Building perimeter fence...", 0.5f);
             PlacePerimeterFence(catalog, root.transform, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied);
 
-            // --- Buildings (hangars) along the back --------------------------------------
-            EditorUtility.DisplayProgressBar("Industrial Layout", "Placing buildings...", 0.6f);
+            // --- Secondary buildings along the back edge only ----------------------------
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Placing buildings...", 0.55f);
             PlaceBuildings(catalog, root.transform, random, areaMinX, areaMaxX, areaMaxZ, occupied);
 
             // --- Large structures: oil tanks & containers --------------------------------
-            EditorUtility.DisplayProgressBar("Industrial Layout", "Placing large structures...", 0.7f);
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Placing large structures...", 0.6f);
             PlaceLargeStructures(catalog, root.transform, random, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied);
 
             // --- Scatter props -----------------------------------------------------------
-            EditorUtility.DisplayProgressBar("Industrial Layout", "Scattering props...", 0.8f);
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Scattering props...", 0.68f);
             ScatterProps(catalog, root.transform, random, areaMinX, areaMaxX, areaMinZ, areaMaxZ, occupied);
 
-            // --- Player ------------------------------------------------------------------
-            EditorUtility.DisplayProgressBar("Industrial Layout", "Adding walkable player...", 0.88f);
-            CreatePlayer(root.transform);
+            // --- Tag flammables in the SAVED scene + play-mode highlight + pick seed ------
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Tagging flammables...", 0.74f);
+            var tagged = FlammableTagger.TagFlammables(
+                root.GetComponentsInChildren<Transform>(true).Select(t => t.gameObject),
+                useUndo: false);
 
-            // --- NavMesh -----------------------------------------------------------------
-            EditorUtility.DisplayProgressBar("Industrial Layout", "Baking NavMesh...", 0.93f);
-            BakeNavMesh(root, groundRoot);
+            Flammable seed = null;
+            float best = float.MaxValue;
+            foreach (var fl in tagged)
+            {
+                var hl = fl.gameObject.AddComponent<FlammableHighlight>();
+                hl.igniteParticlePrefab = catalog.SmokeParticle
+                                          ?? (catalog.Particles.Count > 0 ? catalog.Particles[0] : null);
+                hl.spawnParticleOnIgnite = hl.igniteParticlePrefab != null;
 
-            // --- Save --------------------------------------------------------------------
+                // Seed = flammable nearest the structure centre (origin after recentring).
+                Vector3 c = GetInstanceBounds(fl.gameObject).center;
+                float d = new Vector3(c.x, 0f, c.z).sqrMagnitude;
+                if (d < best) { best = d; seed = fl; }
+            }
+            Debug.Log($"[FireFight] Tagged {tagged.Count} flammables; seed = " +
+                      (seed != null ? seed.name : "<none>"));
+
+            // --- Fire system (manager + gizmo + deterministic igniter + demo controls) ----
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Wiring fire system...", 0.8f);
+            CreateFireSystem(root.transform, structureBounds, seed);
+
+            // --- Player at the size-up vantage -------------------------------------------
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Adding firefighter player...", 0.86f);
+            var player = CreatePlayer(root.transform, structureBounds, areaMinZ);
+
+            // --- NPCs on the clearance ring + command controller -------------------------
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Placing NPCs...", 0.9f);
+            CreateNpcs(root.transform, player, structureBounds);
+
+            // --- NavMesh (fatal if it bakes nothing) -------------------------------------
+            EditorUtility.DisplayProgressBar("Industrial Layout", "Baking NavMesh...", 0.94f);
+            BakeNavMesh(root);
+
+            // --- Save to a FIXED path, overwriting in place ------------------------------
             EditorUtility.DisplayProgressBar("Industrial Layout", "Saving scene...", 0.98f);
             if (!AssetDatabase.IsValidFolder(SceneFolder))
                 Directory.CreateDirectory(SceneFolder);
-            string scenePath = AssetDatabase.GenerateUniqueAssetPath($"{SceneFolder}/{SceneName}.unity");
-            EditorSceneManager.SaveScene(scene, scenePath);
+            string scenePath = $"{SceneFolder}/{SceneName}.unity";
+            if (!EditorSceneManager.SaveScene(scene, scenePath))
+                throw new Exception(
+                    "Could not save IndustrialLayout.unity - is it open/locked by another Unity " +
+                    "instance or VCS?");
             AssetDatabase.Refresh();
 
             Debug.Log($"[FireFight] Industrial layout built and saved to {scenePath}. " +
                       $"Ground: {GroundTilesX}x{GroundTilesZ} tiles ({tileSize.x:F1}x{tileSize.z:F1}m each). " +
-                      $"Occupied footprints: {occupied.Count}.");
+                      $"Structure bounds: center={structureBounds.center}, size={structureBounds.size}. " +
+                      $"Flammables tagged: {tagged.Count}. Occupied footprints: {occupied.Count}.");
 
             EditorUtility.DisplayDialog("Build Industrial Layout",
-                "Done! A walkable industrial layout was created and saved to:\n\n" + scenePath +
-                "\n\nPress Play to walk around with WASD + mouse (Esc to free the cursor).", "OK");
+                "Done! A firefighter size-up scene was created and saved to:\n\n" + scenePath +
+                "\n\nPress Play: walk the 360 around the central hangar with WASD + mouse, " +
+                "spot the glowing burnables, and watch the demo fire spread.", "OK");
         }
 
-        // ------------------------------------------------------------------ Roads
-        private static void PlaceRoads(PrefabCatalog cat, Transform parent, Vector3 tileSize,
-            float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied)
+        // ================================================================= Pure helpers
+        // These two are static and take plain inputs so they can be unit-tested (see
+        // IndustrialLayoutBuilderHelpersTests) without a Unity scene.
+
+        /// <summary>
+        /// Choose the central structure prefab deterministically: prefer a name containing
+        /// "_full" (or exactly "Hangar_v1_full"), else the largest X·Z footprint. Near-zero
+        /// footprints are ignored. Returns null for an empty/degenerate candidate set.
+        /// </summary>
+        internal static GameObject PickCentralPrefab(IReadOnlyList<(GameObject prefab, Vector3 size)> candidates)
+        {
+            if (candidates == null || candidates.Count == 0) return null;
+
+            // Preferred by name.
+            foreach (var (prefab, size) in candidates)
+            {
+                if (prefab == null) continue;
+                string n = prefab.name.ToLowerInvariant();
+                if (n == "hangar_v1_full" || n.Contains("_full"))
+                    return prefab;
+            }
+
+            // Else largest footprint (ignore near-zero).
+            GameObject bestPrefab = null;
+            float bestArea = 0f;
+            foreach (var (prefab, size) in candidates)
+            {
+                if (prefab == null) continue;
+                if (size.x < 0.1f || size.z < 0.1f) continue;
+                float area = size.x * size.z;
+                if (area > bestArea) { bestArea = area; bestPrefab = prefab; }
+            }
+            return bestPrefab;
+        }
+
+        /// <summary>
+        /// Derive a fire grid that provably covers the structure plus its full clearance ring,
+        /// under a fixed per-axis cell budget. The invariant
+        /// <c>gridSize.x*cellSize >= structSize.x + 2*CLEARANCE</c> (and likewise Z) always holds
+        /// because <c>cellSize >= requiredX / MAX_CELLS</c>.
+        /// </summary>
+        internal static (Vector3Int gridSize, float cellSize) ComputeFireGrid(Vector3 structSize)
+        {
+            float requiredX = structSize.x + 2f * CLEARANCE;
+            float requiredZ = structSize.z + 2f * CLEARANCE;
+            float cellSize = Mathf.Max(1f, requiredX / MAX_CELLS, requiredZ / MAX_CELLS);
+            int nx = Mathf.Clamp(Mathf.CeilToInt(requiredX / cellSize), 8, MAX_CELLS);
+            int nz = Mathf.Clamp(Mathf.CeilToInt(requiredZ / cellSize), 8, MAX_CELLS);
+            return (new Vector3Int(nx, 6, nz), cellSize);
+        }
+
+        // ================================================================= Central structure
+        private static void PlaceCentralStructure(PrefabCatalog cat, Transform parent,
+            List<Bounds> occupied, out Bounds structureBounds)
+        {
+            // Build the candidate list (buildings preferred; oil tanks as fallback).
+            var candidates = new List<(GameObject, Vector3)>();
+            foreach (var b in cat.Buildings) candidates.Add((b, GetPrefabSize(b)));
+
+            GameObject chosen = PickCentralPrefab(candidates);
+            if (chosen == null)
+            {
+                // Fallback: largest oil tank.
+                var tanks = new List<(GameObject, Vector3)>();
+                foreach (var t in cat.OilTanks) tanks.Add((t, GetPrefabSize(t)));
+                chosen = PickCentralPrefab(tanks);
+                if (chosen != null)
+                    Debug.LogWarning("[FireFight] No building prefabs; using an oil tank as the central structure.");
+            }
+            if (chosen == null)
+                throw new Exception("No building or oil-tank prefab available for the central structure.");
+
+            var holder = new GameObject("CentralStructure");
+            holder.transform.SetParent(parent);
+
+            var go = InstantiatePrefab(chosen, holder.transform, Vector3.zero, Quaternion.identity);
+
+            // Centre the GEOMETRY (not the pivot) on origin X/Z and seat the base at y=0.
+            Bounds b0 = GetInstanceBounds(go);
+            go.transform.position -= new Vector3(b0.center.x, b0.min.y, b0.center.z);
+
+            // Re-read bounds after the offset: this is the authoritative structureBounds.
+            structureBounds = GetInstanceBounds(go);
+            MarkStatic(go);
+
+            // Push the padded clearance ring into 'occupied' FIRST so nothing else intrudes.
+            occupied.Add(MakeClearanceRing(structureBounds));
+        }
+
+        /// <summary>Footprint of the structure padded by CLEARANCE on X/Z (flat, y spans a wall height).</summary>
+        private static Bounds MakeClearanceRing(Bounds structureBounds)
+        {
+            var size = new Vector3(
+                structureBounds.size.x + 2f * CLEARANCE,
+                4f,
+                structureBounds.size.z + 2f * CLEARANCE);
+            return new Bounds(new Vector3(structureBounds.center.x, 0f, structureBounds.center.z), size);
+        }
+
+        private static bool InsideRing(Vector3 worldXZ, Bounds ring)
+        {
+            return Mathf.Abs(worldXZ.x - ring.center.x) <= ring.extents.x &&
+                   Mathf.Abs(worldXZ.z - ring.center.z) <= ring.extents.z;
+        }
+
+        // ================================================================= Roads
+        private static void PlaceRoads(PrefabCatalog cat, Transform parent,
+            float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied, Bounds ring)
         {
             if (cat.RoadTiles.Count == 0) return;
 
@@ -204,24 +361,28 @@ namespace FireFight.EditorTools
             Vector3 roadSize = GetPrefabSize(roadPrefab);
             float step = Mathf.Max(roadSize.x, 0.5f);
 
-            // Road along X through centre (z = 0)
+            // Road along X through centre (z = 0) - skip tiles inside the clearance ring.
             for (float x = minX + step * 0.5f; x < maxX; x += step)
             {
-                var r = InstantiatePrefab(roadPrefab, roadRoot.transform, new Vector3(x, 0.02f, 0f), Quaternion.identity);
+                var p = new Vector3(x, 0.02f, 0f);
+                if (InsideRing(p, ring)) continue;
+                var r = InstantiatePrefab(roadPrefab, roadRoot.transform, p, Quaternion.identity);
                 MarkStatic(r);
                 occupied.Add(new Bounds(new Vector3(x, 0, 0), new Vector3(roadSize.x, 1, roadSize.z)));
             }
-            // Road along Z through centre (x = 0), rotated 90
+            // Road along Z through centre (x = 0), rotated 90 - also skip the ring.
             for (float z = minZ + step * 0.5f; z < maxZ; z += step)
             {
                 if (Mathf.Abs(z) < roadSize.z) continue; // avoid doubling the intersection
-                var r = InstantiatePrefab(roadPrefab, roadRoot.transform, new Vector3(0f, 0.02f, z), Quaternion.Euler(0, 90, 0));
+                var p = new Vector3(0f, 0.02f, z);
+                if (InsideRing(p, ring)) continue;
+                var r = InstantiatePrefab(roadPrefab, roadRoot.transform, p, Quaternion.Euler(0, 90, 0));
                 MarkStatic(r);
                 occupied.Add(new Bounds(new Vector3(0, 0, z), new Vector3(roadSize.z, 1, roadSize.x)));
             }
         }
 
-        // ------------------------------------------------------------------ Fence
+        // ================================================================= Fence
         private static void PlacePerimeterFence(PrefabCatalog cat, Transform parent,
             float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied)
         {
@@ -234,13 +395,11 @@ namespace FireFight.EditorTools
             float seg = Mathf.Max(size.x, 0.5f);
             float inset = seg * 0.5f;
 
-            // Two sides running along X (north & south)
             for (float x = minX + inset; x <= maxX - inset; x += seg)
             {
                 PlaceFenceSeg(cat, fenceRoot.transform, new Vector3(x, 0, minZ + inset * 0.2f), Quaternion.identity, occupied, size);
                 PlaceFenceSeg(cat, fenceRoot.transform, new Vector3(x, 0, maxZ - inset * 0.2f), Quaternion.identity, occupied, size);
             }
-            // Two sides running along Z (east & west), rotated 90
             for (float z = minZ + inset; z <= maxZ - inset; z += seg)
             {
                 PlaceFenceSeg(cat, fenceRoot.transform, new Vector3(minX + inset * 0.2f, 0, z), Quaternion.Euler(0, 90, 0), occupied, size);
@@ -256,7 +415,7 @@ namespace FireFight.EditorTools
             occupied.Add(new Bounds(pos, new Vector3(Mathf.Max(size.x, size.z), 2, Mathf.Max(size.x, size.z))));
         }
 
-        // ------------------------------------------------------------------ Buildings
+        // ================================================================= Secondary buildings
         private static void PlaceBuildings(PrefabCatalog cat, Transform parent, System.Random rng,
             float minX, float maxX, float maxZ, List<Bounds> occupied)
         {
@@ -267,9 +426,11 @@ namespace FireFight.EditorTools
 
             float cursorX = minX + 6f;
             float rowZ = maxZ - 10f;
-            int guard = 0;
+            int placed = 0, guard = 0;
 
-            while (cursorX < maxX - 6f && guard++ < 50)
+            // Only a few secondary hangars along the back edge, honouring 'occupied' (so the
+            // clearance ring the central structure pushed in keeps them out of the centre).
+            while (cursorX < maxX - 6f && guard++ < 50 && placed < 3)
             {
                 GameObject prefab = cat.Buildings[rng.Next(cat.Buildings.Count)];
                 Vector3 size = GetPrefabSize(prefab);
@@ -282,12 +443,13 @@ namespace FireFight.EditorTools
                     var go = InstantiatePrefab(prefab, bRoot.transform, pos, Quaternion.Euler(0, 180, 0));
                     MarkStatic(go);
                     occupied.Add(footprint);
+                    placed++;
                 }
                 cursorX += size.x + 4f;
             }
         }
 
-        // ------------------------------------------------------------------ Large structures
+        // ================================================================= Large structures
         private static void PlaceLargeStructures(PrefabCatalog cat, Transform parent, System.Random rng,
             float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied)
         {
@@ -320,7 +482,7 @@ namespace FireFight.EditorTools
             }
         }
 
-        // ------------------------------------------------------------------ Props
+        // ================================================================= Props
         private static void ScatterProps(PrefabCatalog cat, Transform parent, System.Random rng,
             float minX, float maxX, float minZ, float maxZ, List<Bounds> occupied)
         {
@@ -330,7 +492,7 @@ namespace FireFight.EditorTools
             pRoot.transform.SetParent(parent);
 
             int placed = 0, attempts = 0, target = 90;
-            while (placed < target && attempts++ < 2000)
+            while (cat.Props.Count > 0 && placed < target && attempts++ < 2000)
             {
                 GameObject prefab = cat.Props[rng.Next(cat.Props.Count)];
                 Vector3 size = GetPrefabSize(prefab);
@@ -348,28 +510,48 @@ namespace FireFight.EditorTools
                 occupied.Add(footprint);
                 placed++;
             }
-
-            // A couple of particle emitters (smoke/dust) for atmosphere - still imported-only.
-            if (cat.Particles.Count > 0)
-            {
-                var fxRoot = new GameObject("Atmosphere_FX");
-                fxRoot.transform.SetParent(pRoot.transform);
-                for (int i = 0; i < Math.Min(3, cat.Particles.Count); i++)
-                {
-                    float x = Mathf.Lerp(minX + 4f, maxX - 4f, (float)rng.NextDouble());
-                    float z = Mathf.Lerp(minZ + 4f, maxZ - 4f, (float)rng.NextDouble());
-                    InstantiatePrefab(cat.Particles[i % cat.Particles.Count], fxRoot.transform,
-                        new Vector3(x, 1.0f, z), Quaternion.identity);
-                }
-            }
         }
 
-        // ------------------------------------------------------------------ Player
-        private static void CreatePlayer(Transform parent)
+        // ================================================================= Fire system
+        private static void CreateFireSystem(Transform parent, Bounds structureBounds, Flammable seed)
+        {
+            var fireGo = new GameObject("FireSystem");
+            fireGo.transform.SetParent(parent);
+            // Grid is anchored at transform.position: centre on the structure, floor at y=0.
+            fireGo.transform.position = new Vector3(structureBounds.center.x, 0f, structureBounds.center.z);
+
+            var mgr = fireGo.AddComponent<FireManager>();
+            var (gridSize, cellSize) = ComputeFireGrid(structureBounds.size);
+            mgr.gridSize = gridSize;
+            mgr.cellSize = cellSize;
+            mgr.fillWithFuel = false; // air does not burn; Flammables paint their own fuel.
+
+            fireGo.AddComponent<FireGizmoVisualizer>(); // Scene-view debug; harmless at runtime.
+
+            var igniter = fireGo.AddComponent<SeedIgniter>();
+            var so = new SerializedObject(igniter);
+            so.FindProperty("seed").objectReferenceValue = seed;        // may be null -> runtime fallback
+            so.FindProperty("fireManager").objectReferenceValue = mgr;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            // FireDemo kept for interactive training controls only (Space / LMB); its own
+            // start-ignition is OFF so the deterministic SeedIgniter is the single demo fire.
+            var demo = fireGo.AddComponent<FireDemo>();
+            demo.igniteCentreOnStart = false;
+        }
+
+        // ================================================================= Player
+        private static GameObject CreatePlayer(Transform parent, Bounds structureBounds, float areaMinZ)
         {
             var player = new GameObject("Player");
             player.transform.SetParent(parent);
-            player.transform.position = new Vector3(0f, 1.2f, -4f);
+
+            // Size-up vantage: just outside the clearance ring on the -Z (front) side, but
+            // clamped a couple of metres inside the perimeter so a big hangar can't push the
+            // spawn onto the fence.
+            float spawnZ = Mathf.Max(areaMinZ + 2f, -(structureBounds.extents.z + CLEARANCE + 2f));
+            player.transform.position = new Vector3(structureBounds.center.x, 1.2f, spawnZ);
+            player.transform.forward = Vector3.forward; // face the structure (+Z)
             player.tag = "Player";
 
             var cc = player.AddComponent<CharacterController>();
@@ -401,9 +583,87 @@ namespace FireFight.EditorTools
             {
                 Debug.LogWarning("[FireFight] FirefighterMovement not found; player added without a controller.");
             }
+
+            return player;
         }
 
-        // ------------------------------------------------------------------ Lighting
+        // ================================================================= NPCs
+        private static void CreateNpcs(Transform parent, GameObject player, Bounds structureBounds)
+        {
+            var npcPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(BaseManPrefabPath);
+            if (npcPrefab == null)
+            {
+                Debug.LogWarning($"[FireFight] Base_Man prefab not found at {BaseManPrefabPath}; skipping NPCs.");
+                return;
+            }
+
+            var npcRoot = new GameObject("NPCs");
+            npcRoot.transform.SetParent(parent);
+
+            // Two points on the clearance ring (side B and side D of the structure).
+            float ringX = structureBounds.extents.x + CLEARANCE * 0.5f;
+            float ringZ = structureBounds.extents.z + CLEARANCE * 0.5f;
+            var spots = new[]
+            {
+                new Vector3(structureBounds.center.x + ringX, 0f, structureBounds.center.z),
+                new Vector3(structureBounds.center.x - ringX, 0f, structureBounds.center.z + ringZ),
+            };
+
+            var movementType = FindType("NPCMovement");
+            NPCMovement firstNpc = null;
+
+            foreach (var spot in spots)
+            {
+                var npc = InstantiatePrefab(npcPrefab, npcRoot.transform, spot, Quaternion.identity);
+
+                // Seat on the ground via the combined bind-pose bounds of all SkinnedMeshRenderers.
+                float minY;
+                if (TryCombinedRendererMinY(npc, out minY))
+                    npc.transform.position = new Vector3(spot.x, -minY, spot.z);
+                // else: leave at y=0 (prefab authored at the base).
+
+                // Capsule so selection raycasts / commands can hit the NPC.
+                var cap = npc.AddComponent<CapsuleCollider>();
+                cap.height = 1.8f;
+                cap.radius = 0.3f;
+                cap.center = new Vector3(0f, 0.9f, 0f);
+
+                var agent = npc.AddComponent<NavMeshAgent>();
+                agent.height = 1.8f;
+                agent.radius = 0.3f;
+
+                if (movementType != null)
+                {
+                    var mv = npc.AddComponent(movementType);
+                    if (firstNpc == null) firstNpc = mv as NPCMovement;
+                }
+            }
+
+            // One command controller on the Player, pre-selecting the first NPC.
+            var controller = player.AddComponent<NPCCommandController>();
+            var cam = player.GetComponentInChildren<Camera>();
+            var so = new SerializedObject(controller);
+            var camProp = so.FindProperty("commandCamera");
+            if (camProp != null) camProp.objectReferenceValue = cam;
+            so.ApplyModifiedPropertiesWithoutUndo();
+            if (firstNpc != null) controller.SelectNpc(firstNpc);
+        }
+
+        /// <summary>Combined world-space min.y of all SkinnedMeshRenderers (bind pose) on a fresh instance.</summary>
+        private static bool TryCombinedRendererMinY(GameObject instance, out float minY)
+        {
+            var skinned = instance.GetComponentsInChildren<SkinnedMeshRenderer>();
+            if (skinned.Length > 0)
+            {
+                Bounds b = skinned[0].bounds;
+                for (int i = 1; i < skinned.Length; i++) b.Encapsulate(skinned[i].bounds);
+                if (b.size.y > 0.001f) { minY = b.min.y; return true; }
+            }
+            minY = 0f;
+            return false;
+        }
+
+        // ================================================================= Lighting
         private static void CreateLighting(GameObject root)
         {
             var sunGo = new GameObject("Directional Light");
@@ -418,8 +678,8 @@ namespace FireFight.EditorTools
             RenderSettings.ambientMode = AmbientMode.Trilight;
         }
 
-        // ------------------------------------------------------------------ NavMesh
-        private static void BakeNavMesh(GameObject root, GameObject groundRoot)
+        // ================================================================= NavMesh (fatal)
+        private static void BakeNavMesh(GameObject root)
         {
             var surface = root.AddComponent<NavMeshSurface>();
             surface.collectObjects = CollectObjects.All;
@@ -430,11 +690,18 @@ namespace FireFight.EditorTools
             }
             catch (Exception e)
             {
-                Debug.LogWarning("[FireFight] NavMesh bake skipped: " + e.Message);
+                throw new Exception(
+                    "NavMesh bake threw: " + e.Message +
+                    " - check that road-floor tiles have mesh colliders and the ground is flat.");
             }
+
+            if (NavMesh.CalculateTriangulation().vertices.Length == 0)
+                throw new Exception(
+                    "NavMesh bake produced no walkable surface - check that road-floor tiles have " +
+                    "mesh colliders and that the ground is flat.");
         }
 
-        // ------------------------------------------------------------------ Material upgrade
+        // ================================================================= Material upgrade
         private static void UpgradeImportedMaterialsToUrp()
         {
             var mats = new List<Material>();
@@ -444,11 +711,10 @@ namespace FireFight.EditorTools
                 var m = AssetDatabase.LoadAssetAtPath<Material>(path);
                 if (m != null) mats.Add(m);
             }
-            // Reuse the dedicated upgrader so behaviour stays consistent across tools.
             MaterialUrpUpgrader.ConvertForBuilder(mats);
         }
 
-        // ------------------------------------------------------------------ Helpers
+        // ================================================================= Helpers
         private static GameObject InstantiatePrefab(GameObject prefab, Transform parent, Vector3 pos, Quaternion rot)
         {
             var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
@@ -498,6 +764,17 @@ namespace FireFight.EditorTools
             return size;
         }
 
+        /// <summary>Combined world-space renderer bounds of a LIVE instance (keeps centre, unlike GetPrefabSize).</summary>
+        private static Bounds GetInstanceBounds(GameObject instance)
+        {
+            var renderers = instance.GetComponentsInChildren<Renderer>();
+            if (renderers.Length == 0)
+                return new Bounds(instance.transform.position, Vector3.zero);
+            Bounds b = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++) b.Encapsulate(renderers[i].bounds);
+            return b;
+        }
+
         private static Type FindType(string simpleName)
         {
             foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
@@ -508,7 +785,7 @@ namespace FireFight.EditorTools
             return null;
         }
 
-        // ------------------------------------------------------------------ Catalog
+        // ================================================================= Catalog
         private class PrefabCatalog
         {
             public readonly List<GameObject> GroundFloors = new();
@@ -519,6 +796,7 @@ namespace FireFight.EditorTools
             public readonly List<GameObject> Props = new();
             public readonly List<GameObject> Particles = new();
             public GameObject FenceStraight;
+            public GameObject SmokeParticle;
 
             public PrefabCatalog(string root)
             {
@@ -530,13 +808,11 @@ namespace FireFight.EditorTools
                     string lower = path.ToLowerInvariant();
                     string name = Path.GetFileNameWithoutExtension(path).ToLowerInvariant();
 
-                    // Walkable ground: flat road "floor" tiles.
                     if (lower.Contains("/roads/") && name.Contains("floor"))
                     {
                         GroundFloors.Add(prefab);
                         continue;
                     }
-                    // Flat road tiles (for the road cross).
                     if (lower.Contains("/roads/") && name.Contains("tile"))
                     {
                         RoadTiles.Add(prefab);
@@ -544,21 +820,25 @@ namespace FireFight.EditorTools
                     }
                     if (lower.Contains("/buildings/"))
                     {
-                        // Use the larger assembled hangars, skip tiny outbuilding fragments duplicates.
                         Buildings.Add(prefab);
                         continue;
                     }
                     if (lower.Contains("/oil_tanks/")) { OilTanks.Add(prefab); continue; }
                     if (lower.Contains("/containers/")) { Containers.Add(prefab); continue; }
-                    if (lower.Contains("/particles/")) { Particles.Add(prefab); continue; }
+                    if (lower.Contains("/particles/"))
+                    {
+                        Particles.Add(prefab);
+                        // Prefer a smoke emitter for the ignite cue (not dust).
+                        if (SmokeParticle == null && name.Contains("smoke"))
+                            SmokeParticle = prefab;
+                        continue;
+                    }
                     if (lower.Contains("/fences/"))
                     {
-                        // Pick one clean straight segment for the perimeter.
                         if (FenceStraight == null && (name.EndsWith("_s") || name.Contains("_s_") || name.Contains("wall_set")))
                             FenceStraight = prefab;
                         continue;
                     }
-                    // Everything else in Barrels/Boxes/Dumpsters/Other_props -> scatter props.
                     if (lower.Contains("/barrels/") || lower.Contains("/boxes/") ||
                         lower.Contains("/dumpsters/") || lower.Contains("/other_props/"))
                     {
