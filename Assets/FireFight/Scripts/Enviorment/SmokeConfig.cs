@@ -20,6 +20,11 @@ namespace FireFight.Environment
         [Range(0f, 1f)]
         public float smokePerSmolderingTick = 0.05f;
 
+        [Tooltip("How many ticks a burned-out cell keeps smouldering (emitting smoke) before " +
+                 "it goes cold. After this, the cell stops producing smoke so the scene can " +
+                 "clear. Set to -1 for endless smoulder (old behaviour).")]
+        public int smoulderDurationTicks = 40;
+
         [Header("Movement")]
         [Tooltip("Highest Y layer smoke is allowed to rise to. Smoke at this layer " +
                  "banks sideways instead of rising, as if hitting a ceiling. " +

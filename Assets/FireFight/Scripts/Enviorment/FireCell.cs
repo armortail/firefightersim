@@ -61,6 +61,15 @@ namespace FireFight.Environment
         /// </summary>
         public float coating = 0f;
 
+        /// <summary>
+        /// How many ticks this cell has been smouldering since it became
+        /// <see cref="FireState.Burned"/>. The smoke sim only emits smoulder smoke
+        /// while this is under a configured limit, so a burned-out cell eventually
+        /// stops smoking and the scene can clear. Reset is unnecessary: a cell only
+        /// reaches Burned once (fuel is spent) unless explicitly re-fuelled.
+        /// </summary>
+        public int smoulderedTicks = 0;
+
         public FireCell(Vector3Int gridPosition)
         {
             this.gridPosition = gridPosition;

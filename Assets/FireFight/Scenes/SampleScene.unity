@@ -6702,6 +6702,7 @@ GameObject:
   - component: {fileID: 1282594492}
   - component: {fileID: 1282594491}
   - component: {fileID: 1282594490}
+  - component: {fileID: 1282594494}
   m_Layer: 0
   m_Name: FireSystem
   m_TagString: Untagged
@@ -6754,7 +6755,7 @@ MonoBehaviour:
   cellSize: 1
   config:
     ticksPerSecond: 4
-    maxFireLayer: 1
+    maxFireLayer: 8
     heatPerTick: 0.35
     upwardHeatMultiplier: 2
     downwardHeatMultiplier: 0.4
@@ -6795,6 +6796,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1282594494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282594489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28de9adf4b1316444a112d14e726d2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.FireRuntimeVisualizer
+  showFire: 1
+  showHeat: 1
+  showSmoke: 1
+  smokeDrawThreshold: 0.05
+  quadScale: 1.1
+  flickerSpeed: 8
+  flickerAmount: 0.25
+  fireColor: {r: 1, g: 0.35, b: 0.05, a: 1}
+  smokeColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
 --- !u!4 &1284803747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013617410114, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}

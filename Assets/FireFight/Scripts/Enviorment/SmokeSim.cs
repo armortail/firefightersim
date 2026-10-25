@@ -50,9 +50,21 @@ namespace FireFight.Environment
             {
                 FireCell cell = cells[i];
                 if (cell.state == FireState.Burning)
+                {
                     cell.smoke = Mathf.Min(1f, cell.smoke + config.smokePerBurningTick);
+                }
                 else if (cell.state == FireState.Burned)
-                    cell.smoke = Mathf.Min(1f, cell.smoke + config.smokePerSmolderingTick);
+                {
+                    // Burned cells smoulder only for a limited time, then go cold so
+                    // the scene can clear. -1 means smoulder forever (legacy behaviour).
+                    bool stillSmouldering = config.smoulderDurationTicks < 0
+                        || cell.smoulderedTicks < config.smoulderDurationTicks;
+                    if (stillSmouldering)
+                    {
+                        cell.smoke = Mathf.Min(1f, cell.smoke + config.smokePerSmolderingTick);
+                        cell.smoulderedTicks++;
+                    }
+                }
             }
 
             // ---- 2 & 3. Movement into the "next" buffer ----
