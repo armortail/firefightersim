@@ -3,4 +3,5 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="FireFight.Tests.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="FireFight.PlayTests.csproj" />
 </Solution>

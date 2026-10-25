@@ -27,6 +27,8 @@ public class FirefighterMovement : MonoBehaviour
 
         if (keyboard.escapeKey.wasPressedThisFrame)
             SetCursorLocked(false);
+            
+            
         else if (mouse != null && mouse.leftButton.wasPressedThisFrame)
             SetCursorLocked(true);
 
