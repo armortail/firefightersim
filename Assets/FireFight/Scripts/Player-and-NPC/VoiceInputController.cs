@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Whisper;
 using Whisper.Utils;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace FireFight
 {
-    public class VoiceController : MonoBehaviour
+    [MovedFrom(true, sourceNamespace: "FireFight", sourceAssembly: "FireFight", sourceClassName: "VoiceController")]
+    public class VoiceInputController : MonoBehaviour
     {
         [SerializeField] private WhisperManager whisper;
         [SerializeField] private MicrophoneRecord microphoneRecord;

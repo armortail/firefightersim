@@ -158,7 +158,7 @@ Material:
     - _Dissolve_Falloff: 0.2
     - _Dissolve_Tex_Oneminus: 0
     - _DstBlend: 10
-    - _DstBlendAlpha: 0
+    - _DstBlendAlpha: 10
     - _EdgeWidth: 0
     - _Emission: 1.5
     - _EnvironmentReflections: 1

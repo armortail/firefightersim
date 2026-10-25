@@ -1,79 +1,52 @@
 using UnityEngine;
 using FireFight.Managers;
+using FireFight.Environment;
+using System.Collections.Generic;
 
-/// <summary>Spray patterns the hose can emit.</summary>
+/// <summary>Jet and cone hoses share the fire manager's existing cooling/wetness API.</summary>
 public enum SprayPattern { Jet, Cone }
 
-/// <summary>
-/// Drives one hose: it both FEEDS WATER into the fire simulation and SHOWS the water.
-///
-/// Simulation (always): while spraying it cools + wets cells via <see cref="FireManager"/>.
-///   - Jet:  a focused stream that splashes the impact point (ExtinguishJet).
-///   - Cone: a wide spray over a cone of cells (ExtinguishCone).
-///
-/// Visuals (optional): if a stream / impact particle prefab is assigned (e.g. NamuFX
-/// Water_Beam / Water_Impact), the hose spawns them once, aims the stream down the spray
-/// direction, parks the impact burst at the point the stream lands, and toggles them with
-/// spraying. The impact point is computed ONCE per frame and shared by the sim and the
-/// visuals so what you see is exactly what cools the fire.
-///
-/// The controller is "dumb": something else (player input or the NPC brain) decides WHERE to
-/// aim and WHEN to spray via <see cref="AimAt"/> + <see cref="StartSpray"/>/<see cref="StopSpray"/>.
-/// So the player and every NPC share one behaviour and one set of water visuals.
-/// </summary>
 [DisallowMultipleComponent]
 public class HoseController : MonoBehaviour
 {
     [Header("References")]
-    [Tooltip("Where the water comes out. Spray originates here and points along its forward axis.")]
     [SerializeField] private Transform nozzlePoint;
-
-    [Tooltip("The fire simulation this hose pours water into.")]
     [SerializeField] private FireManager fireManager;
-
     [Header("Spray")]
     [SerializeField] private SprayPattern sprayPattern = SprayPattern.Jet;
-
-    [Tooltip("How far the water reaches, in world units.")]
     [SerializeField, Min(0f)] private float sprayRange = 8f;
-
-    [Tooltip("Half-angle of the cone spray, in degrees (Cone pattern only).")]
-    [SerializeField, Min(0f)] private float coneAngle = 15f;
-
-    [Tooltip("Heat removed per second at full strength.")]
+    [SerializeField, Range(0f, 80f)] private float coneAngle = 25f;
     [SerializeField, Min(0f)] private float coolingPerSecond = 3f;
-
-    [Tooltip("Wetness added per second so cells resist re-igniting after the spray.")]
     [SerializeField, Min(0f)] private float wetnessPerSecond = 0.5f;
-
-    [Tooltip("Layers the jet stream can hit (walls, floors, flammables). Water lands at the first hit.")]
     [SerializeField] private LayerMask impactLayers = Physics.DefaultRaycastLayers;
+    [SerializeField, Min(0.05f)] private float jetSplashRadius = 0.65f;
+    // Retain the former prefab slots so existing assets do not lose serialized data.
+    [SerializeField, HideInInspector] private GameObject streamVfxPrefab;
+    [SerializeField, HideInInspector] private GameObject impactVfxPrefab;
+    [SerializeField, HideInInspector] private Vector3 streamForwardAxis = Vector3.forward;
 
-    [Header("Water VFX (optional)")]
-    [Tooltip("Particle prefab for the water STREAM (e.g. NamuFX Water_Beam). Spawned once, " +
-             "aimed down the spray direction while spraying. Leave empty for no stream visual.")]
-    [SerializeField] private GameObject streamVfxPrefab;
-
-    [Tooltip("Particle prefab for the IMPACT burst where the water lands (e.g. NamuFX " +
-             "Water_Impact / Water_Splash). Parked at the impact point while spraying.")]
-    [SerializeField] private GameObject impactVfxPrefab;
-
-    [Tooltip("Local axis of the stream prefab that points 'forward' along the beam. Most NamuFX " +
-             "beams fire along +Z; set to +Y or +X if your prefab emits along a different axis.")]
-    [SerializeField] private Vector3 streamForwardAxis = Vector3.forward;
-
-    /// <summary>True while water is actively coming out.</summary>
-    public bool IsSpraying { get; private set; }
-
-    /// <summary>Optional override direction. If set, spray aims this way instead of nozzle.forward.</summary>
     private Vector3? aimDirectionOverride;
-
-    // Spawned VFX instances (created lazily on first spray).
-    private GameObject streamInstance;
-    private GameObject impactInstance;
+    private readonly RaycastHit[] rayHits = new RaycastHit[64];
+    private Flammable[] receivers;
+    private float refreshReceiversAt;
+    private readonly HashSet<int> wettedCells = new HashSet<int>();
+    public bool IsSpraying { get; private set; }
+    public float SprayRange => sprayRange;
+    public SprayPattern Pattern => sprayPattern;
+    public float ConeHalfAngle => coneAngle;
+    public Vector3 Origin => nozzlePoint != null ? nozzlePoint.position : transform.position;
+    public Vector3 Direction => aimDirectionOverride ?? (nozzlePoint != null ? nozzlePoint.forward : transform.forward);
+    public Vector3 ImpactPoint { get; private set; }
+    public Vector3 ImpactNormal { get; private set; } = Vector3.up;
+    public bool HasImpact { get; private set; }
+    public float VisibleLength { get; private set; }
 
     private void Reset() => AutoWire();
-    private void Awake() => AutoWire();
+    private void Awake()
+    {
+        AutoWire();
+        if (GetComponent<HoseWaterVisuals>() == null) gameObject.AddComponent<HoseWaterVisuals>();
+    }
 
     private void AutoWire()
     {
@@ -81,132 +54,115 @@ public class HoseController : MonoBehaviour
         if (fireManager == null) fireManager = FindFirstObjectByType<FireManager>();
     }
 
-    /// <summary>Begin spraying. Safe to call every frame.</summary>
     public void StartSpray() => IsSpraying = true;
-
-    /// <summary>Stop spraying.</summary>
     public void StopSpray() => IsSpraying = false;
-
-    /// <summary>Convenience toggle for input bindings.</summary>
     public void SetSpraying(bool spraying) => IsSpraying = spraying;
 
-    /// <summary>
-    /// Point the spray at a world position (e.g. the NPC aims at a fire).
-    /// Pass null to clear and fall back to the nozzle's own forward direction.
-    /// </summary>
     public void AimAt(Vector3? worldTarget)
     {
-        if (worldTarget.HasValue && nozzlePoint != null)
-            aimDirectionOverride = (worldTarget.Value - nozzlePoint.position).normalized;
-        else
-            aimDirectionOverride = null;
+        aimDirectionOverride = worldTarget.HasValue
+            ? (worldTarget.Value - Origin).normalized : (Vector3?)null;
     }
-
-    /// <summary>Origin of the spray this frame.</summary>
-    public Vector3 Origin => nozzlePoint != null ? nozzlePoint.position : transform.position;
-
-    /// <summary>Direction the spray travels this frame.</summary>
-    public Vector3 Direction =>
-        aimDirectionOverride ?? (nozzlePoint != null ? nozzlePoint.forward : transform.forward);
 
     private void Update()
     {
-        if (!IsSpraying)
-        {
-            SetVfxActive(false);
-            return;
-        }
+        if (IsSpraying) TickSpray(Time.deltaTime);
+    }
 
+    /// <summary>Applies one spray step. Appearance and water delivery use the same range/angle.</summary>
+    public void TickSpray(float deltaTime)
+    {
         Vector3 origin = Origin;
-        Vector3 dir = Direction;
+        Vector3 direction = Direction;
+        HasImpact = RaycastEnvironment(origin, direction, sprayRange, out RaycastHit hit);
+        ImpactPoint = HasImpact ? hit.point : origin + direction * sprayRange;
+        ImpactNormal = HasImpact ? hit.normal : -direction;
+        VisibleLength = HasImpact ? hit.distance : sprayRange;
+        if (!IsSpraying || deltaTime <= 0f || fireManager == null || fireManager.Grid == null) return;
 
-        // Compute where the stream lands ONCE, then use it for both sim and visuals.
-        Vector3 impact = ComputeImpactPoint(origin, dir, out float distance);
-
-        ApplyWaterToSim(origin, dir, impact);
-        UpdateVfx(origin, dir, impact, distance);
-    }
-
-    /// <summary>Raycast the stream; returns the first hit or the max-range point if it hits nothing.</summary>
-    private Vector3 ComputeImpactPoint(Vector3 origin, Vector3 dir, out float distance)
-    {
-        if (Physics.Raycast(origin, dir, out RaycastHit hit, sprayRange,
-                impactLayers, QueryTriggerInteraction.Ignore))
-        {
-            distance = hit.distance;
-            return hit.point;
-        }
-        distance = sprayRange;
-        return origin + dir * sprayRange;
-    }
-
-    /// <summary>Pour this frame's water into the fire simulation.</summary>
-    private void ApplyWaterToSim(Vector3 origin, Vector3 dir, Vector3 impact)
-    {
-        if (fireManager == null) return;
-
-        float cooling = coolingPerSecond * Time.deltaTime;
-        float wetness = wetnessPerSecond * Time.deltaTime;
+        float cooling = coolingPerSecond * deltaTime;
+        float wetness = wetnessPerSecond * deltaTime;
         if (cooling <= 0f && wetness <= 0f) return;
-
-        if (sprayPattern == SprayPattern.Cone)
-            fireManager.ExtinguishCone(origin, dir, sprayRange, coneAngle, cooling, wetness);
-        else
-            fireManager.ExtinguishJet(impact, cooling, wetness);
-    }
-
-    // ---- Water visuals ----
-
-    private void UpdateVfx(Vector3 origin, Vector3 dir, Vector3 impact, float distance)
-    {
-        EnsureVfxSpawned();
-        SetVfxActive(true);
-
-        if (streamInstance != null)
+        if (sprayPattern == SprayPattern.Jet)
         {
-            streamInstance.transform.position = origin;
-            // Rotate so the prefab's configured forward axis points down the spray.
-            streamInstance.transform.rotation = Quaternion.FromToRotation(streamForwardAxis, dir)
-                                                * Quaternion.identity;
+            if (!HasImpact) return;
+            // Deliver full jet strength to the struck cell; splash has a smaller footprint.
+            Vector3Int struck = fireManager.Grid.WorldToGrid(hit.point + direction * 0.03f);
+            fireManager.WetCell(struck, cooling, wetness);
+            ApplyVolume(origin, direction, cooling, wetness, struck);
         }
-
-        if (impactInstance != null)
-            impactInstance.transform.position = impact;
+        else ApplyVolume(origin, direction, cooling, wetness, null);
     }
 
-    private void EnsureVfxSpawned()
+    private void ApplyVolume(Vector3 origin, Vector3 direction, float cooling, float wetness, Vector3Int? struck)
     {
-        if (streamInstance == null && streamVfxPrefab != null)
+        FireGrid grid = fireManager.Grid;
+        float radius = sprayPattern == SprayPattern.Cone ? sprayRange : jetSplashRadius;
+        Vector3 center = sprayPattern == SprayPattern.Cone ? origin : ImpactPoint;
+        if (receivers == null || Time.time >= refreshReceiversAt)
         {
-            streamInstance = Instantiate(streamVfxPrefab, Origin, Quaternion.identity, transform);
-            streamInstance.SetActive(false);
+            receivers = FindObjectsByType<Flammable>(FindObjectsSortMode.None);
+            refreshReceiversAt = Time.time + 0.5f;
         }
-        if (impactInstance == null && impactVfxPrefab != null)
+        wettedCells.Clear();
+        foreach (var receiver in receivers)
         {
-            impactInstance = Instantiate(impactVfxPrefab, Origin, Quaternion.identity);
-            impactInstance.SetActive(false);
+            if (receiver == null || receiver.fireManager != fireManager ||
+                !FireFight.NPCFireTarget.TryGetBounds(receiver, out Bounds bounds) ||
+                bounds.SqrDistance(center) > radius * radius) continue;
+            Collider body = receiver.GetComponentInChildren<Collider>();
+            Vector3Int min = grid.WorldToGrid(bounds.min);
+            Vector3Int max = grid.WorldToGrid(bounds.max);
+            for (int x = Mathf.Max(0, min.x); x <= Mathf.Min(grid.Size.x - 1, max.x); x++)
+            for (int y = Mathf.Max(0, min.y); y <= Mathf.Min(grid.Size.y - 1, max.y); y++)
+            for (int z = Mathf.Max(0, min.z); z <= Mathf.Min(grid.Size.z - 1, max.z); z++)
+            {
+                var gp = new Vector3Int(x, y, z);
+                if ((struck.HasValue && gp == struck.Value) || wettedCells.Contains(grid.Index(gp))) continue;
+                FireCell cell = grid.GetCell(gp);
+                if (cell.fuel <= 0f && cell.state != FireState.Burning) continue;
+                // Boundary voxels can have their centres outside the mesh. Test the actual object surface.
+                Vector3 point = body.ClosestPoint(grid.GridToWorld(gp));
+                float distance = (point - center).magnitude;
+                if (distance > radius || !InsideCone(origin, direction, point)) continue;
+                Vector3 offset = point - origin;
+                if (!RaycastEnvironment(origin, offset.normalized, offset.magnitude + 0.05f, out RaycastHit contact) ||
+                    contact.collider.GetComponentInParent<Flammable>() != receiver) continue;
+                float strength = 1f - distance / Mathf.Max(radius, 0.001f);
+                fireManager.WetCell(gp, cooling * strength, wetness * strength);
+                wettedCells.Add(grid.Index(gp));
+            }
         }
     }
 
-    private void SetVfxActive(bool active)
+    private bool InsideCone(Vector3 origin, Vector3 direction, Vector3 point)
     {
-        if (streamInstance != null && streamInstance.activeSelf != active)
-            streamInstance.SetActive(active);
-        if (impactInstance != null && impactInstance.activeSelf != active)
-            impactInstance.SetActive(active);
+        if (sprayPattern != SprayPattern.Cone) return true;
+        Vector3 offset = point - origin;
+        return offset.sqrMagnitude > 0.0001f &&
+            Vector3.Dot(offset.normalized, direction) >= Mathf.Cos(coneAngle * Mathf.Deg2Rad);
     }
 
-    private void OnDestroy()
+    private bool RaycastEnvironment(Vector3 origin, Vector3 direction, float distance, out RaycastHit closest)
     {
-        if (streamInstance != null) Destroy(streamInstance);
-        if (impactInstance != null) Destroy(impactInstance);
+        closest = default;
+        int count = Physics.RaycastNonAlloc(origin, direction, rayHits, distance, impactLayers,
+            QueryTriggerInteraction.Ignore);
+        float nearest = float.PositiveInfinity;
+        for (int i = 0; i < count; i++)
+        {
+            if (rayHits[i].collider.transform.IsChildOf(transform) || rayHits[i].distance >= nearest) continue;
+            closest = rayHits[i];
+            nearest = closest.distance;
+        }
+        return !float.IsPositiveInfinity(nearest);
     }
+
+    private void OnDisable() => StopSpray();
 
     private void OnDrawGizmosSelected()
     {
-        Transform t = nozzlePoint != null ? nozzlePoint : transform;
         Gizmos.color = IsSpraying ? Color.cyan : new Color(0f, 1f, 1f, 0.3f);
-        Vector3 dir = aimDirectionOverride ?? t.forward;
-        Gizmos.DrawRay(t.position, dir * sprayRange);
+        Gizmos.DrawRay(Origin, Direction * sprayRange);
     }
 }

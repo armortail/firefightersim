@@ -92,6 +92,7 @@ Material:
     - _Cull: 0
     - _DistortionStr: 0.2
     - _DstBlend: 10
+    - _DstBlendAlpha: 10
     - _Intensity: 3
     - _MainTexRotation: 0
     - _MaskTexRotation: 0
@@ -100,6 +101,7 @@ Material:
     - _Rotation: -90
     - _SoftParticleFactor: 0.2
     - _SrcBlend: 5
+    - _SrcBlendAlpha: 1
     - _Surface: 1
     - _UseSoftParticle: 0
     - _ZTest: 4

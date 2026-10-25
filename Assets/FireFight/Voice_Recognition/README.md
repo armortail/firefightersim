@@ -32,6 +32,32 @@ Microphone access must be enabled for Unity in Windows settings.
 The original README and MIT license are in `Whisper/`. Native binaries and
 model weights are tracked with the repository's existing Git LFS setup.
 
-NPC commands are not connected yet. When adding a command script under
-`Assets/FireFight/Scripts/Player-and-NPC`, add `com.whisper.unity` to the
-FireFight assembly definition's references before using Whisper types there.
+## NPC commands in TestScene
+
+- Left-click: place Danny's red movement marker.
+- Right-click: place Simon's blue movement marker.
+- Hold Space, speak, and release Space to issue one completed command.
+- `Danny move here` / `Simon move here`: use that NPC's movement marker.
+- `Danny fight the fire` / `Simon fight the fire`: find a burning object near that NPC's own red/blue ping, approach and spray.
+- `Danny stop spraying` / `Simon stop spraying`: cancel that NPC's firefighting job and approach.
+- `Everyone fight the fire` / `Everyone stop spraying`: explicitly address both NPCs.
+
+`Spray water`, `shoot water`, and `extinguish the fire` are also accepted after
+an NPC name. They require a designated object that is still burning in the actual
+fire grid. Place the red/blue marker on a burning object or on reachable ground
+near it; the same ping works for movement and firefighting. There is no middle-click
+target. The NPC continues through burning objects within 2.5 metres of the initial
+fire and briefly soaks an extinguished surface before moving to the next one. Orders
+without a recipient, ambiguous recipients, and negated orders are ignored.
+
+TestScene contains a seeded burning crate, a nearby flammable crate and a cold
+crate across an air gap. It uses the existing FireManager, Flammable and
+SeedIgniter components. FireTestFeedback is a test-only visual adapter that reads
+burning/smoke state; it does not implement or modify fire physics. Re-enter Play
+mode to restart the test fire. The other scenes and shared NPC prefabs are not
+changed by this setup.
+
+Water uses continuous droplets with a narrow jet core or a widening cone matching
+the hose's configured half-angle. Water stops at solid colliders and only cools/wets
+surfaces it can actually reach. The fire and smoke simulation and fire visuals are
+unchanged by the water update.
