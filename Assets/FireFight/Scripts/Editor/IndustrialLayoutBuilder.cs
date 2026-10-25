@@ -93,6 +93,12 @@ namespace FireFight.EditorTools
             try
             {
                 Build();
+                EditorUtility.ClearProgressBar();
+                EditorUtility.DisplayDialog("Build Industrial Layout",
+                    "Done! A firefighter size-up scene was created and saved to:\n\n" +
+                    $"{SceneFolder}/{SceneName}.unity" +
+                    "\n\nPress Play: walk the 360 around the central hangar with WASD + mouse, " +
+                    "spot the glowing burnables, and watch the demo fire spread.", "OK");
             }
             catch (Exception e)
             {
@@ -236,11 +242,9 @@ namespace FireFight.EditorTools
                       $"Ground: {GroundTilesX}x{GroundTilesZ} tiles ({tileSize.x:F1}x{tileSize.z:F1}m each). " +
                       $"Structure bounds: center={structureBounds.center}, size={structureBounds.size}. " +
                       $"Flammables tagged: {tagged.Count}. Occupied footprints: {occupied.Count}.");
-
-            EditorUtility.DisplayDialog("Build Industrial Layout",
-                "Done! A firefighter size-up scene was created and saved to:\n\n" + scenePath +
-                "\n\nPress Play: walk the 360 around the central hangar with WASD + mouse, " +
-                "spot the glowing burnables, and watch the demo fire spread.", "OK");
+            // NOTE: no success dialog here - Build() is shared by the headless BuildBatch entry
+            // (CI / tests) where EditorUtility.DisplayDialog must not run. The interactive
+            // BuildMenu shows the completion dialog itself after Build() returns.
         }
 
         // ================================================================= Pure helpers
@@ -279,15 +283,26 @@ namespace FireFight.EditorTools
         }
 
         /// <summary>
-        /// Derive a fire grid that provably covers the structure plus its full clearance ring,
-        /// under a fixed per-axis cell budget. The invariant
-        /// <c>gridSize.x*cellSize >= structSize.x + 2*CLEARANCE</c> (and likewise Z) always holds
-        /// because <c>cellSize >= requiredX / MAX_CELLS</c>.
+        /// Extra grid margin (m per side) BEYOND the clearance ring. Flammables are pushed just
+        /// outside the clearance ring by the occupancy test, so a grid sized to exactly
+        /// structure+ring would leave the nearest burnables sitting on (or past) the grid edge,
+        /// where <see cref="FireGrid.WorldToGrid"/> floor-rounding can drop their cells and the
+        /// demo fire never ignites. This margin pulls the first band of burnables comfortably
+        /// inside the grid so the seed always has fuelled cells to light.
+        /// </summary>
+        internal const float FUEL_MARGIN = 8f;
+
+        /// <summary>
+        /// Derive a fire grid that provably covers the structure, its full clearance ring, AND a
+        /// margin of burnables just outside the ring, under a fixed per-axis cell budget. The
+        /// invariant <c>gridSize.x*cellSize >= structSize.x + 2*CLEARANCE</c> (and likewise Z)
+        /// always holds because <c>cellSize >= requiredX / MAX_CELLS</c> and the margin only grows
+        /// the required extent.
         /// </summary>
         internal static (Vector3Int gridSize, float cellSize) ComputeFireGrid(Vector3 structSize)
         {
-            float requiredX = structSize.x + 2f * CLEARANCE;
-            float requiredZ = structSize.z + 2f * CLEARANCE;
+            float requiredX = structSize.x + 2f * (CLEARANCE + FUEL_MARGIN);
+            float requiredZ = structSize.z + 2f * (CLEARANCE + FUEL_MARGIN);
             float cellSize = Mathf.Max(1f, requiredX / MAX_CELLS, requiredZ / MAX_CELLS);
             int nx = Mathf.Clamp(Mathf.CeilToInt(requiredX / cellSize), 8, MAX_CELLS);
             int nz = Mathf.Clamp(Mathf.CeilToInt(requiredZ / cellSize), 8, MAX_CELLS);

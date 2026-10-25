@@ -32,6 +32,9 @@ namespace FireFight.Tests
         {
             var (grid, cellSize) = IndustrialLayoutBuilder.ComputeFireGrid(size);
 
+            // The grid must cover at least structure + the full clearance ring (the hard
+            // requirement). It also adds a fuel margin beyond that so near-ring burnables fall
+            // inside the grid; asserting the ring invariant keeps this a stable lower-bound guard.
             float needX = size.x + 2f * IndustrialLayoutBuilder.CLEARANCE;
             float needZ = size.z + 2f * IndustrialLayoutBuilder.CLEARANCE;
 
@@ -53,11 +56,20 @@ namespace FireFight.Tests
         [Test] public void Grid_CoversVeryLargeHangar() => AssertCoversStructurePlusRing(new Vector3(60f, 15f, 20f));
 
         [Test]
-        public void Grid_DegenerateStructure_StillClampsToMinimum()
+        public void Grid_DegenerateStructure_StaysWithinBudgetAndCoversRing()
         {
+            // Even a near-zero structure still needs the clearance ring + fuel margin on every
+            // side, so the grid is driven by (CLEARANCE + FUEL_MARGIN), not by the structure.
             var (grid, cellSize) = IndustrialLayoutBuilder.ComputeFireGrid(new Vector3(0.01f, 0.01f, 0.01f));
-            Assert.AreEqual(8, grid.x);
-            Assert.AreEqual(8, grid.z);
+
+            float need = 2f * IndustrialLayoutBuilder.CLEARANCE; // minimum hard requirement (ring)
+            Assert.GreaterOrEqual(grid.x * cellSize, need - 1e-3f);
+            Assert.GreaterOrEqual(grid.z * cellSize, need - 1e-3f);
+
+            Assert.GreaterOrEqual(grid.x, 8);
+            Assert.LessOrEqual(grid.x, IndustrialLayoutBuilder.MAX_CELLS);
+            Assert.GreaterOrEqual(grid.z, 8);
+            Assert.LessOrEqual(grid.z, IndustrialLayoutBuilder.MAX_CELLS);
             Assert.AreEqual(1f, cellSize, 1e-3f);
         }
 
