@@ -1,22 +1,21 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace FireFight.Managers
 {
     /// <summary>
-    /// Quick tester for the fire system. Attach to the same GameObject as the
-    /// FireManager. Lets you start a fire and watch it spread in Play mode.
+    /// Fire-system helper on the FireManager GameObject. Logs spread stats each second
+    /// and can optionally start a demo fire at the grid centre on Start.
     ///
-    /// Controls:
-    ///   Left mouse - ignite the cell under the mouse (needs a collider to hit)
-    ///
-    /// Note: the Space key is intentionally NOT used here - it is reserved for the
-    /// voice-command push-to-talk (see VoiceInputController).
+    /// Ignition is NOT player-driven: there is no key or click to start a fire. Fires are
+    /// seeded by RandomFireSpawner (a random authored spawn point per play). The Space key
+    /// is reserved for voice push-to-talk (see VoiceInputController).
     /// </summary>
     [RequireComponent(typeof(FireManager))]
     public class FireDemo : MonoBehaviour
     {
-        public bool igniteCentreOnStart = true;
+        [Tooltip("Debug only: start a fire at the grid centre on play. Leave OFF so " +
+                 "RandomFireSpawner is the single fire source.")]
+        public bool igniteCentreOnStart = false;
 
         private FireManager fire;
         private float logTimer;
@@ -40,21 +39,9 @@ namespace FireFight.Managers
 
         private void Update()
         {
-            Mouse mouse = Mouse.current;
-
-            if (mouse != null && mouse.leftButton.wasPressedThisFrame)
-            {
-                Camera viewCamera = Camera.main;
-                if (viewCamera != null)
-                {
-                    Ray ray = viewCamera.ScreenPointToRay(mouse.position.ReadValue());
-                    if (Physics.Raycast(ray, out RaycastHit hit))
-                    {
-                        fire.IgniteWorld(hit.point);
-                        Debug.Log($"Ignited near {hit.point}.");
-                    }
-                }
-            }
+            // Player-initiated ignition has been intentionally removed: fires are started
+            // only by RandomFireSpawner (one random authored spawn per play). The player
+            // (and NPCs) can fight fire but cannot create it.
 
             // Log spread stats once per second.
             logTimer += Time.deltaTime;

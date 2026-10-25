@@ -8655,7 +8655,7 @@ MonoBehaviour:
   highFlammability: 0.9
   addCharOnBurnout: 1
   logResult: 1
-  autoIgniteFirst: 1
+  autoIgniteFirst: 0
 --- !u!1001 &945966791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9826,6 +9826,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014546088}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1016769955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016769956}
+  - component: {fileID: 1016769957}
+  m_Layer: 0
+  m_Name: ranSpawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1016769956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016769955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.6, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1016769957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016769955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba66ffecbd8f14498310c6b3cd641ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.RandomFireSpawner
+  fireManager: {fileID: 0}
+  spawnPoints: []
+  igniteRadius: 1.5
+  useFixedSeed: 0
+  randomSeed: 0
+  logChoice: 1
 --- !u!4 &1017962397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013617410114, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}
@@ -9898,6 +9948,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000013703715314, guid: 95c00f442e3cf3643b2062e8e0d0bbd6, type: 3}
   m_PrefabInstance: {fileID: 2061692673}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1029106687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1029106688}
+  - component: {fileID: 1029106689}
+  m_Layer: 0
+  m_Name: ranSpawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1029106688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029106687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.8, y: 0, z: 33.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1029106689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029106687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba66ffecbd8f14498310c6b3cd641ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FireFight::FireFight.Managers.RandomFireSpawner
+  fireManager: {fileID: 0}
+  spawnPoints: []
+  igniteRadius: 1.5
+  useFixedSeed: 0
+  randomSeed: 0
+  logChoice: 1
 --- !u!1001 &1038788534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11816,7 +11916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9233b335692d11c428bdb90a8cee6339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireFight.Managers.FireDemo
-  igniteCentreOnStart: 1
+  igniteCentreOnStart: 0
 --- !u!114 &1282594492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11884,11 +11984,6 @@ MonoBehaviour:
     max: {x: 83, y: 3, z: 83}
     startOpen: 0
   autoDetectOxygenBoxes: 0
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  minRoomCells: 2
-  maxRoomCells: 0
   fillWithFuel: 0
 --- !u!4 &1282594493
 Transform:
@@ -19768,3 +19863,5 @@ SceneRoots:
   - {fileID: 1637513733}
   - {fileID: 1626768238}
   - {fileID: 146019723}
+  - {fileID: 1029106688}
+  - {fileID: 1016769956}

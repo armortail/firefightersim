@@ -28,11 +28,6 @@ namespace FireFight.Environment
 
         private readonly OxygenConfig config;
 
-        // When non-null, the box is an ARBITRARY shape (flood-filled room) and
-        // membership is a set lookup. When null, the box is the rectangular
-        // Min..Max region (the original behaviour the tests rely on).
-        private readonly System.Collections.Generic.HashSet<Vector3Int> cells;
-
         public OxygenBox(Vector3Int min, Vector3Int max, OxygenConfig config, bool startOpen = false)
         {
             // Normalise so Min <= Max on every axis regardless of argument order.
@@ -40,56 +35,14 @@ namespace FireFight.Environment
             Max = Vector3Int.Max(min, max);
             this.config = config;
             IsOpen = startOpen;
-            cells = null; // rectangular box
         }
-
-        /// <summary>
-        /// Build a box from an explicit set of grid cells (an auto-detected room of any
-        /// shape). Min/Max are the set's bounding box for convenience, but membership is
-        /// the exact set - so an L-shaped room doesn't leak oxygen across its bounding box.
-        /// </summary>
-        public OxygenBox(System.Collections.Generic.HashSet<Vector3Int> cells,
-            OxygenConfig config, bool startOpen = false)
-        {
-            this.cells = cells;
-            this.config = config;
-            IsOpen = startOpen;
-
-            // Compute the bounding box for Min/Max (and handle the empty case).
-            if (cells != null && cells.Count > 0)
-            {
-                var min = new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue);
-                var max = new Vector3Int(int.MinValue, int.MinValue, int.MinValue);
-                foreach (var c in cells)
-                {
-                    min = Vector3Int.Min(min, c);
-                    max = Vector3Int.Max(max, c);
-                }
-                Min = min;
-                Max = max;
-            }
-            else
-            {
-                Min = Vector3Int.zero;
-                Max = Vector3Int.zero;
-            }
-        }
-
-        /// <summary>Number of cells in this box (room volume). For rectangular boxes, the box volume.</summary>
-        public int CellCount =>
-            cells != null
-                ? cells.Count
-                : (Max.x - Min.x + 1) * (Max.y - Min.y + 1) * (Max.z - Min.z + 1);
 
         /// <summary>Open or seal the box. Opening lets fresh air back in.</summary>
         public void SetOpen(bool open) => IsOpen = open;
 
-        /// <summary>True if a grid position lies inside this box.</summary>
+        /// <summary>True if a grid position lies inside this box (inclusive).</summary>
         public bool Contains(Vector3Int p)
         {
-            if (cells != null) return cells.Contains(p);
-
-            // Rectangular box (original behaviour).
             return p.x >= Min.x && p.x <= Max.x
                 && p.y >= Min.y && p.y <= Max.y
                 && p.z >= Min.z && p.z <= Max.z;

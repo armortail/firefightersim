@@ -175,7 +175,7 @@ namespace FireFight.Environment
                 // cannot ignite, regardless of how hot it gets.
                 bool airBlockedByCoating = cell.coating >= config.coatingExtinguishThreshold;
 
-                if (cell.CanIgnite && !cell.isSolid && belowFireCeiling && hasAir && !airBlockedByCoating
+                if (cell.CanIgnite && belowFireCeiling && hasAir && !airBlockedByCoating
                     && cell.heat >= config.ignitionThreshold)
                 {
                     if (Random.value <= config.spreadChance)
