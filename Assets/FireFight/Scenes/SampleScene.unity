@@ -1206,15 +1206,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118516068}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.712673, z: -0, w: 0.7014964}
-  m_LocalPosition: {x: 33.486725, y: 0.44459718, z: 29.107327}
+  m_LocalRotation: {x: 0, y: -0.707106781, z: 0, w: 0.707106781}
+  m_LocalPosition: {x: 33.4722695, y: -0.17, z: 29.7708}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1717805409}
   - {fileID: 1692725861}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &123801974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013617410114, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}
@@ -1461,6 +1461,16 @@ MonoBehaviour:
   - {fileID: 1000879910}
   - {fileID: 1471803731}
   - {fileID: 888761182}
+  - {fileID: 700000000000000002}
+  - {fileID: 700000000000000012}
+  - {fileID: 700000000000000022}
+  - {fileID: 700000000000000032}
+  - {fileID: 700000000000000042}
+  - {fileID: 700000000000000052}
+  - {fileID: 700000000000000062}
+  - {fileID: 700000000000000072}
+  - {fileID: 700000000000000082}
+  - {fileID: 700000000000000092}
   firstRoomIndex: 0
   roomCount: 5
 --- !u!114 &146019722
@@ -1504,6 +1514,16 @@ Transform:
   - {fileID: 1000879911}
   - {fileID: 1471803732}
   - {fileID: 888761183}
+  - {fileID: 700000000000000001}
+  - {fileID: 700000000000000011}
+  - {fileID: 700000000000000021}
+  - {fileID: 700000000000000031}
+  - {fileID: 700000000000000041}
+  - {fileID: 700000000000000051}
+  - {fileID: 700000000000000061}
+  - {fileID: 700000000000000071}
+  - {fileID: 700000000000000081}
+  - {fileID: 700000000000000091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &151986644
@@ -3017,15 +3037,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348762860}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99996877, z: -0, w: 0.00790173}
-  m_LocalPosition: {x: 40.345467, y: 0.49853343, z: 36.200417}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 40.43911, y: -0.17, z: 36.7646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1051371989}
   - {fileID: 2022824198}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1001 &363065390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7157,15 +7177,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825507719}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7126731, z: -0, w: 0.7014963}
-  m_LocalPosition: {x: 23.178226, y: 0.2246102, z: -0.17144518}
+  m_LocalRotation: {x: 0, y: -0.707106781, z: 0, w: 0.707106781}
+  m_LocalPosition: {x: 22.6977, y: -0.17, z: 0.6572}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1929555897}
   - {fileID: 196598793}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &835197384
 GameObject:
   m_ObjectHideFlags: 0
@@ -7768,15 +7788,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888761181}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99996877, z: -0, w: 0.007902408}
-  m_LocalPosition: {x: 28.274193, y: 0.19310439, z: -4.494324}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 27.72613, y: -0.17, z: -3.76245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1449683578}
   - {fileID: 1916012568}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1001 &891518829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8072,15 +8092,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917483931}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99996877, z: -0, w: 0.007902203}
-  m_LocalPosition: {x: 33.71367, y: 0.44297084, z: 28.884892}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 33.692613, y: -0.17, z: 29.54345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1849734075}
   - {fileID: 19397026}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &918763479
 GameObject:
   m_ObjectHideFlags: 0
@@ -9308,15 +9328,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000879909}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99996877, z: -0, w: 0.0079021165}
-  m_LocalPosition: {x: 32.46455, y: 0.4784593, z: 33.665615}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 32.5164865, y: -0.17, z: 34.34395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1762688583}
   - {fileID: 1099749476}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &1003488523
 GameObject:
   m_ObjectHideFlags: 0
@@ -11399,23 +11419,23 @@ MonoBehaviour:
   oxygenBoxes:
   - name: Main Room
     min: {x: 72, y: 0, z: 43}
-    max: {x: 93, y: 3, z: 78}
+    max: {x: 93, y: 3, z: 79}
     startOpen: 0
   - name: Left Rear Room
-    min: {x: 83, y: 0, z: 79}
+    min: {x: 83, y: 0, z: 80}
     max: {x: 93, y: 3, z: 86}
     startOpen: 0
   - name: Small Rear Room
-    min: {x: 79, y: 0, z: 83}
-    max: {x: 83, y: 3, z: 85}
+    min: {x: 79, y: 0, z: 85}
+    max: {x: 82, y: 3, z: 86}
     startOpen: 0
   - name: Right Rear Room
-    min: {x: 72, y: 0, z: 78}
-    max: {x: 79, y: 3, z: 85}
+    min: {x: 72, y: 0, z: 80}
+    max: {x: 78, y: 3, z: 86}
     startOpen: 0
   - name: Connecting Hall
-    min: {x: 79, y: 0, z: 78}
-    max: {x: 83, y: 3, z: 83}
+    min: {x: 79, y: 0, z: 80}
+    max: {x: 82, y: 3, z: 84}
     startOpen: 0
   autoDetectOxygenBoxes: 0
   fillWithFuel: 0
@@ -13304,15 +13324,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471803730}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7126732, z: -0, w: 0.70149624}
-  m_LocalPosition: {x: 29.250837, y: 0.44650373, z: 29.446413}
+  m_LocalRotation: {x: 0, y: -0.707106781, z: 0, w: 0.707106781}
+  m_LocalPosition: {x: 29.237035, y: -0.17, z: 30.1764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 940579733}
   - {fileID: 1572938844}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &1477065440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013617410114, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}
@@ -15414,15 +15434,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745851622}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99996877, z: -0, w: 0.007902366}
-  m_LocalPosition: {x: 40.21858, y: 0.17985423, z: -6.505743}
+  m_LocalRotation: {x: 0, y: -0.999995243, z: 0, w: 0.00308455056}
+  m_LocalPosition: {x: 39.63725, y: -0.17, z: -5.953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 915335038}
   - {fileID: 835197385}
   m_Father: {fileID: 146019723}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -179.646536, z: 0}
 --- !u!4 &1749452575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013617410114, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}
@@ -18985,6 +19005,786 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}
+--- !u!1001 &700000000000000000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Rear Right Room Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '27.955800000000004'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '36.671949999999995'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '1.0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '180'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '3'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000003 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Rear Small Room Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '32.969382'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '36.78295'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '1.0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '180'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '2'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000012 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000020
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Right Room Side Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '22.658150000000003'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '33.95'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '3'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000021 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000022 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000020}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000030
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Right Window 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '22.6977'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '18.56037'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000031 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000030}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000040
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Right Window 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '22.6977'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '24.03006'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000041 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Right Window 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '22.6977'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '28.957700000000003'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000051 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Left Window 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '43.30485'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '10.310390000000002'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '-0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '-90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000060}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000070
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Left Window 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '43.30485'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '0.7303000000000015'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '-0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '-90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000071 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000070}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000070}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000080
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Left Window 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '43.30485'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '5.537000000000001'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '-0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '-90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000081 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000082 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000080}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
+--- !u!1001 &700000000000000090
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 146019723}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_Name
+      value: Main Room Left Window 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: '43.30485'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: '1.0999999999999996'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: '-4.009899999999998'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: '-0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: '0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: '0.7071067811865476'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: '-90'
+      objectReference: {fileID: 0}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: ventilation
+      value: ''
+      objectReference: {fileID: 146019721}
+    - target: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+      propertyPath: roomA
+      value: '0'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+--- !u!4 &700000000000000091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &700000000000000093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &700000000000000092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 100005, guid: 384fd1bac121467a8ee4653c5ecf78c4, type: 3}
+  m_PrefabInstance: {fileID: 700000000000000090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700000000000000093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e826c42540eb54b9276e21c1fc33f5, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: FireFight::FireFight.HouseDoor
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
