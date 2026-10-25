@@ -2,5 +2,8 @@
   <Project Path="FireFight.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="FireFight.Tests.csproj" />
+  <Project Path="com.whisper.unity.csproj" />
+  <Project Path="FireFight.Whisper.Samples.csproj" />
+  <Project Path="com.whisper.unity.editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>
