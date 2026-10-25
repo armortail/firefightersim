@@ -6,7 +6,11 @@ using Unity.AI.Navigation;
 
 namespace FireFight
 {
-    /// <summary>A hinged house door. E opens the door under the crosshair.</summary>
+    /// <summary>
+    /// A hinged house door (or, with isWindow set, a window). E opens the one under the
+    /// crosshair. Both swing open/closed and vent their room's oxygen; a window additionally
+    /// creates no walkable NavMesh passage and skips the doorway occupant check.
+    /// </summary>
     [DisallowMultipleComponent]
     public class HouseDoor : MonoBehaviour
     {
@@ -19,6 +23,12 @@ namespace FireFight
         [SerializeField] private int roomB = -1;
         [SerializeField] private Vector3 closedCenter;
         [SerializeField] private Vector3 closedSize;
+
+        [Tooltip("Treat this as a WINDOW, not a door: it still swings open/closed and vents its " +
+                 "room's oxygen, but does NOT create a walkable NavMesh passage (you can't walk " +
+                 "through a window) and doesn't block closing on someone standing in it. Set a " +
+                 "smaller closedSize / hinge angle in the Inspector for a window.")]
+        [SerializeField] private bool isWindow = false;
 
         private Quaternion[] closedRotations;
         private Quaternion[] openRotations;
@@ -53,6 +63,9 @@ namespace FireFight
 
         private void ConnectPassage()
         {
+            // A window is not walkable: never build a NavMesh passage through it.
+            if (isWindow) return;
+
             if (passage != null) { passage.enabled = true; return; }
             nextLinkAttempt = Time.time + 1f;
             // Both demo firefighters use the default humanoid agent type.
@@ -83,7 +96,7 @@ namespace FireFight
             int cornerCount = -1;
             foreach (var door in activeDoors)
             {
-                if (door == null || door.LeavesAreClear()) continue;
+                if (door == null || door.isWindow || door.LeavesAreClear()) continue;
                 Vector3 position = door.transform.InverseTransformPoint(agent.transform.position);
                 if (Mathf.Abs(position.z) > 3f + agent.radius ||
                     Mathf.Abs(position.x - door.closedCenter.x) > door.closedSize.x * 0.5f + agent.radius ||
@@ -135,7 +148,7 @@ namespace FireFight
 
         private void Update()
         {
-            if (passage == null && Time.time >= nextLinkAttempt) ConnectPassage();
+            if (!isWindow && passage == null && Time.time >= nextLinkAttempt) ConnectPassage();
             if (animating)
             {
                 bool finished = true;
@@ -176,9 +189,10 @@ namespace FireFight
         public void SetOpen(bool open)
         {
             if (open == IsOpen) return;
-            if (!open)
+            if (!open && !isWindow)
             {
-                // Do not close through a player or firefighter standing in the opening.
+                // Do not close a DOOR through a player or firefighter standing in the opening.
+                // Windows skip this - nobody stands inside a window.
                 var occupants = Physics.OverlapBox(transform.TransformPoint(closedCenter), closedSize * 0.5f,
                     transform.rotation, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
                 foreach (var body in occupants)
@@ -199,7 +213,8 @@ namespace FireFight
         private void OnGUI()
         {
             if (aimedDoor != this) return;
-            string text = IsOpen ? "E: Close door" : "E: Open door";
+            string noun = isWindow ? "window" : "door";
+            string text = IsOpen ? $"E: Close {noun}" : $"E: Open {noun}";
             if (ventilation != null)
             {
                 float oxygen = ventilation.GetRoomOxygen(roomA);
